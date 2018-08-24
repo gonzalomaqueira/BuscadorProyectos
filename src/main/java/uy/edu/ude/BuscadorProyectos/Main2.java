@@ -37,7 +37,7 @@ public class Main2 {
 		PDFTextStripper pdfStripper;
 
 		String parsedText;
-		String fileName = "C:\\temp\\Resumenes\\JDBC2.pdf";
+		String fileName = "PAPA FRITA";
 
 		try {
 
