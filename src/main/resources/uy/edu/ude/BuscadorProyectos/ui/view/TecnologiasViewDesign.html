@@ -1,0 +1,80 @@
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;apptheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+ </head>
+<body>
+  <vaadin-vertical-layout style-name="crud-template" spacing="false" responsive size-full margin="false">
+   <vaadin-horizontal-layout style-name="top-bar" spacing="false" width-full height="50px">
+    <vaadin-horizontal-layout spacing="false" width-full :middle :expand>
+     <vaadin-text-field icon="fonticon://FontAwesome/f002" style-name="small inline-icon search" id="search" placeholder="Buscar" width-full _id="search"></vaadin-text-field>
+    </vaadin-horizontal-layout>
+    <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="addCategoria" plain-text _id="addCategoria" :middle :right>
+      Nueva Categoria 
+    </vaadin-button>
+    <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="addTecnologia" plain-text _id="addTecnologia" :middle :right>
+      Nueva Tecnologia 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-css-layout style-name="content" size-full :expand>
+    <vaadin-css-layout style-name="gridcategoria" size-half>
+     <vaadin-grid id="gridcategoria" size-half data-item-type="uy.edu.ude.BuscadorProyectos.entity.Categoria" _id="gridcategoria">
+      <table>
+       <colgroup>
+        <col column-id="id" sortable>
+        <col column-id="nombre" sortable>
+       </colgroup>
+       <thead>
+        <tr default>
+         <th plain-text column-ids="id">Id</th>
+         <th plain-text column-ids="nombre">Categoria</th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </vaadin-grid>
+     </vaadin-css-layout>
+     <vaadin-css-layout style-name="gridtecnologia" size-half>
+     <vaadin-grid id="gridtecnologia" size-half data-item-type="uy.edu.ude.BuscadorProyectos.entity.Tecnologia" _id="gridtecnologia">
+      <table>
+       <colgroup>
+        <col column-id="id" sortable>
+        <col column-id="nombre" sortable>
+       </colgroup>
+       <thead>
+        <tr default>
+         <th plain-text column-ids="id">Id</th>
+         <th plain-text column-ids="nombre">Tecnologia</th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </vaadin-grid>
+    </vaadin-css-layout>
+    <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="513px" height-full margin="false" _id="form">
+     <vaadin-css-layout style-name="edit" size-full :expand>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-combo-box caption="Categoria" empty-selection-allowed="false" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.entity.Categoria" _id="cmbCategoria"></vaadin-combo-box>
+       <vaadin-text-field caption="Categoria" style-name="small" id="txtCategoria" width-full _id="txtCategoria"></vaadin-text-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-text-field caption="Tecnologia" style-name="small" id="tecnologia" width-full height="31px" _id="tecnologia"></vaadin-text-field>
+      </vaadin-css-layout>
+    
+      <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">
+      <vaadin-button style-name="small primary" id="update" plain-text _id="update" :middle>
+        Actualizar 
+      </vaadin-button>
+      <vaadin-button style-name="small" id="cancel" plain-text _id="cancel" :middle :center>
+        Cancelar 
+      </vaadin-button>
+      <vaadin-button style-name="small danger" id="delete" plain-text _id="delete" :middle :right :expand>
+        Borrar 
+      </vaadin-button>
+     </vaadin-horizontal-layout>
+    </vaadin-vertical-layout>
+   </vaadin-css-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>

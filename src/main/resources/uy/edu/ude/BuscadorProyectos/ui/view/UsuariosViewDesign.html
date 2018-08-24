@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;apptheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+  <meta name="package-mapping" content="com_gmail_damien_ui_view_admin:com.gmail.damien.ui.view.admin">
+ </head>
+ <body>
+  <vaadin-vertical-layout style-name="crud-template" spacing="false" responsive size-full margin="false">
+   <vaadin-horizontal-layout style-name="top-bar" spacing="false" width-full height="50px">
+    <vaadin-horizontal-layout spacing="false" width-full :middle :expand>
+     <vaadin-text-field icon="fonticon://FontAwesome/f002" style-name="small inline-icon search" id="search" placeholder="Buscar" width-full _id="search"></vaadin-text-field>
+    </vaadin-horizontal-layout>
+    <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="btnNuevo" plain-text _id="btnNuevo" :middle :right>
+      Nuevo usuario 
+    </vaadin-button>
+   </vaadin-horizontal-layout>
+   <vaadin-css-layout style-name="content" size-full :expand>
+    <vaadin-css-layout style-name="list" size-full>
+     <vaadin-grid id="grdUsuarios" size-full data-item-type="uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO" _id="grdUsuarios">
+      <table>
+       <colgroup>
+        <col column-id="id" sortable>
+        <col column-id="usuario" sortable>
+        <col column-id="nombre" sortable>
+        <col column-id="apellido" sortable>
+        <col column-id="email" sortable>
+       </colgroup>
+       <thead>
+        <tr default>
+         <th plain-text column-ids="id">Id</th>
+         <th plain-text column-ids="usuario">Usuario</th>
+         <th plain-text column-ids="nombre">Nombre</th>
+         <th plain-text column-ids="apellido">Apellido</th>
+         <th plain-text column-ids="email">Email</th>
+        </tr>
+       </thead>
+       <tbody></tbody>
+      </table>
+     </vaadin-grid>
+    </vaadin-css-layout>
+    <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="513px" height-full margin="false" _id="form">
+     <vaadin-css-layout style-name="edit" size-full :expand>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-text-field caption="Usuario (login)" style-name="small" id="usuario" width-full height="31px" _id="usuario"></vaadin-text-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-password-field caption="Contraseña" style-name="small" id="contrasenia" width-full height="31px" _id="contrasenia"></vaadin-password-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full height="78px">
+       <vaadin-password-field caption="Repetir Contraseña" style-name="small" id="contrasenia2" width-full height="31px" _id="contrasenia2"></vaadin-password-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-text-field caption="Nombre" style-name="small" id="nombre" width-full _id="nombre"></vaadin-text-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full>
+       <vaadin-text-field caption="Apellido" style-name="small" id="apellido" width-full height="31px" _id="apellido"></vaadin-text-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full height="78px">
+       <vaadin-text-field caption="Email" style-name="small" id="email" width-full height="31px" _id="email"></vaadin-text-field>
+      </vaadin-css-layout>
+      <vaadin-css-layout style-name="section half" width-full height="78px">
+       <vaadin-combo-box caption="Perfil" empty-selection-allowed="false" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO" _id="cmbPerfil"></vaadin-combo-box>
+      </vaadin-css-layout>
+     </vaadin-css-layout>
+     <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">
+      <vaadin-button style-name="small primary" id="btnAgregar" plain-text _id="btnAgregar" :middle>
+        Agregar 
+      </vaadin-button>
+      <vaadin-button visible="false" style-name="small primary" id="btnModificar" plain-text _id="btnModificar" :middle>
+        Modificar 
+      </vaadin-button>
+      <vaadin-button style-name="small" id="btnCancelar" plain-text _id="btnCancelar" :middle :center>
+        Cancelar 
+      </vaadin-button>
+      <vaadin-button style-name="small danger" id="btnBorrar" plain-text _id="btnBorrar" :middle :right :expand>
+        Borrar 
+      </vaadin-button>
+     </vaadin-horizontal-layout>
+    </vaadin-vertical-layout>
+   </vaadin-css-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>
