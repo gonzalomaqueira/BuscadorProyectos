@@ -37,8 +37,8 @@ public class Main2 {
 		PDFTextStripper pdfStripper;
 
 		String parsedText;
-		String fileName = "C:\\temp\\Resumenes\\JDBC3.pdf";
-
+		String fileName = "PAPA FRITA";
+		
 		try {
 
 			pdDoc = PDDocument.load(new File(fileName));
