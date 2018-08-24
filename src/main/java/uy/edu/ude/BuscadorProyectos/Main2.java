@@ -37,7 +37,7 @@ public class Main2 {
 		PDFTextStripper pdfStripper;
 
 		String parsedText;
-		String fileName = "C:\\temp\\Resumenes\\JDBC1.pdf";
+		String fileName = "C:\\temp\\Resumenes\\JDBC2.pdf";
 
 		try {
 
