@@ -33,7 +33,8 @@ public class Main {
 	    PDFTextStripper pdfStripper;
 
 	    String parsedText;
-	    String fileName = "C:\\temp\\Resumenes\\JDBC2.pdf";
+	    String fileName = "C:\\temp\\Resumenes\\lapruebadeMaxi.pdf";
+	    /*esto es un comentario de pureba*/
 
 	    
 	    try {
