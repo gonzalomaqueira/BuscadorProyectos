@@ -1,5 +1,6 @@
 package uy.edu.ude.BuscadorProyectos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,18 +19,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "MetodologiaTesting")
-public class MetodologiaTesting {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdTesting")
-	private Long id;
-	
-	@NotNull
-	@Size(min = 1, max = 255)
-	@Column(name = "Nombre")
-	private String nombre;
-	
+public class MetodologiaTesting extends ElementoProyecto
+{	
 	@OneToMany(mappedBy="metodologiaTesting", cascade=CascadeType.ALL)
 	private List<SinonimoMetodologiaTesting> sinonimos;
 	
@@ -40,26 +31,17 @@ public class MetodologiaTesting {
 	public MetodologiaTesting() {
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public List<Sinonimo> getSinonimos()
+	{
+		ArrayList<Sinonimo> vRetorno = new ArrayList<Sinonimo>();
+		for(Sinonimo sin: sinonimos)
+		{
+			vRetorno.add(sin);
+		}
+		return vRetorno;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public List<SinonimoMetodologiaTesting> getSinonimos() {
-		return sinonimos;
-	}
-
+	
 	public void setSinonimos(List<SinonimoMetodologiaTesting> sinonimos) {
 		this.sinonimos = sinonimos;
 	}

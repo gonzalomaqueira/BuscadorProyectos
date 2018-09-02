@@ -11,6 +11,5 @@ public interface TecnologiaService {
     void add(Tecnologia tecnologia);
 	void modify(Tecnologia tecnologia);
 	void delete(Tecnologia tecnologia);
-
 	
 }

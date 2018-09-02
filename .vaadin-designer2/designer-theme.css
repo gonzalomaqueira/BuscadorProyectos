@@ -15495,7 +15495,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .apptheme .app-shell[width-range~="1001px-"] .navigation-bar {
-	background-image: url('bg');
+	background-image: url('bg.jpg');
 }
 
 .apptheme .v-errorindicator {

@@ -14,43 +14,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "SinonimosTecnologia")
-public class SinonimoTecnologia {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdSinonimo")
-	private Long id;
-	
-	@NotNull
-	@Size(min = 1, max = 255)
-	@Column(name = "Nombre")
-	private String nombre;
-
+public class SinonimoTecnologia extends Sinonimo
+{	
 	@ManyToOne
 	@JoinColumn(name = "IdTecnologia")
-	private Tecnologia tecnologia;
-	
-	public SinonimoTecnologia() {
-	}
-
-	public SinonimoTecnologia(Long id, @NotNull @Size(min = 1, max = 255) String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}	
-
+	private Tecnologia tecnologia;	
 }

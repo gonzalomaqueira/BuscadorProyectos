@@ -41,7 +41,7 @@ public class ReportesView extends ReportesViewDesign implements View{
 	        ArrayList<String> titulos = new ArrayList<String>();
 	        Proyecto proyecto= new Proyecto();
 	        proyecto.setDocumentoPorSecciones(fachada.armarDocumentoPorSecciones(textoOriginal));
-	        System.out.println(parsedText);
+	        //System.out.println(parsedText);
 	        
 	        List<Tecnologia> vTecnologiasDelProyecto = fachada.obtenerTecnologiasProyecto(proyecto);	  	        
 	        

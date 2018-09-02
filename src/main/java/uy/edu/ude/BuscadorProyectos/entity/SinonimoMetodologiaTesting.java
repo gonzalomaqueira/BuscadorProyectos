@@ -11,47 +11,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-	@Entity
-	@Table(name = "SinonimoMetodologiaTesting")
-	public class SinonimoMetodologiaTesting {
-		
-		@Id
-		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		@Column(name="IdSinonimo")
-		private Long id;
-		
-		@NotNull
-		@Size(min = 1, max = 255)
-		@Column(name = "Nombre")
-		private String nombre;
-
-		@ManyToOne
-		@JoinColumn(name = "IdMetodologiaTesting")
-		private MetodologiaTesting metodologiaTesting;
-		
-		public SinonimoMetodologiaTesting() {
-		}
-
-		public SinonimoMetodologiaTesting(Long id, @NotNull @Size(min = 1, max = 255) String nombre) {
-			this.nombre = nombre;
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-		
-		
-
-	}
+@Entity
+@Table(name = "SinonimoMetodologiaTesting")
+public class SinonimoMetodologiaTesting extends Sinonimo
+{		
+	@ManyToOne
+	@JoinColumn(name = "IdMetodologiaTesting")
+	private MetodologiaTesting metodologiaTesting;	
+}

@@ -1,5 +1,6 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO;
 import uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO;
+import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
+import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;

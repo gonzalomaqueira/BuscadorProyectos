@@ -1,5 +1,6 @@
 package uy.edu.ude.BuscadorProyectos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,18 +19,8 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Tecnologias")
-public class Tecnologia {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdTecnologia")
-	private Long id;
-	
-	@NotNull
-	@Size(min = 1, max = 255)
-	@Column(name = "Nombre")
-	private String nombre;
-	
+public class Tecnologia extends ElementoProyecto
+{	
 	@ManyToOne
 	@JoinColumn(name = "IdCategoria")
 	private Categoria categoria;
@@ -43,33 +34,11 @@ public class Tecnologia {
 	public Tecnologia() {
 	}
 
-	
-
 	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) {
-		this.nombre = nombre;
+		super();
 		this.categoria = categoria;
 		this.sinonimos = sinonimos;
-	}
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	
+	}	
 	
 	public Categoria getCategoria() {
 		return categoria;
@@ -79,10 +48,17 @@ public class Tecnologia {
 		this.categoria = categoria;
 	}
 
-	public List<SinonimoTecnologia> getSinonimos() {
-		return sinonimos;
+	@Override
+	public List<Sinonimo> getSinonimos()
+	{
+		ArrayList<Sinonimo> vRetorno = new ArrayList<Sinonimo>();
+		for(Sinonimo sin: sinonimos)
+		{
+			vRetorno.add(sin);
+		}
+		return vRetorno;
 	}
-
+	
 	public void setSinonimos(List<SinonimoTecnologia> sinonimos) {
 		this.sinonimos = sinonimos;
 	}
@@ -91,6 +67,5 @@ public class Tecnologia {
 	public String toString() {
 		return "Tecnologia [id=" + id + ", nombre=" + nombre +"]";
 	}
-	
-	
+
 }
