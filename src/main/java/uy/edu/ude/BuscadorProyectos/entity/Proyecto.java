@@ -82,6 +82,14 @@ public class Proyecto {
 	@JoinTable(name = "RelProyectoTecnologia", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "Tecnologias") })
 	private List <Tecnologia> tecnologia;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "RelProyectoModeloProceso", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "ModeloProceso") })
+	private List <ModeloProceso> modeloProceso;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "RelProyectoMetodologiaTesting", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "MetodologiaTesting") })
+	private List <MetodologiaTesting> metodologiaTesting;
+	
 	@Transient
 	private List<SeccionTexto>  DocumentoPorSecciones;
 
