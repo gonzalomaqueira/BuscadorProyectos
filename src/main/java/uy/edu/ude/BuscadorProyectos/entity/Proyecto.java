@@ -13,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -75,6 +77,10 @@ public class Proyecto {
 
 	@Enumerated(EnumType.STRING)
 	private Enumerados.EstadoProyectoEnum estado;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "RelProyectoTecnologia", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "Tecnologias") })
+	private List <Tecnologia> tecnologia;
 	
 	@Transient
 	private List<SeccionTexto>  DocumentoPorSecciones;
