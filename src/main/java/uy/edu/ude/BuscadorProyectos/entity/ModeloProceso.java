@@ -17,12 +17,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Tecnologias")
-public class Tecnologia {
+@Table(name = "ModeloProceso")
+public class ModeloProceso {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdTecnologia")
+	@Column(name="IdModeloProceso")
 	private Long id;
 	
 	@NotNull
@@ -30,28 +30,15 @@ public class Tecnologia {
 	@Column(name = "Nombre")
 	private String nombre;
 	
-	@ManyToOne
-	@JoinColumn(name = "IdCategoria")
-	private Categoria categoria;
+	@OneToMany(mappedBy="modeloProceso", cascade=CascadeType.ALL)
+	private List<SinonimoModeloProceso> sinonimos;
 	
-	@OneToMany(mappedBy="tecnologia", cascade=CascadeType.ALL)
-	private List<SinonimoTecnologia> sinonimos;
-	
-	@ManyToMany(cascade=CascadeType.ALL, mappedBy="tecnologia")  
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="modeloProceso")  
     private List<Proyecto> proyectos;  
-	
-	public Tecnologia() {
-	}
 
 	
-
-	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) {
-		this.nombre = nombre;
-		this.categoria = categoria;
-		this.sinonimos = sinonimos;
+	public ModeloProceso() {
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -69,27 +56,17 @@ public class Tecnologia {
 		this.nombre = nombre;
 	}
 
-	
-	
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public List<SinonimoTecnologia> getSinonimos() {
+	public List<SinonimoModeloProceso> getSinonimos() {
 		return sinonimos;
 	}
 
-	public void setSinonimos(List<SinonimoTecnologia> sinonimos) {
+	public void setSinonimos(List<SinonimoModeloProceso> sinonimos) {
 		this.sinonimos = sinonimos;
 	}
 
 	@Override
 	public String toString() {
-		return "Tecnologia [id=" + id + ", nombre=" + nombre +"]";
+		return "ModeloProceso [id=" + id + ", nombre=" + nombre +"]";
 	}
 	
 	

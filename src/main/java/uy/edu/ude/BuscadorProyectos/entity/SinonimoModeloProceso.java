@@ -1,8 +1,5 @@
 package uy.edu.ude.BuscadorProyectos.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,34 +7,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "Categorias")
-public class Categoria {
+@Table(name = "SinonimosModeloProceso")
+public class SinonimoModeloProceso {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdCategoria")
+	@Column(name="IdSinonimo")
 	private Long id;
 	
 	@NotNull
 	@Size(min = 1, max = 255)
 	@Column(name = "Nombre")
 	private String nombre;
+
+	@ManyToOne
+	@JoinColumn(name = "IdModeloProceso")
+	private ModeloProceso modeloProceso;
 	
-	@OneToMany(mappedBy = "categoria", cascade=CascadeType.ALL)
-	private List<Tecnologia> tecnologias;
-	
-	public Categoria() {
+	public SinonimoModeloProceso() {
 	}
 
-	public Categoria(String nombre, List<Tecnologia> tecnologias) {
+	public SinonimoModeloProceso(Long id, @NotNull @Size(min = 1, max = 255) String nombre) {
 		this.nombre = nombre;
-		this.tecnologias = tecnologias;
 	}
 
 	public Long getId() {
@@ -47,7 +43,7 @@ public class Categoria {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -55,23 +51,6 @@ public class Categoria {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public List<Tecnologia> getTecnologias() {
-		return tecnologias;
-	}
-
-	public void setTecnologias(List<Tecnologia> tecnologias) {
-		this.tecnologias = tecnologias;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Categoria [nombre=%s, tecnologias=%s]", nombre, tecnologias);
-	}
-	
-	
-	
-	
 	
 	
 

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import uy.edu.ude.BuscadorProyectos.dao.ProyectoDao;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
-import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
+import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 
@@ -190,7 +190,7 @@ public class ProyectoServiceImp implements ProyectoService {
 					}
 					else
 					{
-						for (Sinonimo sinonimo: tecnologia.getSinonimos())
+						for (SinonimoTecnologia sinonimo: tecnologia.getSinonimos())
 						{
 							if(FuncionesTexto.seccionContieneTexto(seccion, sinonimo.getNombre()))
 							{
