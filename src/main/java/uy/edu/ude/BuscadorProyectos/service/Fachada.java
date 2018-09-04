@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO;
-import uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO;
 import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
@@ -17,6 +15,8 @@ import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
+import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 @Service
 public class Fachada {
@@ -37,7 +37,7 @@ public class Fachada {
 	@Transactional(readOnly = true)
 	public List<Tecnologia> obtenerTecnologias()
 	{
-		return tecnologiaService.listTecnologias();
+		return tecnologiaService.obtenerTecnologias();
 	}
 	
 	public List<PerfilVO> listarPerfiles()
@@ -57,7 +57,7 @@ public class Fachada {
 	
 	public List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto)
 	{
-		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.listTecnologias());
+		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.obtenerTecnologiasCompleto());
 	}
 
 	public void altaUsuario(String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 

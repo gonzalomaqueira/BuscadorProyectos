@@ -20,10 +20,24 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
 	@Transactional(readOnly = true)
 	@Override
-	public List<Tecnologia> listTecnologias() {
-		return tecnologiaDao.listTecnologias();
+	public List<Tecnologia> obtenerTecnologias() 
+	{
+		return tecnologiaDao.obtenerTecnologias();
 	}
-
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<Tecnologia> obtenerTecnologiasCompleto()
+	{
+		List<Tecnologia> vRetorno = tecnologiaDao.obtenerTecnologias();
+		for(Tecnologia tec: vRetorno)
+		{
+			tec.setSinonimos(tecnologiaDao.obtenerSinonimosTecnologia(tec.getId()));
+		}
+		return vRetorno;
+	}
+	
+	
 	@Transactional
 	@Override
 	public void add(Tecnologia tecnologia) {

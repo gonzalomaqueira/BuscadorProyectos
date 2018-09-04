@@ -7,9 +7,9 @@ import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 
 public interface TecnologiaService {
 
-	List<Tecnologia> listTecnologias();
+	List<Tecnologia> obtenerTecnologias();
+	List<Tecnologia> obtenerTecnologiasCompleto();
     void add(Tecnologia tecnologia);
 	void modify(Tecnologia tecnologia);
-	void delete(Tecnologia tecnologia);
-	
+	void delete(Tecnologia tecnologia);	
 }

@@ -24,7 +24,7 @@ import com.vaadin.ui.declarative.Design;
 public class UsuariosViewDesign extends VerticalLayout {
 	protected TextField search;
 	protected Button btnNuevo;
-	protected Grid<uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO> grdUsuarios;
+	protected Grid<uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO> grdUsuarios;
 	protected VerticalLayout form;
 	protected TextField usuario;
 	protected PasswordField contrasenia;
@@ -32,7 +32,7 @@ public class UsuariosViewDesign extends VerticalLayout {
 	protected TextField nombre;
 	protected TextField apellido;
 	protected TextField email;
-	protected ComboBox<uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO> cmbPerfil;
+	protected ComboBox<uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO> cmbPerfil;
 	protected Button btnAgregar;
 	protected Button btnModificar;
 	protected Button btnCancelar;

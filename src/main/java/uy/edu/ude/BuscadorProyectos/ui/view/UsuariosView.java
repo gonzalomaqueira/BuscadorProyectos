@@ -14,8 +14,8 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.components.grid.SingleSelectionModel;
 
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
-import uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO;
-import uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 @SpringView
 @SpringComponent

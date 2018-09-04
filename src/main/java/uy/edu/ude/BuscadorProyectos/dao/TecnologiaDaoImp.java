@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import uy.edu.ude.BuscadorProyectos.entity.Categoria;
+import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
-import uy.edu.ude.BuscadorProyectos.entity.Usuario;
-
 @Repository
 public class TecnologiaDaoImp implements TecnologiaDao {
 
@@ -20,7 +19,7 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 	   private EntityManager em;
 	
 	@Override
-	public List<Tecnologia> listTecnologias() {
+	public List<Tecnologia> obtenerTecnologias() {
 	      CriteriaQuery<Tecnologia> criteriaQuery = em.getCriteriaBuilder().createQuery(Tecnologia.class);
 	      @SuppressWarnings("unused")
 	      Root<Tecnologia> root = criteriaQuery.from(Tecnologia.class);
@@ -44,5 +43,13 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 		em.remove(em.contains(tecnologia) ? tecnologia : em.merge(tecnologia));
 
 	}
+	
+    public List<SinonimoTecnologia> obtenerSinonimosTecnologia(long idTecnologia) {
+        TypedQuery<SinonimoTecnologia> query = em.createNamedQuery("SinonimoTecnologia.obtenerSinonimosTecnologia", SinonimoTecnologia.class);
+        query.setParameter("idTecnologia", idTecnologia);
+        List<SinonimoTecnologia> resultado = query.getResultList();
+        return resultado;
+    }
+	
 
 }

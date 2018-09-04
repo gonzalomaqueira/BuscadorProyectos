@@ -1,22 +1,21 @@
 package uy.edu.ude.BuscadorProyectos.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "SinonimosTecnologia")
+@NamedQueries({
+	@NamedQuery(name = "SinonimoTecnologia.obtenerSinonimosTecnologia", query = "SELECT s FROM SinonimoTecnologia s WHERE s.id = :idTecnologia") })
+
 public class SinonimoTecnologia extends Sinonimo
 {	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "IdTecnologia")
 	private Tecnologia tecnologia;	
 }

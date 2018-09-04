@@ -251,14 +251,14 @@ public class ProyectoServiceImp implements ProyectoService {
 					}
 					else
 					{
-						/*for (Sinonimo sinonimo: elemento.getSinonimos())
+						for (Sinonimo sinonimo: elemento.getSinonimos())
 						{
 							if(FuncionesTexto.seccionContieneTexto(seccion, sinonimo.getNombre()))
 							{
 								vListaRetorno.add(elemento);
 								break;
 							}
-						}*/
+						}
 					}
 				}
 			}
