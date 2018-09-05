@@ -3,10 +3,10 @@ package uy.edu.ude.BuscadorProyectos.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO;
-import uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
+import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 public class ConversorValueObject {
 	

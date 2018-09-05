@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.dao.ProyectoDao;
+import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
+import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
+import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
@@ -53,7 +57,7 @@ public class ProyectoServiceImp implements ProyectoService {
         boolean encontreTitulo = false;
 		
         documentoPorSecciones.add(armarSeccionAlumnos(textoOriginal));
-        documentoPorSecciones.add(armarSeccionTutor(textoOriginal));        
+        documentoPorSecciones.add(armarSeccionTutor(textoOriginal));
          
         List<String> Textolista = new ArrayList<String>(Arrays.asList(textoOriginal));
         
@@ -174,36 +178,100 @@ public class ProyectoServiceImp implements ProyectoService {
 	
 	@Transactional
 	@Override
-	public List<Tecnologia> obtenerTecnologiasProyecto (Proyecto proyecto, List<Tecnologia> vTecnologias)
+	public List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto, List<Tecnologia> tecnologias)
 	{
-		List<Tecnologia> vListaRetorno = new ArrayList<Tecnologia>();
+		List<ElementoProyecto> vElementos = new ArrayList<ElementoProyecto>();
+		for (Tecnologia tec: tecnologias)
+		{
+			vElementos.add(tec);
+		}		
+		List<ElementoProyecto> vElementosProyecto = obtenerElementosProyecto (proyecto, vElementos);
+		
+		List<Tecnologia> vRetorno = new ArrayList<Tecnologia>();
+		for (ElementoProyecto elem: vElementosProyecto)
+		{
+			vRetorno.add((Tecnologia)elem);
+		}		
+		return vRetorno;
+	}
+	
+	@Transactional
+	@Override
+	public List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto, List<MetodologiaTesting> metodologiasTesting)
+	{
+		List<ElementoProyecto> vElementos = new ArrayList<ElementoProyecto>();
+		for (MetodologiaTesting met: metodologiasTesting)
+		{
+			vElementos.add(met);
+		}		
+		List<ElementoProyecto> vElementosProyecto = obtenerElementosProyecto (proyecto, vElementos);
+		
+		List<MetodologiaTesting> vRetorno = new ArrayList<MetodologiaTesting>();
+		for (ElementoProyecto elem: vElementosProyecto)
+		{
+			vRetorno.add((MetodologiaTesting)elem);
+		}		
+		return vRetorno;
+	}
+	
+	@Transactional
+	@Override
+	public List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto, List<ModeloProceso> modelosProceso)
+	{
+		List<ElementoProyecto> vElementos = new ArrayList<ElementoProyecto>();
+		for (ModeloProceso mod: modelosProceso)
+		{
+			vElementos.add(mod);
+		}		
+		List<ElementoProyecto> vElementosProyecto = obtenerElementosProyecto (proyecto, vElementos);
+		
+		List<ModeloProceso> vRetorno = new ArrayList<ModeloProceso>();
+		for (ElementoProyecto elem: vElementosProyecto)
+		{
+			vRetorno.add((ModeloProceso)elem);
+		}		
+		return vRetorno;
+	}
+	
+	
+	
+	private List<ElementoProyecto> obtenerElementosProyecto (Proyecto proyecto, List<ElementoProyecto> vElementos)
+	{
+		boolean vEncontroElemento = false;
+		
+		List<ElementoProyecto> vListaRetorno = new ArrayList<ElementoProyecto>();
 		if (proyecto.getDocumentoPorSecciones() != null)
 		{
-			for(Tecnologia tecnologia : vTecnologias)
+			for(ElementoProyecto elemento : vElementos)
 			{
 				for(SeccionTexto seccion : proyecto.getDocumentoPorSecciones())
 				{
-					if(FuncionesTexto.seccionContieneTexto(seccion, tecnologia.getNombre()))
+					if (vEncontroElemento)
 					{
-						vListaRetorno.add(tecnologia);
+						vEncontroElemento = false;
+						break;
+					}
+					if(FuncionesTexto.seccionContieneTexto(seccion, elemento.getNombre()))
+					{
+						vListaRetorno.add(elemento);
 						break;
 					}
 					else
 					{
-						for (SinonimoTecnologia sinonimo: tecnologia.getSinonimos())
+						for (Sinonimo sinonimo: elemento.getSinonimos())
 						{
 							if(FuncionesTexto.seccionContieneTexto(seccion, sinonimo.getNombre()))
 							{
-								vListaRetorno.add(tecnologia);
+								vListaRetorno.add(elemento);
+								vEncontroElemento = true;
 								break;
 							}
 						}
 					}
-				}
+				}	
 			}
 		}
 		return vListaRetorno;
-	}
-	
+	}	
 
 }

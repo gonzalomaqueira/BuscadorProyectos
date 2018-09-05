@@ -41,7 +41,7 @@ public class MainView extends MainViewDesign implements ViewDisplay {
 	@PostConstruct
 	public void init() {
 		attachNavigation(storefront, ProyectosUploadView.class);
-		//attachNavigation(dashboard, UploadProjectView.class);
+		attachNavigation(dashboard, ReportesView.class);
 		attachNavigation(users, UsuariosView.class);
 		attachNavigation(tecnologias, TecnologiasView.class);
 		attachNavigation(products, ReportesView.class);

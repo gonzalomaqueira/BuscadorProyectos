@@ -1,25 +1,28 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO;
-import uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO;
+import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
+import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
+import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
+import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 @Service
 public class Fachada {
 	
-	@Autowired
-	private TecnologiaService tecnologiaService;
 	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
@@ -30,11 +33,18 @@ public class Fachada {
 	private ExtraccionService extraccionService;
 	@Autowired
 	private ProyectoService proyectoService;
+	@Autowired
+	private TecnologiaService tecnologiaService;
+	@Autowired
+	private ModeloProcesoService modeloProcesoService;
+	@Autowired
+	private MetodologiaTestingService metodologiaTestingService;
+
 
 	@Transactional(readOnly = true)
 	public List<Tecnologia> obtenerTecnologias()
 	{
-		return tecnologiaService.listTecnologias();
+		return tecnologiaService.obtenerTecnologias();
 	}
 	
 	public List<PerfilVO> listarPerfiles()
@@ -54,7 +64,17 @@ public class Fachada {
 	
 	public List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto)
 	{
-		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.listTecnologias());
+		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.obtenerTecnologiasCompleto());
+	}
+	
+	public List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto)
+	{
+		return proyectoService.obtenerModelosProcesoProyecto(proyecto, modeloProcesoService.obtenerModelosProcesoCompleto());
+	}
+	
+	public List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto)
+	{
+		return proyectoService.obtenerMetodologiasTestingProyecto(proyecto, metodologiaTestingService.obtenerMetodologiasTestingCompleto());
 	}
 
 	public void altaUsuario(String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 

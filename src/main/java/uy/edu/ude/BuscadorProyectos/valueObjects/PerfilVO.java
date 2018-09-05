@@ -1,4 +1,4 @@
-package uy.edu.ude.BuscadorProyectos.ValueObjects;
+package uy.edu.ude.BuscadorProyectos.valueObjects;
 
 public class PerfilVO {
 

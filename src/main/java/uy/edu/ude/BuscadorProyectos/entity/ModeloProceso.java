@@ -1,5 +1,6 @@
 package uy.edu.ude.BuscadorProyectos.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,48 +19,28 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ModeloProceso")
-public class ModeloProceso {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IdModeloProceso")
-	private Long id;
-	
-	@NotNull
-	@Size(min = 1, max = 255)
-	@Column(name = "Nombre")
-	private String nombre;
-	
+public class ModeloProceso extends ElementoProyecto
+{
 	@OneToMany(mappedBy="modeloProceso", cascade=CascadeType.ALL)
 	private List<SinonimoModeloProceso> sinonimos;
 	
 	@ManyToMany(cascade=CascadeType.ALL, mappedBy="modeloProceso")  
     private List<Proyecto> proyectos;  
 
-	
 	public ModeloProceso() {
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public List<Sinonimo> getSinonimos()
+	{
+		ArrayList<Sinonimo> vRetorno = new ArrayList<Sinonimo>();
+		for(Sinonimo sin: sinonimos)
+		{
+			vRetorno.add(sin);
+		}
+		return vRetorno;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public List<SinonimoModeloProceso> getSinonimos() {
-		return sinonimos;
-	}
-
+	
 	public void setSinonimos(List<SinonimoModeloProceso> sinonimos) {
 		this.sinonimos = sinonimos;
 	}
@@ -67,7 +48,6 @@ public class ModeloProceso {
 	@Override
 	public String toString() {
 		return "ModeloProceso [id=" + id + ", nombre=" + nombre +"]";
-	}
-	
+	}	
 	
 }

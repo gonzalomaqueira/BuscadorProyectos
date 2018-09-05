@@ -13,6 +13,8 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 
+import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
@@ -43,13 +45,25 @@ public class ReportesView extends ReportesViewDesign implements View{
 	        proyecto.setDocumentoPorSecciones(fachada.armarDocumentoPorSecciones(textoOriginal));
 	        System.out.println(parsedText);
 	        
-	        List<Tecnologia> vTecnologiasDelProyecto = fachada.obtenerTecnologiasProyecto(proyecto);	  	        
 	        
+	        List<Tecnologia> vTecnologiasDelProyecto = fachada.obtenerTecnologiasProyecto(proyecto);	  	        
 	        for(Tecnologia tecnologia : vTecnologiasDelProyecto)
 			{
 	        	System.out.println(tecnologia.toString());
 			}
 	        
+	        List<ModeloProceso> vModelosProcesoDelProyecto = fachada.obtenerModelosProcesoProyecto(proyecto);	  	        
+	        for(ModeloProceso modelo : vModelosProcesoDelProyecto)
+			{
+	        	System.out.println(modelo.toString());
+			}
+	        
+
+	        List<MetodologiaTesting> vMetodologiaTestingDelProyecto = fachada.obtenerMetodologiasTestingProyecto(proyecto);  	        	        
+	        for(MetodologiaTesting metodologia : vMetodologiaTestingDelProyecto)
+			{
+	        	System.out.println(metodologia.toString());
+			}
 	        
 	        /*
 	        for(String linea : proyecto.devolverResumen())
@@ -61,7 +75,7 @@ public class ReportesView extends ReportesViewDesign implements View{
 	        {	        	
 	        	sec.listarSeccion();
 	        }
-	        */
+	        
 	        /*
 	        for(String linea : proyecto.devolverAlumnos())
 	        {
