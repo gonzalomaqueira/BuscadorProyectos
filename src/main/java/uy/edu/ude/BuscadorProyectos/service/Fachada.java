@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
+import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
@@ -22,8 +24,6 @@ import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 public class Fachada {
 	
 	@Autowired
-	private TecnologiaService tecnologiaService;
-	@Autowired
 	private UsuarioService usuarioService;
 	@Autowired
 	private PerfilService perfilService;
@@ -33,6 +33,13 @@ public class Fachada {
 	private ExtraccionService extraccionService;
 	@Autowired
 	private ProyectoService proyectoService;
+	@Autowired
+	private TecnologiaService tecnologiaService;
+	@Autowired
+	private ModeloProcesoService modeloProcesoService;
+	@Autowired
+	private MetodologiaTestingService metodologiaTestingService;
+
 
 	@Transactional(readOnly = true)
 	public List<Tecnologia> obtenerTecnologias()
@@ -58,6 +65,16 @@ public class Fachada {
 	public List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto)
 	{
 		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.obtenerTecnologiasCompleto());
+	}
+	
+	public List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto)
+	{
+		return proyectoService.obtenerModelosProcesoProyecto(proyecto, modeloProcesoService.obtenerModelosProcesoCompleto());
+	}
+	
+	public List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto)
+	{
+		return proyectoService.obtenerMetodologiasTestingProyecto(proyecto, metodologiaTestingService.obtenerMetodologiasTestingCompleto());
 	}
 
 	public void altaUsuario(String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 

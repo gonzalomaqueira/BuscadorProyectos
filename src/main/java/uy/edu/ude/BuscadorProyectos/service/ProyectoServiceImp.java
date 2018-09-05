@@ -237,6 +237,8 @@ public class ProyectoServiceImp implements ProyectoService {
 	
 	private List<ElementoProyecto> obtenerElementosProyecto (Proyecto proyecto, List<ElementoProyecto> vElementos)
 	{
+		boolean vEncontroElemento = false;
+		
 		List<ElementoProyecto> vListaRetorno = new ArrayList<ElementoProyecto>();
 		if (proyecto.getDocumentoPorSecciones() != null)
 		{
@@ -244,6 +246,11 @@ public class ProyectoServiceImp implements ProyectoService {
 			{
 				for(SeccionTexto seccion : proyecto.getDocumentoPorSecciones())
 				{
+					if (vEncontroElemento)
+					{
+						vEncontroElemento = false;
+						break;
+					}
 					if(FuncionesTexto.seccionContieneTexto(seccion, elemento.getNombre()))
 					{
 						vListaRetorno.add(elemento);
@@ -256,11 +263,12 @@ public class ProyectoServiceImp implements ProyectoService {
 							if(FuncionesTexto.seccionContieneTexto(seccion, sinonimo.getNombre()))
 							{
 								vListaRetorno.add(elemento);
+								vEncontroElemento = true;
 								break;
 							}
 						}
 					}
-				}
+				}	
 			}
 		}
 		return vListaRetorno;
