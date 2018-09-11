@@ -48,7 +48,7 @@ public class ModeloProcesoDaoImp implements ModeloProcesoDao {
 	
     public List<SinonimoModeloProceso> obtenerSinonimosModeloProceso(long idModeloProceso) {
         TypedQuery<SinonimoModeloProceso> query = em.createNamedQuery("SinonimoModeloProceso.obtenerSinonimosModeloProceso", SinonimoModeloProceso.class);
-        query.setParameter("idModeloProceso", idModeloProceso);
+        query.setParameter("idModeloProceso", new ModeloProceso(idModeloProceso));
         List<SinonimoModeloProceso> resultado = query.getResultList();
         return resultado;
     }

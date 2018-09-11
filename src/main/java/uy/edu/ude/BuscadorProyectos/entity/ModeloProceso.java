@@ -27,7 +27,13 @@ public class ModeloProceso extends ElementoProyecto
 	@ManyToMany(cascade=CascadeType.ALL, mappedBy="modeloProceso")  
     private List<Proyecto> proyectos;  
 
-	public ModeloProceso() {
+	public ModeloProceso() 
+	{
+	}
+	
+	public ModeloProceso(long idModeloProceso) 
+	{
+		super(idModeloProceso);
 	}
 
 	@Override

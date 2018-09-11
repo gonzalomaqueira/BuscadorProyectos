@@ -28,8 +28,15 @@ public class MetodologiaTesting extends ElementoProyecto
     private List<Proyecto> proyectos;  
 
 	
-	public MetodologiaTesting() {
+	public MetodologiaTesting() 
+	{
 	}
+	
+	public MetodologiaTesting(long idMetodologiaTesting) 
+	{
+		super(idMetodologiaTesting);
+	}
+	
 
 	@Override
 	public List<Sinonimo> getSinonimos()

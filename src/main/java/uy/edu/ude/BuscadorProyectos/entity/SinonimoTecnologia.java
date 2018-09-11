@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "SinonimosTecnologia")
 @NamedQueries({
-	@NamedQuery(name = "SinonimoTecnologia.obtenerSinonimosTecnologia", query = "SELECT s FROM SinonimoTecnologia s WHERE s.id = :idTecnologia") })
+	@NamedQuery(name = "SinonimoTecnologia.obtenerSinonimosTecnologia", query = "SELECT s FROM SinonimoTecnologia s WHERE s.tecnologia = :idTecnologia") })
 
 public class SinonimoTecnologia extends Sinonimo
 {	

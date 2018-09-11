@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -19,6 +21,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Tecnologias")
+@NamedQueries({
+	@NamedQuery(name = "Tecnologia.obtenerTecnologiasPorCategoria", query = "SELECT t FROM Tecnologia t  WHERE t.categoria = :idCategoria") })
+
 public class Tecnologia extends ElementoProyecto
 {	
 	@ManyToOne
@@ -31,20 +36,29 @@ public class Tecnologia extends ElementoProyecto
 	@ManyToMany(cascade=CascadeType.ALL, mappedBy="tecnologia")  
     private List<Proyecto> proyectos;  
 	
-	public Tecnologia() {
+	public Tecnologia() 
+	{
 	}
 
-	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) {
+	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) 
+	{
 		super();
 		this.categoria = categoria;
 		this.sinonimos = sinonimos;
 	}	
 	
-	public Categoria getCategoria() {
+	public Tecnologia(long idTecnologia)
+	{
+		super(idTecnologia);
+	}
+
+	public Categoria getCategoria() 
+	{
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(Categoria categoria) 
+	{
 		this.categoria = categoria;
 	}
 

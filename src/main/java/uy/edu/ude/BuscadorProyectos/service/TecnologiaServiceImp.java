@@ -11,6 +11,7 @@ import uy.edu.ude.BuscadorProyectos.dao.TecnologiaDao;
 import uy.edu.ude.BuscadorProyectos.dao.UsuarioDao;
 import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 
 @Service
 public class TecnologiaServiceImp implements TecnologiaService {
@@ -57,6 +58,18 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	public void delete(Tecnologia tecnologia) {
 		tecnologiaDao.delete(tecnologia);
 		
+	}
+	
+	@Transactional
+	@Override
+	public List<Tecnologia> obtenerTecnologiasCompletoPorCategoria(Categoria categoria)
+	{
+		List<Tecnologia> vRetorno = tecnologiaDao.obtenerTecnologiasPorCategoria(categoria.getId());
+		for(Tecnologia tec: vRetorno)
+		{
+			tec.setSinonimos(tecnologiaDao.obtenerSinonimosTecnologia(tec.getId()));
+		}
+		return vRetorno;
 	}
 
 }

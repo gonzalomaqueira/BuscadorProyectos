@@ -32,6 +32,10 @@ public abstract class ElementoProyecto
 		this.nombre = nombre;
 	}	
 	
+	public ElementoProyecto(long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}
