@@ -39,10 +39,12 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	@Autowired
     private Fachada fachada;
 	private ElementoProyectoVO tecnologiaSelecionada;
+	private CategoriaVO categoriaSeleccionada;
     
     private List<CategoriaVO> listaCategorias;
     
-	public void enter(ViewChangeEvent event) {
+	public void enter(ViewChangeEvent event) 
+	{
 		
 		grdSinonimos.setEnabled(false);
 		this.cargarCategorias();
@@ -54,6 +56,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		    {
 		    	grdSinonimos.setItems(new ArrayList<SinonimoVO>());
 		    	this.cargarTecnologiasPorCategoria(evt.getValue());
+		    	categoriaSeleccionada = evt.getValue();
 		    }
 		});
 		
@@ -73,17 +76,65 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 				grdSinonimos.setEnabled(false);
 			}
 		});
+		
+		btnNuevaTecnologia.addClickListener(new Button.ClickListener()
+		{
+		    public void buttonClick(ClickEvent event) 
+		    {
+		    	cargarCategoriaTecnologias();
+				btnAgregar.setVisible(true);
+				btnModificar.setVisible(false);
+		    	form.setEnabled(true);
+   	
+		    }
+		});
+		
+		btnAgregar.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event) 
+			{
+				if (txtNombreTecnologia.isEmpty()) 
+				{
+					Notification.show("Hay valores vacíos",Notification.Type.WARNING_MESSAGE);
+				}
+				else 
+				{	
+			    	try 
+			    	{
+			    		fachada.altaTecnologia(	txtNombreTecnologia.getValue(), cmbCategoriasTecnologias.getValue().getId());		
+			    		actualizarCategorias();
+			    		cargarTecnologiasPorCategoria(categoriaSeleccionada);
+			    	}
+			    	catch (Exception e)
+					{
+			    		e.printStackTrace();
+			    		Notification.show("Ocurrió un error",Notification.Type.WARNING_MESSAGE);				
+					}
+				    			
+			    	grdTecnologias.setEnabled(true);
+			    	txtNombreTecnologia.clear();
+			    	form.setEnabled(false);
+						    	
+				}
+			}	
+
+		});
 	}
 	
 	private void cargarCategorias() 
 	{
 		if (listaCategorias == null)
 		{
-			listaCategorias = new ArrayList<CategoriaVO>();
-			listaCategorias.addAll(fachada.obtenerCategorias());
-			cmbCategorias.setItems(listaCategorias);
-			cmbCategorias.setItemCaptionGenerator(CategoriaVO::getNombre);
+			this.actualizarCategorias();
 		}
+	}
+	
+	private void actualizarCategorias()
+	{
+		listaCategorias = new ArrayList<CategoriaVO>();
+		listaCategorias.addAll(fachada.obtenerCategorias());
+		cmbCategorias.setItems(listaCategorias);
+		cmbCategorias.setItemCaptionGenerator(CategoriaVO::getNombre);
 	}
 	
 	private void cargarTecnologiasPorCategoria(CategoriaVO categoria)
@@ -95,6 +146,13 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	{
 		
 		grdSinonimos.setItems(tecnologia.getListaSinonimos());
+	}
+	
+	private void cargarCategoriaTecnologias()
+	{
+		cmbCategoriasTecnologias.setItems(listaCategorias);
+		cmbCategoriasTecnologias.setItemCaptionGenerator(CategoriaVO::getNombre);
+
 	}
 	
 	

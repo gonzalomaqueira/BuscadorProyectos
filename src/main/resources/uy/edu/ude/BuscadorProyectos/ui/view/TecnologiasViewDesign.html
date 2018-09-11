@@ -15,8 +15,8 @@
      </vaadin-label>
     </vaadin-horizontal-layout>
     <vaadin-horizontal-layout spacing="false" width="70%" height-full :middle :right>
-     <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="btnNuevo" plain-text _id="btnNuevo" :middle :right>
-       Nuevo usuario 
+     <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="btnNuevaTecnologia" plain-text _id="btnNuevaTecnologia" :middle :right>
+       Nueva Tecnología 
      </vaadin-button>
     </vaadin-horizontal-layout>
    </vaadin-horizontal-layout>
@@ -52,25 +52,10 @@
     <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="513px" height-full margin="false" _id="form">
      <vaadin-css-layout style-name="edit" size-full :expand>
       <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Usuario (login)" style-name="small" id="usuario" width-full height="31px" _id="usuario"></vaadin-text-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-password-field caption="Contraseña" style-name="small" id="contrasenia" width-full height="31px" _id="contrasenia"></vaadin-password-field>
+       <vaadin-text-field caption="Tecnología" style-name="small" id="txtNombreTecnologia" width-full height="31px" _id="txtNombreTecnologia"></vaadin-text-field>
       </vaadin-css-layout>
       <vaadin-css-layout style-name="section half" width-full height="78px">
-       <vaadin-password-field caption="Repetir Contraseña" style-name="small" id="contrasenia2" width-full height="31px" _id="contrasenia2"></vaadin-password-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Nombre" style-name="small" id="nombre" width-full _id="nombre"></vaadin-text-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Apellido" style-name="small" id="apellido" width-full height="31px" _id="apellido"></vaadin-text-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="78px">
-       <vaadin-text-field caption="Email" style-name="small" id="email" width-full height="31px" _id="email"></vaadin-text-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="78px">
-       <vaadin-combo-box caption="Perfil" empty-selection-allowed="false" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO" _id="cmbPerfil"></vaadin-combo-box>
+       <vaadin-combo-box caption="Categoría" empty-selection-allowed="false" id="cmbCategoriasTecnologias" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO" _id="cmbCategoriasTecnologias"></vaadin-combo-box>
       </vaadin-css-layout>
      </vaadin-css-layout>
      <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">

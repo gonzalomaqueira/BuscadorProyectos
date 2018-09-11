@@ -103,4 +103,9 @@ public class Fachada {
 		
 		return ConversorValueObject.convertirListaCategoriaVO(categoriaService.obtenerCategoriasCompleto());
 	}
+
+	public void altaTecnologia(String nombreTecnologia, long idCategoria) {
+		
+		tecnologiaService.altaTecnologia(nombreTecnologia, idCategoria);
+	}
 }

@@ -42,7 +42,7 @@ public class Tecnologia extends ElementoProyecto
 
 	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) 
 	{
-		super();
+		super(nombre);
 		this.categoria = categoria;
 		this.sinonimos = sinonimos;
 	}	
