@@ -40,6 +40,10 @@ public class Categoria {
 		this.tecnologias = tecnologias;
 	}
 
+	public Categoria(long idCategoria) {
+		this.id = idCategoria;
+	}
+
 	public Long getId() {
 		return id;
 	}

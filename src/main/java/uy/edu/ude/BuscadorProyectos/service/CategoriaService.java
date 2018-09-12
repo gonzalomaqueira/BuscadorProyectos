@@ -6,8 +6,9 @@ import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 
 public interface CategoriaService {
 
-	List<Categoria> listCategorias();
+	List<Categoria> obtenerCategorias();
+	List<Categoria> obtenerCategoriasCompleto();
     void add(Categoria categoria);
 	void modify(Categoria categoria);
-	void delete(Categoria categoria);	
+	void delete(Categoria categoria);
 }

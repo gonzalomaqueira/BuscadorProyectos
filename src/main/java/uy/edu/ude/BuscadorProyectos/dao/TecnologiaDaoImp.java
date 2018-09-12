@@ -10,8 +10,10 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 @Repository
 public class TecnologiaDaoImp implements TecnologiaDao {
 
@@ -19,7 +21,8 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 	   private EntityManager em;
 	
 	@Override
-	public List<Tecnologia> obtenerTecnologias() {
+	public List<Tecnologia> obtenerTecnologias() 
+	{
 	      CriteriaQuery<Tecnologia> criteriaQuery = em.getCriteriaBuilder().createQuery(Tecnologia.class);
 	      @SuppressWarnings("unused")
 	      Root<Tecnologia> root = criteriaQuery.from(Tecnologia.class);
@@ -27,27 +30,39 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 	}
 
 	@Override
-	public void add(Tecnologia tecnologia) {
+	public void add(Tecnologia tecnologia) 
+	{
 		   em.merge(tecnologia);
 
 	}
 
 	@Override
-	public void modify(Tecnologia tecnologia) {
+	public void modify(Tecnologia tecnologia) 
+	{
 		  em.merge(tecnologia);
 
 	}
 
 	@Override
-	public void delete(Tecnologia tecnologia) {
+	public void delete(Tecnologia tecnologia)
+	{
 		em.remove(em.contains(tecnologia) ? tecnologia : em.merge(tecnologia));
 
 	}
 	
-    public List<SinonimoTecnologia> obtenerSinonimosTecnologia(long idTecnologia) {
+    public List<SinonimoTecnologia> obtenerSinonimosTecnologia(long idTecnologia) 
+    {
         TypedQuery<SinonimoTecnologia> query = em.createNamedQuery("SinonimoTecnologia.obtenerSinonimosTecnologia", SinonimoTecnologia.class);
-        query.setParameter("idTecnologia", idTecnologia);
+        query.setParameter("idTecnologia", new Tecnologia(idTecnologia));
         List<SinonimoTecnologia> resultado = query.getResultList();
+        return resultado;
+    }
+    
+    public List<Tecnologia> obtenerTecnologiasPorCategoria(long idCategoria)
+    {
+    	TypedQuery<Tecnologia> query = em.createNamedQuery("Tecnologia.obtenerTecnologiasPorCategoria", Tecnologia.class);
+        query.setParameter("idCategoria", new Categoria(idCategoria));
+        List<Tecnologia> resultado = query.getResultList();
         return resultado;
     }
 	

@@ -1,5 +1,6 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,11 @@ import uy.edu.ude.BuscadorProyectos.dao.CategoriaDao;
 import uy.edu.ude.BuscadorProyectos.dao.TecnologiaDao;
 import uy.edu.ude.BuscadorProyectos.dao.UsuarioDao;
 import uy.edu.ude.BuscadorProyectos.entity.Categoria;
+import uy.edu.ude.BuscadorProyectos.entity.Perfil;
+import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.entity.Usuario;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 
 @Service
 public class TecnologiaServiceImp implements TecnologiaService {
@@ -58,5 +63,25 @@ public class TecnologiaServiceImp implements TecnologiaService {
 		tecnologiaDao.delete(tecnologia);
 		
 	}
+	
+	@Transactional
+	@Override
+	public List<Tecnologia> obtenerTecnologiasCompletoPorCategoria(Categoria categoria)
+	{
+		List<Tecnologia> vRetorno = tecnologiaDao.obtenerTecnologiasPorCategoria(categoria.getId());
+		for(Tecnologia tec: vRetorno)
+		{
+			tec.setSinonimos(tecnologiaDao.obtenerSinonimosTecnologia(tec.getId()));
+		}
+		return vRetorno;
+	}
+	
+   @Transactional
+   @Override
+   public void altaTecnologia(String nombreTecnologia, long idCategoria)
+   {
+	   Tecnologia tecnologia = new Tecnologia(nombreTecnologia, new Categoria(idCategoria), new ArrayList<SinonimoTecnologia>());
+	   this.add(tecnologia);
+   }
 
 }

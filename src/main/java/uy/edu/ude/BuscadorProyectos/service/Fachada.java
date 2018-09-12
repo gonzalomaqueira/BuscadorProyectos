@@ -1,6 +1,7 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
@@ -96,4 +99,13 @@ public class Fachada {
 		usuarioService.eliminarUsuario(id);
 	}
 
+	public List<CategoriaVO> obtenerCategorias() {
+		
+		return ConversorValueObject.convertirListaCategoriaVO(categoriaService.obtenerCategoriasCompleto());
+	}
+
+	public void altaTecnologia(String nombreTecnologia, long idCategoria) {
+		
+		tecnologiaService.altaTecnologia(nombreTecnologia, idCategoria);
+	}
 }

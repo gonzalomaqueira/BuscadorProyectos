@@ -6,6 +6,7 @@ import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 
 public interface TecnologiaDao {
 	List<Tecnologia> obtenerTecnologias();
@@ -13,4 +14,5 @@ public interface TecnologiaDao {
 	void modify(Tecnologia tecnologia);
 	void delete(Tecnologia tecnologia);
 	List<SinonimoTecnologia> obtenerSinonimosTecnologia(long idTecnologia);
+	List<Tecnologia> obtenerTecnologiasPorCategoria(long idCategoria);
 }

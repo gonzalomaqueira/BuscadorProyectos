@@ -19,7 +19,7 @@ public class CategoriaDaoImp implements CategoriaDao {
 	   private EntityManager em;
 	
 	@Override
-	public List<Categoria> listCategorias() {
+	public List<Categoria> obtenerCategorias() {
 	      CriteriaQuery<Categoria> criteriaQuery = em.getCriteriaBuilder().createQuery(Categoria.class);
 	      @SuppressWarnings("unused")
 	      Root<Categoria> root = criteriaQuery.from(Categoria.class);

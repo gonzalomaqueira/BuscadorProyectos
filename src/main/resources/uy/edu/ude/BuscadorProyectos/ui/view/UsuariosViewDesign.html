@@ -18,7 +18,7 @@
    </vaadin-horizontal-layout>
    <vaadin-css-layout style-name="content" size-full :expand>
     <vaadin-css-layout style-name="list" size-full>
-     <vaadin-grid id="grdUsuarios" size-full data-item-type="uy.edu.ude.BuscadorProyectos.ValueObjects.UsuarioVO" _id="grdUsuarios">
+     <vaadin-grid id="grdUsuarios" width-full height="323px" data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO" _id="grdUsuarios">
       <table>
        <colgroup>
         <col column-id="id" sortable>
@@ -61,11 +61,11 @@
        <vaadin-text-field caption="Email" style-name="small" id="email" width-full height="31px" _id="email"></vaadin-text-field>
       </vaadin-css-layout>
       <vaadin-css-layout style-name="section half" width-full height="78px">
-       <vaadin-combo-box caption="Perfil" empty-selection-allowed="false" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.ValueObjects.PerfilVO" _id="cmbPerfil"></vaadin-combo-box>
+       <vaadin-combo-box caption="Perfil" empty-selection-allowed="false" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO" _id="cmbPerfil"></vaadin-combo-box>
       </vaadin-css-layout>
      </vaadin-css-layout>
      <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">
-      <vaadin-button style-name="small primary" id="btnAgregar" plain-text _id="btnAgregar" :middle>
+      <vaadin-button style-name="small primary" id="btnAgregar" width="83px" plain-text _id="btnAgregar" :middle>
         Agregar 
       </vaadin-button>
       <vaadin-button visible="false" style-name="small primary" id="btnModificar" plain-text _id="btnModificar" :middle>
