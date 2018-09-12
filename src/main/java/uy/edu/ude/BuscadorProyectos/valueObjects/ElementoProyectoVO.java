@@ -8,6 +8,12 @@ public class ElementoProyectoVO {
 	private String nombre;
 	private List<SinonimoVO> listaSinonimos;
 	
+	public ElementoProyectoVO() {
+
+	}
+	public ElementoProyectoVO(String value) {
+		this.nombre=value;
+	}
 	public long getId() {
 		return id;
 	}

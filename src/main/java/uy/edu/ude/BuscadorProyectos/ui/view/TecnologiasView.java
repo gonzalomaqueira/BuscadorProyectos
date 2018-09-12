@@ -48,9 +48,11 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		
 		grdSinonimos.setEnabled(false);
 		this.cargarCategorias();
+		cargarTodasTecnologias();
 		cmbCategorias.addValueChangeListener(evt -> {
 		    if (evt.getSource().isEmpty()) {
-		        //
+		    	
+		    	cargarTodasTecnologias();
 		    } 
 		    else 
 		    {
@@ -101,16 +103,17 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 				{	
 			    	try 
 			    	{
-			    		fachada.altaTecnologia(	txtNombreTecnologia.getValue(), cmbCategoriasTecnologias.getValue().getId());		
-			    		actualizarCategorias();
-			    		cargarTecnologiasPorCategoria(categoriaSeleccionada);
+			    		fachada.altaTecnologia(	txtNombreTecnologia.getValue(), cmbCategoriasTecnologias.getValue().getId());
+
 			    	}
 			    	catch (Exception e)
 					{
 			    		e.printStackTrace();
 			    		Notification.show("Ocurrió un error",Notification.Type.WARNING_MESSAGE);				
 					}
-				    			
+
+			    	actualizarCategorias();
+			    	cargarTecnologiasPorCategoria(categoriaSeleccionada);
 			    	grdTecnologias.setEnabled(true);
 			    	txtNombreTecnologia.clear();
 			    	form.setEnabled(false);
@@ -135,11 +138,41 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		listaCategorias.addAll(fachada.obtenerCategorias());
 		cmbCategorias.setItems(listaCategorias);
 		cmbCategorias.setItemCaptionGenerator(CategoriaVO::getNombre);
+		this.ActualizarCategoriaSeleccionada();
+	}
+	
+	private void ActualizarCategoriaSeleccionada()
+	{
+		if (this.categoriaSeleccionada != null && this.listaCategorias != null && !this.listaCategorias.isEmpty())
+		{
+			for(CategoriaVO cat: this.listaCategorias)
+			{
+				if (cat.getId() == this.categoriaSeleccionada.getId())
+				{
+					this.categoriaSeleccionada = cat;
+					break;
+				}
+			}
+		}
 	}
 	
 	private void cargarTecnologiasPorCategoria(CategoriaVO categoria)
 	{
 		grdTecnologias.setItems(categoria.getTecnologias());
+	}
+	
+	private void cargarTodasTecnologias()
+	{
+		if ( this.listaCategorias != null && !this.listaCategorias.isEmpty()) {
+
+			List<ElementoProyectoVO> vRetorno = new ArrayList<ElementoProyectoVO>();
+			for(CategoriaVO cat : this.listaCategorias)
+			{
+				vRetorno.addAll(cat.getTecnologias());
+			}
+			grdTecnologias.setItems(vRetorno);
+		}
+
 	}
 	
 	private void cargarSinonimosPorTecnologia(ElementoProyectoVO tecnologia)
@@ -154,6 +187,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		cmbCategoriasTecnologias.setItemCaptionGenerator(CategoriaVO::getNombre);
 
 	}
+
 	
 	
 }
