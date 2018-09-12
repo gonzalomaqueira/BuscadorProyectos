@@ -1,7 +1,10 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,10 +81,21 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
    @Transactional
    @Override
-   public void altaTecnologia(String nombreTecnologia, long idCategoria)
+   public void altaTecnologia(String nombreTecnologia, Long idCategoria)
    {
 	   Tecnologia tecnologia = new Tecnologia(nombreTecnologia, new Categoria(idCategoria), new ArrayList<SinonimoTecnologia>());
 	   this.add(tecnologia);
    }
+   
+   @Transactional
+   @Override
+   public void eliminarTecnologia(Long id) 
+   {
+	   Tecnologia tecnologia = new Tecnologia();
+	   tecnologia.setId(id);
+	   this.delete(tecnologia);
+   }
+
+
 
 }

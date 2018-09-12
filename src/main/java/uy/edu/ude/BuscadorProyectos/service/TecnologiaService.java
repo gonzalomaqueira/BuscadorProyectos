@@ -14,5 +14,6 @@ public interface TecnologiaService {
 	void modify(Tecnologia tecnologia);
 	void delete(Tecnologia tecnologia);
 	List<Tecnologia> obtenerTecnologiasCompletoPorCategoria(Categoria categoria);
-	void altaTecnologia(String nombreTecnologia, long idCategoria);
+	void altaTecnologia(String nombreTecnologia, Long idCategoria);
+	void eliminarTecnologia(Long id);
 }

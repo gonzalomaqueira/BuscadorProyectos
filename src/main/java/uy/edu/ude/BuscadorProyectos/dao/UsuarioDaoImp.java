@@ -40,7 +40,8 @@ public class UsuarioDaoImp implements UsuarioDao {
    }
 
    @Override
-   public void delete(Usuario usuario) {
+   public void delete(Usuario usuario) 
+   {
 	  em.remove(em.contains(usuario) ? usuario : em.merge(usuario));
    }
    

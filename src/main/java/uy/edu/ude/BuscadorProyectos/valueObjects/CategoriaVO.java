@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CategoriaVO {
 		
-	private long id;
+	private Long id;
 	private String nombre;
 	private List<ElementoProyectoVO> listaTecnologias;
 	

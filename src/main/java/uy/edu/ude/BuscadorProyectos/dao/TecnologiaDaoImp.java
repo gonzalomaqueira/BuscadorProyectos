@@ -8,7 +8,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
@@ -40,8 +43,8 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 	public void modify(Tecnologia tecnologia) 
 	{
 		  em.merge(tecnologia);
-
 	}
+
 
 	@Override
 	public void delete(Tecnologia tecnologia)

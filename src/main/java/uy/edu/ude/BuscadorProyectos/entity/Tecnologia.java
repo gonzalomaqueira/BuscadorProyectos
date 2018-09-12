@@ -32,7 +32,7 @@ public class Tecnologia extends ElementoProyecto
 	
 	@OneToMany(mappedBy="tecnologia", cascade=CascadeType.ALL)
 	private List<SinonimoTecnologia> sinonimos;
-	
+	 
 	@ManyToMany(cascade=CascadeType.ALL, mappedBy="tecnologia")  
     private List<Proyecto> proyectos;  
 	

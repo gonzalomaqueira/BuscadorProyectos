@@ -108,4 +108,10 @@ public class Fachada {
 		
 		tecnologiaService.altaTecnologia(nombreTecnologia, idCategoria);
 	}
+
+	public void eliminarTecnologia(Long id) 
+	{
+		
+		tecnologiaService.eliminarTecnologia(id);
+	}
 }
