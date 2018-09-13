@@ -26,7 +26,7 @@ public class TecnologiasViewDesign extends VerticalLayout {
 	protected ComboBox<uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO> cmbCategorias;
 	protected Label lblCategoria;
 	protected Button btnNuevaTecnologia;
-	protected Grid<uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO> grdTecnologias;
+	protected Grid<uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO> grdTecnologias;
 	protected Grid<uy.edu.ude.BuscadorProyectos.valueObjects.SinonimoVO> grdSinonimos;
 	protected VerticalLayout form;
 	protected CssLayout formTecnologia;

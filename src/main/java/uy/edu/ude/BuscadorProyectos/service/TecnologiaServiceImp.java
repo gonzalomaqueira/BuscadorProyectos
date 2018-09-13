@@ -95,6 +95,20 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	   tecnologia.setId(id);
 	   this.delete(tecnologia);
    }
+   
+   
+   @Transactional
+   @Override
+   public void modificarTecnologia(Long idTecnologia, String nombre, Long idCategoria)
+   {
+	   Tecnologia tecnologia = new Tecnologia();
+	   tecnologia.setId(idTecnologia);
+	   tecnologia.setNombre(nombre);
+	   Categoria categoria= new Categoria();
+	   categoria.setId(idCategoria);
+	   tecnologia.setCategoria(categoria);
+	   this.modify(tecnologia);
+   }
 
 
 

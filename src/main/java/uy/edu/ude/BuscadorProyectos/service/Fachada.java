@@ -104,14 +104,19 @@ public class Fachada {
 		return ConversorValueObject.convertirListaCategoriaVO(categoriaService.obtenerCategoriasCompleto());
 	}
 
-	public void altaTecnologia(String nombreTecnologia, long idCategoria) {
-		
+	public void altaTecnologia(String nombreTecnologia, Long idCategoria) 
+	{		
 		tecnologiaService.altaTecnologia(nombreTecnologia, idCategoria);
 	}
 
 	public void eliminarTecnologia(Long id) 
-	{
-		
+	{		
 		tecnologiaService.eliminarTecnologia(id);
+	}
+
+	public void modificarTecnologia(Long idTecnologia, String nombre, Long idCategoria) {
+		 
+		tecnologiaService.modificarTecnologia(idTecnologia, nombre, idCategoria);
+		
 	}
 }

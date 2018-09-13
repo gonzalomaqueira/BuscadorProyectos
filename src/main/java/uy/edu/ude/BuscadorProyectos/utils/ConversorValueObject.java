@@ -12,6 +12,7 @@ import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.SinonimoVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 public class ConversorValueObject {
@@ -82,19 +83,20 @@ public class ConversorValueObject {
 		return listaCategoriasVO;
 	}
 	
-	public static ElementoProyectoVO convertirTecnologiaVO(Tecnologia tecnologia)
+	public static TecnologiaVO convertirTecnologiaVO(Tecnologia tecnologia)
 	{
-		ElementoProyectoVO tecnologiaVO = new ElementoProyectoVO();
+		TecnologiaVO tecnologiaVO = new TecnologiaVO();
 		tecnologiaVO.setId(tecnologia.getId());
-		tecnologiaVO.setNombre(tecnologia.getNombre());		
+		tecnologiaVO.setNombre(tecnologia.getNombre());	
+		tecnologiaVO.setIdCategoria( tecnologia.getCategoria().getId() );
 		tecnologiaVO.setListaSinonimos(convertirListaSinonimosVO(tecnologia.getSinonimos()));
 		
 		return tecnologiaVO;
 	}
 
-	public static List<ElementoProyectoVO> convertirListaTecnologiasVO(List<Tecnologia> listaTecnologias) 
+	public static List<TecnologiaVO> convertirListaTecnologiasVO(List<Tecnologia> listaTecnologias) 
 	{
-		List<ElementoProyectoVO> listaTecnologiaVO = new ArrayList<ElementoProyectoVO>();
+		List<TecnologiaVO> listaTecnologiaVO = new ArrayList<TecnologiaVO>();
 		for(Tecnologia tecnologia : listaTecnologias)
 		{
 			listaTecnologiaVO.add(convertirTecnologiaVO(tecnologia));
