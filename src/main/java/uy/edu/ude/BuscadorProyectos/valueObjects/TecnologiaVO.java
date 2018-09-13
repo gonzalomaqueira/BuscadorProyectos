@@ -4,10 +4,10 @@ import java.util.List;
 
 public class TecnologiaVO extends ElementoProyectoVO{
 	
-	private Long id;
+	private int id;
 	private String nombre;
 	private List<SinonimoVO> listaSinonimos;
-	private Long idCategoria;
+	private int idCategoria;
 	
 	public TecnologiaVO() {
 
@@ -15,10 +15,10 @@ public class TecnologiaVO extends ElementoProyectoVO{
 	public TecnologiaVO(String value) {
 		this.nombre=value;
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -33,10 +33,10 @@ public class TecnologiaVO extends ElementoProyectoVO{
 	public void setListaSinonimos(List<SinonimoVO> listaSinonimos) {
 		this.listaSinonimos = listaSinonimos;
 	}
-	public Long getIdCategoria() {
+	public int getIdCategoria() {
 		return idCategoria;
 	}
-	public void setIdCategoria(Long idCategoria) {
+	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 

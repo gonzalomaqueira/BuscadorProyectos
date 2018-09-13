@@ -13,6 +13,7 @@ public interface TecnologiaDao {
 	void add(Tecnologia tecnologia);
 	void modify(Tecnologia tecnologia);
 	void delete(Tecnologia tecnologia);
-	List<SinonimoTecnologia> obtenerSinonimosTecnologia(long idTecnologia);
-	List<Tecnologia> obtenerTecnologiasPorCategoria(long idCategoria);
+	List<SinonimoTecnologia> obtenerSinonimosTecnologia(int idTecnologia);
+	List<Tecnologia> obtenerTecnologiasPorCategoria(int idCategoria);
+	Tecnologia obtenerTecnologiaPorId(int idTecnologia); 
 }

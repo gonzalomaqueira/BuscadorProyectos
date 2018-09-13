@@ -18,7 +18,7 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="IdUsuario")
-	private Long id;
+	private int id;
 	
 	@NotNull
 	@Size(min = 1, max = 255)
@@ -71,11 +71,11 @@ public class Usuario {
 		this.activo = true;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

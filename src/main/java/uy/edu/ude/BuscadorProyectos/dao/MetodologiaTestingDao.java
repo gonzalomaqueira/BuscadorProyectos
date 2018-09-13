@@ -12,6 +12,6 @@ public interface MetodologiaTestingDao {
 	void add(MetodologiaTesting metodologia);
 	void modify(MetodologiaTesting metodologia);
 	void delete(MetodologiaTesting metodologia);
-	List<SinonimoMetodologiaTesting> obtenerSinonimosMetodologiaTesting(long idMetodologiaTesting);
+	List<SinonimoMetodologiaTesting> obtenerSinonimosMetodologiaTesting(int idMetodologiaTesting);
 
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 public class CategoriaVO {
 		
-	private Long id;
+	private int id;
 	private String nombre;
 	private List<TecnologiaVO> listaTecnologias;
 	
 	
-	public long getId() 
+	public int getId() 
 	{
 		return id;
 	}
 	
-	public void setId(long id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

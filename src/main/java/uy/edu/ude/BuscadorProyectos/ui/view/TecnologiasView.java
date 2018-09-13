@@ -1,8 +1,5 @@
 package uy.edu.ude.BuscadorProyectos.ui.view;
 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +27,8 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 
 	@Autowired
     private Fachada fachada;
-	
 	private TecnologiaVO tecnologiaSelecionada;
-	
 	private CategoriaVO categoriaSeleccionada;
-    
     private List<CategoriaVO> listaCategorias;
     
 	public void enter(ViewChangeEvent event) 
@@ -43,7 +37,8 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		this.cargarCategorias();
 		cargarTodasTecnologias();
 		
-		cmbCategorias.addValueChangeListener(evt -> {
+		cmbCategorias.addValueChangeListener(evt -> 
+		{
 		    if (evt.getSource().isEmpty()) {
 		    	
 		    	cargarTodasTecnologias();
@@ -71,8 +66,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 				actualizarInterfazModificarTecnologia();
 			}
 			catch (Exception e)
-			{
-				
+			{				
 			}
 		});
 		
@@ -90,13 +84,13 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		
 		btnAgregarTecnologia.addClickListener(new Button.ClickListener()
 		{
-			public void buttonClick(ClickEvent event) 
+			public void buttonClick(ClickEvent event)
 			{
 				if (txtNombreTecnologia.isEmpty() || cmbCategoriasTecnologias.getValue() == null) 
 				{
-					Notification.show("Hay valores vacíos",Notification.Type.WARNING_MESSAGE);
+					Notification.show("Hay valores vacíos", Notification.Type.WARNING_MESSAGE);
 				}
-				else 
+				else
 				{	
 			    	try 
 			    	{
@@ -104,15 +98,13 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 			    							   cmbCategoriasTecnologias.getValue().getId());
 			    	}
 			    	catch (Exception e)
-					{			    						
+					{
 					}
-
 			    	actualizarCategorias();
 			    	cargarTecnologiasPorCategoria(categoriaSeleccionada);
 			    	cargarInterfazInicial();
 				}
 			}	
-
 		});
 		
 		btnModificarTecnologia.addClickListener(new Button.ClickListener()
@@ -132,21 +124,21 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 			    									cmbCategoriasTecnologias.getValue().getId());
 			    	}
 			    	catch (Exception e)
-					{			    					
+					{
+			    		e.printStackTrace();
 					}
-
 			    	actualizarCategorias();
 			    	cargarTecnologiasPorCategoria(categoriaSeleccionada);
 			    	cargarInterfazInicial();
 				}
 			}	
-
 		});
 		
 		
-		btnBorrarTecnologia.addClickListener(new Button.ClickListener() {
-		    public void buttonClick(ClickEvent event) {
-		    	
+		btnBorrarTecnologia.addClickListener(new Button.ClickListener()
+		{
+		    public void buttonClick(ClickEvent event)
+		    {
 		    	fachada.eliminarTecnologia(tecnologiaSelecionada.getId());	
 		    	formTecnologia.setEnabled(false);
 		    	actualizarCategorias();
@@ -155,11 +147,11 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		    }
 		});	
 		
-		btnCancelarTecnologia.addClickListener(new Button.ClickListener() {
-		    public void buttonClick(ClickEvent event) {
-		    	
-		    	cargarInterfazInicial();
-		
+		btnCancelarTecnologia.addClickListener(new Button.ClickListener()
+		{
+		    public void buttonClick(ClickEvent event)
+		    {		    	
+		    	cargarInterfazInicial();		
 		    }
 		});	
 	}
@@ -233,7 +225,6 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	{
 		cmbCategoriasTecnologias.setItems(listaCategorias);
 		cmbCategoriasTecnologias.setItemCaptionGenerator(CategoriaVO::getNombre);
-
 	}
 	
 	private void actualizarInterfazAgregarTecnologia() 
@@ -267,7 +258,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	    formTecnologia.setEnabled(false);
 	}
 	
-	private CategoriaVO obtenerCategoriaPorId(Long id)
+	private CategoriaVO obtenerCategoriaPorId(int id)
 	{
 		CategoriaVO categoria= new CategoriaVO();
 		if ( this.listaCategorias != null && !this.listaCategorias.isEmpty()) 

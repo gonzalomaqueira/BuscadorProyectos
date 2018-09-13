@@ -22,7 +22,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Tecnologias")
 @NamedQueries({
-	@NamedQuery(name = "Tecnologia.obtenerTecnologiasPorCategoria", query = "SELECT t FROM Tecnologia t  WHERE t.categoria = :idCategoria") })
+	@NamedQuery(name = "Tecnologia.obtenerTecnologiasPorCategoria", query = "SELECT t FROM Tecnologia t  WHERE t.categoria = :idCategoria"),
+	@NamedQuery(name = "Tecnologia.obtenerTecnologiasPorId", query = "SELECT t FROM Tecnologia t  WHERE t.id = :idTecnologia") })
 
 public class Tecnologia extends ElementoProyecto
 {	
@@ -34,10 +35,11 @@ public class Tecnologia extends ElementoProyecto
 	private List<SinonimoTecnologia> sinonimos;
 	 
 	@ManyToMany(cascade=CascadeType.ALL, mappedBy="tecnologia")  
-    private List<Proyecto> proyectos;  
+    private List<Proyecto> proyectos;
 	
 	public Tecnologia() 
 	{
+		super();
 	}
 
 	public Tecnologia(@NotNull @Size(min = 1, max = 255) String nombre, Categoria categoria, List<SinonimoTecnologia> sinonimos) 
@@ -47,7 +49,7 @@ public class Tecnologia extends ElementoProyecto
 		this.sinonimos = sinonimos;
 	}	
 	
-	public Tecnologia(long idTecnologia)
+	public Tecnologia(int idTecnologia)
 	{
 		super(idTecnologia);
 	}
@@ -75,6 +77,16 @@ public class Tecnologia extends ElementoProyecto
 	
 	public void setSinonimos(List<SinonimoTecnologia> sinonimos) {
 		this.sinonimos = sinonimos;
+	}
+	
+	
+
+	public List<Proyecto> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(List<Proyecto> proyectos) {
+		this.proyectos = proyectos;
 	}
 
 	@Override

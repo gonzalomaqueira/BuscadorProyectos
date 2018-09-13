@@ -31,7 +31,7 @@ public class ModeloProceso extends ElementoProyecto
 	{
 	}
 	
-	public ModeloProceso(long idModeloProceso) 
+	public ModeloProceso(int idModeloProceso) 
 	{
 		super(idModeloProceso);
 	}

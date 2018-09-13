@@ -48,23 +48,23 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
 	@Transactional
 	@Override
-	public void add(Tecnologia tecnologia) {
-		tecnologiaDao.add(tecnologia);
-		
+	public void add(Tecnologia tecnologia)
+	{
+		tecnologiaDao.add(tecnologia);		
 	}
 
 	@Transactional
 	@Override
-	public void modify(Tecnologia tecnologia) {
-		tecnologiaDao.modify(tecnologia);
-		
+	public void modify(Tecnologia tecnologia) 
+	{
+		tecnologiaDao.modify(tecnologia);		
 	}
 
 	@Transactional
 	@Override
-	public void delete(Tecnologia tecnologia) {
-		tecnologiaDao.delete(tecnologia);
-		
+	public void delete(Tecnologia tecnologia)
+	{
+		tecnologiaDao.delete(tecnologia);		
 	}
 	
 	@Transactional
@@ -81,7 +81,7 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
    @Transactional
    @Override
-   public void altaTecnologia(String nombreTecnologia, Long idCategoria)
+   public void altaTecnologia(String nombreTecnologia, int idCategoria)
    {
 	   Tecnologia tecnologia = new Tecnologia(nombreTecnologia, new Categoria(idCategoria), new ArrayList<SinonimoTecnologia>());
 	   this.add(tecnologia);
@@ -89,17 +89,20 @@ public class TecnologiaServiceImp implements TecnologiaService {
    
    @Transactional
    @Override
-   public void eliminarTecnologia(Long id) 
-   {
-	   Tecnologia tecnologia = new Tecnologia();
-	   tecnologia.setId(id);
+   public void eliminarTecnologia(int id) 
+   {		
+	   Tecnologia tecnologia = this.obtenerTecnologiaPorId(id);
 	   this.delete(tecnologia);
    }
    
-   
-   @Transactional
+   private Tecnologia obtenerTecnologiaPorId(int id) 
+   {
+	   return tecnologiaDao.obtenerTecnologiaPorId(id);
+   }
+
+@Transactional
    @Override
-   public void modificarTecnologia(Long idTecnologia, String nombre, Long idCategoria)
+   public void modificarTecnologia(int idTecnologia, String nombre, int idCategoria)
    {
 	   Tecnologia tecnologia = new Tecnologia();
 	   tecnologia.setId(idTecnologia);

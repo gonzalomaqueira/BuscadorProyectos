@@ -13,7 +13,7 @@ public interface UsuarioService {
 	void delete(Usuario usuario);
 	Usuario buscarUsuario(String user);
 	void altaUsuario(String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil);
-	void modificarUsuario(Long id, String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil);
-	void eliminarUsuario(Long id);
+	void modificarUsuario(int id, String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil);
+	void eliminarUsuario(int id);
 
 }
