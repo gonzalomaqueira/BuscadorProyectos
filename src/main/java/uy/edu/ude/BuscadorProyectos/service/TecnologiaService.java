@@ -17,4 +17,5 @@ public interface TecnologiaService {
 	void altaTecnologia(String nombreTecnologia, int idCategoria);
 	void eliminarTecnologia(int id);
 	void modificarTecnologia(int idTecnologia, String nombre, int idCategoria);
+	void altaSinonimoTecnologia(String nombreSinonimo, int idTecnologia);
 }

@@ -100,7 +100,7 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	   return tecnologiaDao.obtenerTecnologiaPorId(id);
    }
 
-@Transactional
+   @Transactional
    @Override
    public void modificarTecnologia(int idTecnologia, String nombre, int idCategoria)
    {
@@ -113,6 +113,18 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	   this.modify(tecnologia);
    }
 
+   @Transactional
+   @Override
+   public void altaSinonimoTecnologia(String nombreSinonimo, int idTecnologia)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setNombre(nombreSinonimo);
+	   sinonimo.setTecnologia(this.obtenerTecnologiaPorId(idTecnologia));
+	   this.agregarSinonimo(sinonimo);
+   }
 
-
+   private void agregarSinonimo(SinonimoTecnologia sinonimo) 
+   {
+		tecnologiaDao.agregarSinonimo(sinonimo);
+   }
 }

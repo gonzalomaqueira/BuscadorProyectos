@@ -27,7 +27,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 
 	@Autowired
     private Fachada fachada;
-	private TecnologiaVO tecnologiaSelecionada;
+	private TecnologiaVO tecnologiaSeleccionada;
 	private CategoriaVO categoriaSeleccionada;
     private List<CategoriaVO> listaCategorias;
     
@@ -52,7 +52,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		    
 		    limpiarFormTecnologias();
 		});
-		
+				
 		grdTecnologias.addSelectionListener(evt -> 
 		{
 			grdSinonimos.setEnabled(true);
@@ -60,9 +60,9 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 			singleSelect.setDeselectAllowed(false);			
 			try
 			{
-				tecnologiaSelecionada = singleSelect.getSelectedItem().get();
-				cargarDatosTecnologiaSeleccionada(tecnologiaSelecionada);
-				cargarSinonimosPorTecnologia(tecnologiaSelecionada);
+				tecnologiaSeleccionada = singleSelect.getSelectedItem().get();
+				cargarDatosTecnologiaSeleccionada(tecnologiaSeleccionada);
+				cargarSinonimosPorTecnologia(tecnologiaSeleccionada);
 				actualizarInterfazModificarTecnologia();
 			}
 			catch (Exception e)
@@ -77,6 +77,8 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		    	grdTecnologias.setEnabled(false);
 		    	grdSinonimos.setEnabled(false);
 		    	limpiarFormTecnologias();
+		    	limpiarFormSinonimos();
+		    	formSinonimos.setEnabled(false);
 		    	cargarCategoriaTecnologias();
 		    	actualizarInterfazAgregarTecnologia();
 		    }
@@ -119,7 +121,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 				{
 			    	try 
 			    	{
-			    		fachada.modificarTecnologia(tecnologiaSelecionada.getId(),
+			    		fachada.modificarTecnologia(tecnologiaSeleccionada.getId(),
 			    									txtNombreTecnologia.getValue(),
 			    									cmbCategoriasTecnologias.getValue().getId());
 			    	}
@@ -139,10 +141,11 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		{
 		    public void buttonClick(ClickEvent event)
 		    {
-		    	fachada.eliminarTecnologia(tecnologiaSelecionada.getId());	
+		    	fachada.eliminarTecnologia(tecnologiaSeleccionada.getId());	
 		    	formTecnologia.setEnabled(false);
 		    	actualizarCategorias();
 		    	cargarTecnologiasPorCategoria(categoriaSeleccionada);
+		    	grdSinonimos.setItems(new ArrayList<SinonimoVO>());
 		
 		    }
 		});	
@@ -153,7 +156,35 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		    {		    	
 		    	cargarInterfazInicial();		
 		    }
-		});	
+		});
+		
+		
+		btnAgregarSinonimo.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event)
+			{
+				if (txtNombreSinonimo.isEmpty()) 
+				{
+					Notification.show("Hay valores vacíos", Notification.Type.WARNING_MESSAGE);
+				}
+				else
+				{
+			    	try
+			    	{
+			    		fachada.altaSinonimoTecnologia(txtNombreSinonimo.getValue(), tecnologiaSeleccionada.getId());
+			    	}
+			    	catch (Exception e)
+					{
+					}
+			    	actualizarCategorias();
+			    	cargarTecnologiasPorCategoria(categoriaSeleccionada);
+			    	actualizarTecnologiaSeleccionada();
+			    	cargarSinonimosPorTecnologia(tecnologiaSeleccionada);
+			    	cargarInterfazInicial();
+			    	grdSinonimos.setEnabled(true);	    	
+				}
+			}	
+		});			
 	}
 	
 	private void cargarCategorias() 
@@ -170,10 +201,10 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		listaCategorias.addAll(fachada.obtenerCategorias());
 		cmbCategorias.setItems(listaCategorias);
 		cmbCategorias.setItemCaptionGenerator(CategoriaVO::getNombre);
-		this.ActualizarCategoriaSeleccionada();
+		this.actualizarCategoriaSeleccionada();
 	}
 	
-	private void ActualizarCategoriaSeleccionada()
+	private void actualizarCategoriaSeleccionada()
 	{
 		if (this.categoriaSeleccionada != null && this.listaCategorias != null && !this.listaCategorias.isEmpty())
 		{
@@ -182,6 +213,23 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 				if (cat.getId() == this.categoriaSeleccionada.getId())
 				{
 					this.categoriaSeleccionada = cat;
+					break;
+				}
+			}
+		}
+	}
+	
+	private void actualizarTecnologiaSeleccionada()
+	{
+		CategoriaVO categoriaActualizada = this.obtenerCategoriaPorId(tecnologiaSeleccionada.getIdCategoria());
+		
+		if (categoriaActualizada != null)
+		{
+			for(TecnologiaVO tec: categoriaActualizada.getTecnologias())
+			{
+				if (tec.getId() == this.tecnologiaSeleccionada.getId())
+				{
+					this.tecnologiaSeleccionada = tec;
 					break;
 				}
 			}
@@ -197,6 +245,14 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		else
 		{
 			this.cargarTodasTecnologias();
+		}
+	}
+	
+	private void cargarSinonimosPorTecnologia(TecnologiaVO tecnologia)
+	{
+		if(tecnologia != null)
+		{
+			grdSinonimos.setItems(tecnologia.getListaSinonimos());
 		}
 	}	
 	
@@ -215,12 +271,6 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 
 	}
 	
-	private void cargarSinonimosPorTecnologia(TecnologiaVO tecnologia)
-	{
-		
-		grdSinonimos.setItems(tecnologia.getListaSinonimos());
-	}
-	
 	private void cargarCategoriaTecnologias()
 	{
 		cmbCategoriasTecnologias.setItems(listaCategorias);
@@ -237,12 +287,22 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	
 	private void actualizarInterfazModificarTecnologia() 
 	{
-		formTecnologia.setEnabled(true);
+		formTecnologia.setEnabled(true);		
 		btnBorrarTecnologia.setVisible(true);
 		btnAgregarTecnologia.setVisible(false);
 		btnModificarTecnologia.setVisible(true);
+		
+		this.actualizarInterfazAgregarSinonimo();
 	}
 	
+	private void actualizarInterfazAgregarSinonimo()
+	{
+		formSinonimos.setEnabled(true);
+		btnBorrarSinonimo.setVisible(false);
+		btnAgregarSinonimo.setVisible(true);
+		btnModificarTecnologia.setVisible(false);
+	}
+		
 	private void cargarDatosTecnologiaSeleccionada(TecnologiaVO tecnologia)
 	{
 		txtNombreTecnologia.setValue(tecnologia.getNombre());
@@ -256,6 +316,12 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	    txtNombreTecnologia.clear();
 	    cmbCategoriasTecnologias.clear();
 	    formTecnologia.setEnabled(false);
+	}
+	
+	private void limpiarFormSinonimos()
+	{
+	    txtNombreSinonimo.clear();
+	    formSinonimos.setEnabled(false);
 	}
 	
 	private CategoriaVO obtenerCategoriaPorId(int id)
@@ -278,6 +344,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	private void cargarInterfazInicial() 
 	{
 		limpiarFormTecnologias();
+		limpiarFormSinonimos();
 		form.setEnabled(true);
 		grdTecnologias.setEnabled(true);
 		formTecnologia.setEnabled(false);

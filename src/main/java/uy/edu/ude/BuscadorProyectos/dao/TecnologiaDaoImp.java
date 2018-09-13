@@ -75,4 +75,10 @@ public class TecnologiaDaoImp implements TecnologiaDao {
     	Object persistentInstance = em.find(Tecnologia.class, idTecnologia);
     	return (Tecnologia)persistentInstance;
     }
+    
+    @Override
+    public void agregarSinonimo(SinonimoTecnologia sinonimo)
+    {
+    	em.merge(sinonimo);
+    }
 }

@@ -133,4 +133,9 @@ public class Fachada {
 		 
 		tecnologiaService.modificarTecnologia(idTecnologia, nombre, idCategoria);		
 	}
+
+	public void altaSinonimoTecnologia(String nombreSinonimo, int idTecnologia)
+	{
+		tecnologiaService.altaSinonimoTecnologia(nombreSinonimo, idTecnologia);
+	}
 }
