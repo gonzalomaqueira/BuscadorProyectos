@@ -81,4 +81,20 @@ public class TecnologiaDaoImp implements TecnologiaDao {
     {
     	em.merge(sinonimo);
     }
+    
+    @Override
+    public void modificarSinonimo(SinonimoTecnologia sinonimo)
+    {
+    	Object persistentInstance= em.find(SinonimoTecnologia.class, sinonimo.getId());
+    	SinonimoTecnologia aux= (SinonimoTecnologia) persistentInstance;
+    	aux.setNombre(sinonimo.getNombre());
+    	em.merge(aux);		
+    }
+    
+    @Override
+    public void eliminarSinonimo(SinonimoTecnologia sinonimo)
+    {
+    	Object persistentInstance= em.find(SinonimoTecnologia.class, sinonimo.getId());
+    	em.remove(em.contains(persistentInstance) ? persistentInstance : em.merge(persistentInstance));		
+    }
 }

@@ -127,4 +127,35 @@ public class TecnologiaServiceImp implements TecnologiaService {
    {
 		tecnologiaDao.agregarSinonimo(sinonimo);
    }
+   
+   @Transactional
+   @Override
+   public void modificarSinonimoTecnologia(int idSinonimo, String nombreSinonimo)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setId(idSinonimo);
+	   sinonimo.setNombre(nombreSinonimo);
+	   this.modificarSinonimo(sinonimo);
+   }
+
+   private void modificarSinonimo(SinonimoTecnologia sinonimo)
+   {
+	   tecnologiaDao.modificarSinonimo(sinonimo);
+   }
+  
+   @Transactional
+   @Override
+   public void eliminarSinonimoTecnologia(int idSinonimo)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setId(idSinonimo);
+	   this.eliminarSinonimo(sinonimo);
+   }
+
+   private void eliminarSinonimo(SinonimoTecnologia sinonimo)
+   {
+	   tecnologiaDao.eliminarSinonimo(sinonimo);
+   }
+   
+
 }

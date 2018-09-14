@@ -138,4 +138,16 @@ public class Fachada {
 	{
 		tecnologiaService.altaSinonimoTecnologia(nombreSinonimo, idTecnologia);
 	}
+
+
+
+	public void modificarSinonimo(int idSinonimo, String nombreSinonimo) 
+	{
+		tecnologiaService.modificarSinonimoTecnologia(idSinonimo, nombreSinonimo);
+	}
+
+	public void eliminarSinonimo(int idSinonimo) 
+	{
+		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
+	}
 }
