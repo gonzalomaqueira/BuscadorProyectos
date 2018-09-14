@@ -17,5 +17,13 @@ public class SinonimoTecnologia extends Sinonimo
 {	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "IdTecnologia")
-	private Tecnologia tecnologia;	
+	private Tecnologia tecnologia;
+
+	public Tecnologia getTecnologia() {
+		return tecnologia;
+	}
+
+	public void setTecnologia(Tecnologia tecnologia) {
+		this.tecnologia = tecnologia;
+	}
 }

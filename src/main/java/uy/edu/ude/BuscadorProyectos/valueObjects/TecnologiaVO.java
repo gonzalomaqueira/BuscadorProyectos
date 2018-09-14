@@ -1,17 +1,18 @@
- package uy.edu.ude.BuscadorProyectos.valueObjects;
+package uy.edu.ude.BuscadorProyectos.valueObjects;
 
 import java.util.List;
 
-public class ElementoProyectoVO {
-
+public class TecnologiaVO extends ElementoProyectoVO{
+	
 	private int id;
 	private String nombre;
 	private List<SinonimoVO> listaSinonimos;
+	private int idCategoria;
 	
-	public ElementoProyectoVO() {
+	public TecnologiaVO() {
 
 	}
-	public ElementoProyectoVO(String value) {
+	public TecnologiaVO(String value) {
 		this.nombre=value;
 	}
 	public int getId() {
@@ -32,5 +33,14 @@ public class ElementoProyectoVO {
 	public void setListaSinonimos(List<SinonimoVO> listaSinonimos) {
 		this.listaSinonimos = listaSinonimos;
 	}
-}
+	public int getIdCategoria() {
+		return idCategoria;
+	}
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+
 	
+
+}

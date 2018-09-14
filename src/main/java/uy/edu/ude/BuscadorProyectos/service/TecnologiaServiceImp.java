@@ -1,7 +1,10 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,23 +48,23 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
 	@Transactional
 	@Override
-	public void add(Tecnologia tecnologia) {
-		tecnologiaDao.add(tecnologia);
-		
+	public void add(Tecnologia tecnologia)
+	{
+		tecnologiaDao.add(tecnologia);		
 	}
 
 	@Transactional
 	@Override
-	public void modify(Tecnologia tecnologia) {
-		tecnologiaDao.modify(tecnologia);
-		
+	public void modify(Tecnologia tecnologia) 
+	{
+		tecnologiaDao.modify(tecnologia);		
 	}
 
 	@Transactional
 	@Override
-	public void delete(Tecnologia tecnologia) {
-		tecnologiaDao.delete(tecnologia);
-		
+	public void delete(Tecnologia tecnologia)
+	{
+		tecnologiaDao.delete(tecnologia);		
 	}
 	
 	@Transactional
@@ -78,10 +81,81 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	
    @Transactional
    @Override
-   public void altaTecnologia(String nombreTecnologia, long idCategoria)
+   public void altaTecnologia(String nombreTecnologia, int idCategoria)
    {
 	   Tecnologia tecnologia = new Tecnologia(nombreTecnologia, new Categoria(idCategoria), new ArrayList<SinonimoTecnologia>());
 	   this.add(tecnologia);
    }
+   
+   @Transactional
+   @Override
+   public void eliminarTecnologia(int id) 
+   {		
+	   Tecnologia tecnologia = this.obtenerTecnologiaPorId(id);
+	   this.delete(tecnologia);
+   }
+   
+   private Tecnologia obtenerTecnologiaPorId(int id) 
+   {
+	   return tecnologiaDao.obtenerTecnologiaPorId(id);
+   }
+
+   @Transactional
+   @Override
+   public void modificarTecnologia(int idTecnologia, String nombre, int idCategoria)
+   {
+	   Tecnologia tecnologia = new Tecnologia();
+	   tecnologia.setId(idTecnologia);
+	   tecnologia.setNombre(nombre);
+	   Categoria categoria= new Categoria();
+	   categoria.setId(idCategoria);
+	   tecnologia.setCategoria(categoria);
+	   this.modify(tecnologia);
+   }
+
+   @Transactional
+   @Override
+   public void altaSinonimoTecnologia(String nombreSinonimo, int idTecnologia)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setNombre(nombreSinonimo);
+	   sinonimo.setTecnologia(this.obtenerTecnologiaPorId(idTecnologia));
+	   this.agregarSinonimo(sinonimo);
+   }
+
+   private void agregarSinonimo(SinonimoTecnologia sinonimo) 
+   {
+		tecnologiaDao.agregarSinonimo(sinonimo);
+   }
+   
+   @Transactional
+   @Override
+   public void modificarSinonimoTecnologia(int idSinonimo, String nombreSinonimo)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setId(idSinonimo);
+	   sinonimo.setNombre(nombreSinonimo);
+	   this.modificarSinonimo(sinonimo);
+   }
+
+   private void modificarSinonimo(SinonimoTecnologia sinonimo)
+   {
+	   tecnologiaDao.modificarSinonimo(sinonimo);
+   }
+  
+   @Transactional
+   @Override
+   public void eliminarSinonimoTecnologia(int idSinonimo)
+   {
+	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
+	   sinonimo.setId(idSinonimo);
+	   this.eliminarSinonimo(sinonimo);
+   }
+
+   private void eliminarSinonimo(SinonimoTecnologia sinonimo)
+   {
+	   tecnologiaDao.eliminarSinonimo(sinonimo);
+   }
+   
 
 }

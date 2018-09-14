@@ -2,17 +2,17 @@ package uy.edu.ude.BuscadorProyectos.valueObjects;
 
 public class UsuarioVO {
 
-	private Long id;
+	private int id;
 	private String usuario;
 	private String nombre;
 	private String apellido;
 	private String email;
 	private PerfilVO perfil;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getUsuario() {

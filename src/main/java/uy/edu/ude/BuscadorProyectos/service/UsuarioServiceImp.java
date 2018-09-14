@@ -57,7 +57,7 @@ public class UsuarioServiceImp implements UsuarioService {
    
    @Transactional
    @Override
-   public void modificarUsuario(Long id, String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil)
+   public void modificarUsuario(int id, String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil)
    {
 	   if(FuncionesTexto.esNuloOVacio(contrasenia))
 		  contrasenia=buscarUsuario(nombreUsuario).getContrasenia();
@@ -70,7 +70,7 @@ public class UsuarioServiceImp implements UsuarioService {
    
    @Transactional
    @Override
-   public void eliminarUsuario(Long id)
+   public void eliminarUsuario(int id)
    {
 	   Usuario usuario = new Usuario();
 	   usuario.setId(id);

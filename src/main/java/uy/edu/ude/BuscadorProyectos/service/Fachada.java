@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import uy.edu.ude.BuscadorProyectos.dao.TecnologiaDao;
 import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
 import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
 import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
@@ -43,6 +44,20 @@ public class Fachada {
 	@Autowired
 	private MetodologiaTestingService metodologiaTestingService;
 
+	
+	
+	
+	@Autowired
+	private TecnologiaDao tecnologiaDao;
+	
+	@Transactional(readOnly = true)
+	public void obtenerTecnologiasPrueba()
+	{
+		List<Tecnologia> listaTec = tecnologiaService.obtenerTecnologias();
+		tecnologiaDao.delete(listaTec.get(5));
+	}
+	
+	
 
 	@Transactional(readOnly = true)
 	public List<Tecnologia> obtenerTecnologias()
@@ -87,14 +102,14 @@ public class Fachada {
 		usuarioService.altaUsuario(usuario, contrasenia, nombre, apellido, email, p);
 	}	
 	
-	public void modificarUsuario(Long id, String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 
+	public void modificarUsuario(int id, String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 
 	{
 		Perfil p = new Perfil();
 		p.setId(perfil.getId());
 		usuarioService.modificarUsuario(id, usuario, contrasenia, nombre, apellido, email, p);
 	}
 	
-	public void eliminarUsuario(Long id)
+	public void eliminarUsuario(int id)
 	{
 		usuarioService.eliminarUsuario(id);
 	}
@@ -104,8 +119,35 @@ public class Fachada {
 		return ConversorValueObject.convertirListaCategoriaVO(categoriaService.obtenerCategoriasCompleto());
 	}
 
-	public void altaTecnologia(String nombreTecnologia, long idCategoria) {
-		
+	public void altaTecnologia(String nombreTecnologia, int idCategoria) 
+	{		
 		tecnologiaService.altaTecnologia(nombreTecnologia, idCategoria);
+	}
+
+	public void eliminarTecnologia(int id) 
+	{		
+		tecnologiaService.eliminarTecnologia(id);
+	}
+
+	public void modificarTecnologia(int idTecnologia, String nombre, int idCategoria) {
+		 
+		tecnologiaService.modificarTecnologia(idTecnologia, nombre, idCategoria);		
+	}
+
+	public void altaSinonimoTecnologia(String nombreSinonimo, int idTecnologia)
+	{
+		tecnologiaService.altaSinonimoTecnologia(nombreSinonimo, idTecnologia);
+	}
+
+
+
+	public void modificarSinonimo(int idSinonimo, String nombreSinonimo) 
+	{
+		tecnologiaService.modificarSinonimoTecnologia(idSinonimo, nombreSinonimo);
+	}
+
+	public void eliminarSinonimo(int idSinonimo) 
+	{
+		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
 	}
 }

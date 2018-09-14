@@ -14,7 +14,7 @@ public abstract class Sinonimo
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="IdSinonimo")
-	protected Long id;
+	protected int id;
 	
 	@NotNull
 	@Size(min = 1, max = 255)
@@ -24,16 +24,16 @@ public abstract class Sinonimo
 	public Sinonimo() {
 	}
 	
-	public Sinonimo(Long id, @NotNull @Size(min = 1, max = 255) String nombre)
+	public Sinonimo(int id, @NotNull @Size(min = 1, max = 255) String nombre)
 	{
 		this.nombre = nombre;
 	}
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -28,6 +28,9 @@ public class ReportesView extends ReportesViewDesign implements View{
 	public void enter(ViewChangeEvent event) {
 		
 				
+		
+		fachada.obtenerTecnologiasPrueba();
+		
 		PDDocument pdDoc = null;
 		PDFTextStripper pdfStripper;
 

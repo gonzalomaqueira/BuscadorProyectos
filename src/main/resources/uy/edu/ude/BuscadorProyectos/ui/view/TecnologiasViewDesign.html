@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;apptheme&quot;}">
-  <meta name="vaadin-version" content="8.1.5">
+  <meta name="vaadin-version" content="8.0.5">
  </head>
  <body>
   <vaadin-vertical-layout style-name="crud-template" spacing="false" responsive size-full margin="false">
@@ -22,14 +22,14 @@
    </vaadin-horizontal-layout>
    <vaadin-css-layout style-name="content" size-full :expand>
     <vaadin-css-layout style-name="list" size-full>
-     <vaadin-grid id="grdTecnologias" width="50%" height-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO" _id="grdTecnologias">
+     <vaadin-grid id="grdTecnologias" width="50%" height-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO" _id="grdTecnologias">
       <table>
        <colgroup>
         <col column-id="nombre" sortable>
        </colgroup>
        <thead>
         <tr default>
-         <th plain-text column-ids="nombre">Tecnologías</th>
+         <th plain-text column-ids="nombre">Nombre</th>
         </tr>
        </thead>
        <tbody></tbody>
@@ -49,29 +49,44 @@
       </table>
      </vaadin-grid>
     </vaadin-css-layout>
-    <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="513px" height-full margin="false" _id="form">
+    <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="550px" height-full margin="false" _id="form">
      <vaadin-css-layout style-name="edit" size-full :expand>
-      <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Tecnología" style-name="small" id="txtNombreTecnologia" width-full height="31px" _id="txtNombreTecnologia"></vaadin-text-field>
-      </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="78px">
+      <vaadin-css-layout caption="Tecnología" id="formTecnologia" width-full height="40%" _id="formTecnologia">
+       <vaadin-text-field caption="Nombre" style-name="small" id="txtNombreTecnologia" width-full height="31px" _id="txtNombreTecnologia"></vaadin-text-field>
        <vaadin-combo-box caption="Categoría" empty-selection-allowed="false" id="cmbCategoriasTecnologias" placeholder="" text-input-allowed="false" width-full height="31px" data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO" _id="cmbCategoriasTecnologias"></vaadin-combo-box>
+       <vaadin-horizontal-layout width-full height="50px">
+        <vaadin-button style-name="small primary" id="btnAgregarTecnologia" width="83px" plain-text _id="btnAgregarTecnologia" :middle>
+          Agregar 
+        </vaadin-button>
+        <vaadin-button visible="false" style-name="small primary" id="btnModificarTecnologia" plain-text _id="btnModificarTecnologia" :middle>
+          Modificar 
+        </vaadin-button>
+        <vaadin-button style-name="small" id="btnCancelarTecnologia" plain-text _id="btnCancelarTecnologia" :middle :center>
+          Cancelar 
+        </vaadin-button>
+        <vaadin-button style-name="small danger" id="btnBorrarTecnologia" plain-text _id="btnBorrarTecnologia" :middle :right :expand>
+          Borrar 
+        </vaadin-button>
+       </vaadin-horizontal-layout>
+      </vaadin-css-layout>
+      <vaadin-css-layout caption="Sinónimo" id="formSinonimos" width-full height="30%" _id="formSinonimos">
+       <vaadin-text-field caption="Nombre" style-name="small" id="txtNombreSinonimo" width-full height="31px" _id="txtNombreSinonimo"></vaadin-text-field>
+       <vaadin-horizontal-layout width-full height="50px">
+        <vaadin-button style-name="small primary" id="btnAgregarSinonimo" width="83px" plain-text _id="btnAgregarSinonimo" :middle>
+          Agregar 
+        </vaadin-button>
+        <vaadin-button visible="false" style-name="small primary" id="btnModificarSinonimo" plain-text _id="btnModificarSinonimo" :middle>
+          Modificar 
+        </vaadin-button>
+        <vaadin-button style-name="small" id="btnCancelarSinonimo" plain-text _id="btnCancelarSinonimo" :middle :center>
+          Cancelar 
+        </vaadin-button>
+        <vaadin-button style-name="small danger" id="btnBorrarSinonimo" plain-text _id="btnBorrarSinonimo" :middle :right :expand>
+          Borrar 
+        </vaadin-button>
+       </vaadin-horizontal-layout>
       </vaadin-css-layout>
      </vaadin-css-layout>
-     <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">
-      <vaadin-button style-name="small primary" id="btnAgregar" width="83px" plain-text _id="btnAgregar" :middle>
-        Agregar 
-      </vaadin-button>
-      <vaadin-button visible="false" style-name="small primary" id="btnModificar" plain-text _id="btnModificar" :middle>
-        Modificar 
-      </vaadin-button>
-      <vaadin-button style-name="small" id="btnCancelar" plain-text _id="btnCancelar" :middle :center>
-        Cancelar 
-      </vaadin-button>
-      <vaadin-button style-name="small danger" id="btnBorrar" plain-text _id="btnBorrar" :middle :right :expand>
-        Borrar 
-      </vaadin-button>
-     </vaadin-horizontal-layout>
     </vaadin-vertical-layout>
    </vaadin-css-layout>
   </vaadin-vertical-layout>

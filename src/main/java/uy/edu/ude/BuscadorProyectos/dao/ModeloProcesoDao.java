@@ -11,6 +11,6 @@ public interface ModeloProcesoDao {
 	void add(ModeloProceso modelo);
 	void modify(ModeloProceso modelo);
 	void delete(ModeloProceso modelo);
-	List<SinonimoModeloProceso> obtenerSinonimosModeloProceso(long idModeloProceso);
+	List<SinonimoModeloProceso> obtenerSinonimosModeloProceso(int idModeloProceso);
 
 }

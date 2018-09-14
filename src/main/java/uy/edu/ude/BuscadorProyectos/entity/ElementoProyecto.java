@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,7 +18,7 @@ public abstract class ElementoProyecto
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Id")
-	protected Long id;
+	protected int id;
 	
 	@NotNull
 	@Size(min = 1, max = 255)
@@ -32,15 +34,15 @@ public abstract class ElementoProyecto
 		this.nombre = nombre;
 	}	
 	
-	public ElementoProyecto(long id) {
+	public ElementoProyecto(int id) {
 		this.id = id;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

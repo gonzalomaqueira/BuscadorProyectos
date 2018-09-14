@@ -44,7 +44,7 @@ public class MetodologiaTestingDaoImp implements MetodologiaTestingDao {
 		em.remove(em.contains(metodologia) ? metodologia : em.merge(metodologia));
 	}
 	
-    public List<SinonimoMetodologiaTesting> obtenerSinonimosMetodologiaTesting(long idMetodologiaTesting) {
+    public List<SinonimoMetodologiaTesting> obtenerSinonimosMetodologiaTesting(int idMetodologiaTesting) {
         TypedQuery<SinonimoMetodologiaTesting> query = em.createNamedQuery("SinonimoMetodologiaTesting.obtenerSinonimosMetodologiaTesting", SinonimoMetodologiaTesting.class);
         query.setParameter("idMetodologiaTesting", new MetodologiaTesting(idMetodologiaTesting));
         List<SinonimoMetodologiaTesting> resultado = query.getResultList();

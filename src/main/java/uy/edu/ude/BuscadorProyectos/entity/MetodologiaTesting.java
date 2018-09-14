@@ -32,7 +32,7 @@ public class MetodologiaTesting extends ElementoProyecto
 	{
 	}
 	
-	public MetodologiaTesting(long idMetodologiaTesting) 
+	public MetodologiaTesting(int idMetodologiaTesting) 
 	{
 		super(idMetodologiaTesting);
 	}
