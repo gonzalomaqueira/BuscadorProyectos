@@ -5,17 +5,43 @@ import java.util.List;
 
 import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
+import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.SinonimoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
-public class ConversorValueObject {
+public class ConversorValueObject 
+{
+	/****************************************************** Proyecto */
+	
+	public static ProyectoVO convertirProyectoVO(Proyecto proyecto)
+	{
+		return new ProyectoVO(proyecto.getId(), 
+							  proyecto.getNombre(),
+							  proyecto.getAnio(),
+							  proyecto.getCarrera(),
+							  proyecto.getNota());
+	}
+	
+	public static List<ProyectoVO> convertirListaProyectoVO(List<Proyecto> listaProyectos)
+	{
+		List<ProyectoVO> listaProyectosVO = new ArrayList<ProyectoVO>();
+
+		for(Proyecto proyecto : listaProyectos)
+		{
+			listaProyectosVO.add(convertirProyectoVO(proyecto));
+		}		
+		return listaProyectosVO;
+	}
+	
+	/****************************************************** Usuario */
 	
 	public static UsuarioVO convertirUsuarioVO(Usuario usuario)
 	{
@@ -62,6 +88,8 @@ public class ConversorValueObject {
 	}
 
 	
+	/****************************************************** Tecnología */	
+
 	public static CategoriaVO convertirCategoriaVO(Categoria categoria)
 	{
 		CategoriaVO categoriaVO = new CategoriaVO();
@@ -71,7 +99,6 @@ public class ConversorValueObject {
 		
 		return categoriaVO;
 	}
-	
 	
 	public static List<CategoriaVO> convertirListaCategoriaVO(List<Categoria> listaCategorias) 
 	{
@@ -122,6 +149,5 @@ public class ConversorValueObject {
 		}		
 		return listaSinonimosVO;
 	}
-
 
 }

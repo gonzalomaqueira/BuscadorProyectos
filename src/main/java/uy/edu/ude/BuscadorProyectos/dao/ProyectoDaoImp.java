@@ -17,7 +17,8 @@ public class ProyectoDaoImp implements ProyectoDao {
 	private EntityManager em;
 
 	@Override
-	public List<Proyecto> listarProyectos() {
+	public List<Proyecto> listarProyectos()
+	{
 	      CriteriaQuery<Proyecto> criteriaQuery = em.getCriteriaBuilder().createQuery(Proyecto.class);
 	      @SuppressWarnings("unused")
 	      Root<Proyecto> root = criteriaQuery.from(Proyecto.class);
@@ -25,18 +26,26 @@ public class ProyectoDaoImp implements ProyectoDao {
 	   }
 
 	@Override
-	public void add(Proyecto proyecto) {
+	public void add(Proyecto proyecto)
+	{
 		em.merge(proyecto);
     }
 
 	@Override
-	public void modify(Proyecto proyecto) {
+	public void modify(Proyecto proyecto)
+	{
 		em.merge(proyecto);
     }
 
 	@Override
-	public void delete(Proyecto proyecto) {
+	public void delete(Proyecto proyecto)
+	{
 		  em.remove(em.contains(proyecto) ? proyecto : em.merge(proyecto));
     }
 
+	@Override
+	public Proyecto obtenerProyectoPorId(int id)
+	{
+		return (Proyecto)em.find(Proyecto.class, id);
+	}
 }

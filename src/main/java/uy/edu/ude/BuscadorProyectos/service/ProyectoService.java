@@ -11,10 +11,15 @@ import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 
 public interface ProyectoService {
 
-    List<Proyecto> listarProyectos();
-    void add(Proyecto proyecto);
-	void modify(Proyecto proyecto);
-	void delete(Proyecto proyecto);
+    List<Proyecto> obtenerProyectos();
+    void agregar(Proyecto proyecto);
+	void modificar(Proyecto proyecto);
+	void borrar(Proyecto proyecto);
+	
+	void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo);
+	void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo);
+	void borrarProyecto(int id);
+	
 	List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[]);
 	SeccionTexto armarSeccionAlumnos(String texto[]);
 	SeccionTexto armarSeccionTutor(String texto[]);

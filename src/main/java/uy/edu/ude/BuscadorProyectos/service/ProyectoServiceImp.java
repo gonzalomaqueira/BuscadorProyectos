@@ -17,6 +17,7 @@ import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
 import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 
 @Service
@@ -27,26 +28,47 @@ public class ProyectoServiceImp implements ProyectoService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<Proyecto> listarProyectos() {
+	public List<Proyecto> obtenerProyectos() {
 		return proyectoDao.listarProyectos();
 	}
 
 	@Transactional
 	@Override
-	public void add(Proyecto proyecto) {
+	public void agregar(Proyecto proyecto) {
 		proyectoDao.add(proyecto);
 	}
 
 	@Transactional
 	@Override
-	public void modify(Proyecto proyecto) {
+	public void modificar(Proyecto proyecto) {
 		proyectoDao.modify(proyecto);
 	}
 
 	@Transactional
 	@Override
-	public void delete(Proyecto proyecto) {
+	public void borrar(Proyecto proyecto) {
 		proyectoDao.delete(proyecto);
+	}
+	
+	
+	@Override
+	public void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) 
+	{
+	   Proyecto proyecto = new Proyecto(nombre, anio, carrera, nota, rutaArchivo);
+	   this.agregar(proyecto);
+	}
+
+	@Override
+	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) {
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	
+	@Override
+	public void borrarProyecto(int id) 
+	{
+		this.borrar(proyectoDao.obtenerProyectoPorId(id));
 	}
 	
 	public List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[])
@@ -272,6 +294,5 @@ public class ProyectoServiceImp implements ProyectoService {
 			}
 		}
 		return vListaRetorno;
-	}	
-
+	}
 }
