@@ -1,41 +1,35 @@
 package uy.edu.ude.BuscadorProyectos.ui.view;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.SQLException;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.ExternalResource;
-import com.vaadin.server.Resource;
-import com.vaadin.server.VaadinSession;
+
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Link;
+
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Upload;
-import com.vaadin.ui.Upload.SucceededListener;
+
 import com.vaadin.ui.components.grid.SingleSelectionModel;
 import com.vaadin.ui.Button.ClickEvent;
 
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
+import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
-import uy.edu.ude.BuscadorProyectos.service.ProyectoService;
+
 import uy.edu.ude.BuscadorProyectos.utils.Constantes;
 import uy.edu.ude.BuscadorProyectos.utils.ReceptorArchivos;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
-import uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO;
+
 
 @SpringView
 @SpringComponent
@@ -48,6 +42,14 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
     private String nombreArchivo;
     private String prefijoArchivo;
     private ProyectoVO proyectoSeleccionado;
+    
+    private final NavigationManager navigationManager;
+    
+    @Autowired
+    public ProyectosUploadView (NavigationManager navigationManager)
+    {
+    	this.navigationManager = navigationManager;
+    }
     
 	@Override
 	public void enter(ViewChangeEvent event)
@@ -166,6 +168,15 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
            Notification.show("Archivo subido exitosamente", Notification.Type.HUMANIZED_MESSAGE);
            updProyecto.setEnabled(false);
         });
+		
+
+		btnProyecto.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event)
+			{
+				navigationManager.navigateTo(ProyectoView.class , proyectoSeleccionado.getId());
+			}
+		});		
 	}
 	
 	private void cargarInterfazInicial() 

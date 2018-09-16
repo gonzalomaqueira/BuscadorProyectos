@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;GENERATE_GETTERS&quot;:false,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;apptheme&quot;}">
+  <meta name="vaadin-version" content="8.1.5">
+  <meta name="package-mapping" content="com_bakery_ui_views_orderedit:com.Bakery.ui.views.orderedit">
+ </head>
+ <body>
+  <vaadin-vertical-layout spacing="false" margin-top="false">
+   <vaadin-css-layout style-name="order-form responsive" responsive width-full>
+    <vaadin-horizontal-layout id="cabezalProyecto" width-full _id="cabezalProyecto">
+     <vaadin-label style-name="h4 colored" id="orderId" plain-text _id="orderId">
+       #idProyecto 
+     </vaadin-label>
+     <vaadin-label style-name="h4 colored" id="stateLabel" width-full plain-text _id="stateLabel" :expand>
+       Nombre Proyecto 
+     </vaadin-label>
+    </vaadin-horizontal-layout>
+    <vaadin-label style-name="header" width-full plain-text _id="headerNombreProyecto">
+      Nombre Proyecto 
+    </vaadin-label>
+    <vaadin-text-field style-name="full" id="txtNombreProyecto" width-full _id="txtNombreProyecto"></vaadin-text-field>
+    <vaadin-label style-name="header" width-full plain-text _id="headerCarrera">
+      Carrera 
+    </vaadin-label>
+    <vaadin-text-field style-name="full" id="txtCarrera" width-full _id="txtCarrera"></vaadin-text-field>
+    <vaadin-horizontal-layout width-full _id="contenedorAnioNota">
+     <vaadin-vertical-layout spacing="false" size-full margin="false">
+      <vaadin-label style-name="header" id="headerAnio" width-full plain-text _id="headerAnio">
+        Año 
+      </vaadin-label>
+      <vaadin-text-field style-name="full" id="txtAnio" width-full _id="txtAnio"></vaadin-text-field>
+     </vaadin-vertical-layout>
+     <vaadin-vertical-layout spacing="false" size-full margin="false">
+      <vaadin-label style-name="header" id="headerNota" width-full plain-text _id="headerNota">
+        Nota 
+      </vaadin-label>
+      <vaadin-text-field style-name="full" id="txtNota" width-full _id="txtNota"></vaadin-text-field>
+     </vaadin-vertical-layout>
+    </vaadin-horizontal-layout>
+    <vaadin-label style-name="header" id="headerResumen" width-full plain-text _id="headerResumen">
+      Resúmen Ejecutivo 
+    </vaadin-label>
+    <vaadin-text-area width-full _id="txtResumen"></vaadin-text-area>
+    <vaadin-horizontal-layout width-full _id="contenedorTutorAlumnos">
+     <vaadin-vertical-layout spacing="false" size-full margin="false">
+      <vaadin-label style-name="header" id="headerTutor" width-full plain-text _id="headerTutor">
+        Tutor 
+      </vaadin-label>
+      <vaadin-text-field style-name="full" width-full _id="txtTutor"></vaadin-text-field>
+     </vaadin-vertical-layout>
+     <vaadin-vertical-layout spacing="false" size-full margin="false">
+      <vaadin-label style-name="header" id="headerAlumnos" width-full plain-text _id="headerAlumnos">
+        ALumnos 
+      </vaadin-label>
+      <vaadin-text-area width-full _id="txtAlumnos"></vaadin-text-area>
+     </vaadin-vertical-layout>
+    </vaadin-horizontal-layout>
+    <vaadin-label style-name="header" id="headerTecnologia" width-full plain-text _id="headerTecnologia">
+      Tecnología 
+    </vaadin-label>
+    <vaadin-grid style-name="half" id="grdTecnologias" height-mode="undefined" width-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO" _id="grdTecnologias">
+     <table>
+      <colgroup>
+       <col column-id="nombre" sortable>
+      </colgroup>
+      <thead>
+       <tr default>
+        <th plain-text column-ids="nombre">Nombre</th>
+       </tr>
+      </thead>
+      <tbody></tbody>
+     </table>
+    </vaadin-grid>
+    <vaadin-label style-name="header" id="headerModeloProceso" width-full plain-text _id="headerModeloProceso">
+      Modelo de proceso 
+    </vaadin-label>
+    <vaadin-grid style-name="half" id="grdModeloProceso" height-mode="undefined" width-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO" _id="grdModeloProceso">
+     <table>
+      <colgroup>
+       <col column-id="nombre" sortable>
+      </colgroup>
+      <thead>
+       <tr default>
+        <th plain-text column-ids="nombre">Nombre</th>
+       </tr>
+      </thead>
+      <tbody></tbody>
+     </table>
+    </vaadin-grid>
+    <vaadin-label style-name="header" id="headerMetodologiaTesting" width-full plain-text _id="headerMetodologiaTesting">
+      Tecnología 
+    </vaadin-label>
+    <vaadin-grid style-name="half" id="grdMetodologiaTesting" height-mode="undefined" width-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO" _id="grdMetodologiaTesting">
+     <table>
+      <colgroup>
+       <col column-id="nombre" sortable>
+      </colgroup>
+      <thead>
+       <tr default>
+        <th plain-text column-ids="nombre">Nombre</th>
+       </tr>
+      </thead>
+      <tbody></tbody>
+     </table>
+    </vaadin-grid>
+   </vaadin-css-layout>
+  </vaadin-vertical-layout>
+ </body>
+</html>

@@ -31,6 +31,7 @@ public class ProyectosUploadViewDesign extends VerticalLayout {
 	protected TextField txtAnio;
 	protected TextField txtCarrera;
 	protected TextField txtNota;
+	protected Button btnProyecto;
 	protected CssLayout formUpload;
 	protected Upload updProyecto;
 	protected Button btnAgregar;

@@ -51,6 +51,7 @@ public class ProyectoServiceImp implements ProyectoService {
 	}
 	
 	
+	@Transactional
 	@Override
 	public void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) 
 	{
@@ -58,6 +59,7 @@ public class ProyectoServiceImp implements ProyectoService {
 	   this.agregar(proyecto);
 	}
 
+	@Transactional
 	@Override
 	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) {
 		// TODO Auto-generated method stub
@@ -65,6 +67,7 @@ public class ProyectoServiceImp implements ProyectoService {
 	}	
 	
 	
+	@Transactional
 	@Override
 	public void borrarProyecto(int id) 
 	{
