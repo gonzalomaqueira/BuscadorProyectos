@@ -1,9 +1,14 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,6 +89,12 @@ public class Fachada {
 	{
 		return proyectoService.obtenerMetodologiasTestingProyecto(proyecto, metodologiaTestingService.obtenerMetodologiasTestingCompleto());
 	}
+	
+	public Proyecto obtenerProyectoPorId(int idProyecto)
+	{
+		return proyectoService.obtenerProyectoPorId(idProyecto);
+	}
+	
 
 	
 	/**************************************************************** Usuarios */	
@@ -158,5 +169,30 @@ public class Fachada {
 	public void eliminarSinonimo(int idSinonimo) 
 	{
 		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
+	}
+
+	public String[] obtenerTextoOriginalProyecto(Proyecto proyecto) {
+		
+		PDDocument pdDoc = null;
+		PDFTextStripper pdfStripper;
+		String parsedText = null;
+		String fileName = proyecto.getRutaArchivo();
+		try 
+		{
+			pdDoc = PDDocument.load(new File(fileName));
+			pdfStripper = new PDFTextStripper();
+			parsedText = pdfStripper.getText(pdDoc);
+		} catch (InvalidPasswordException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String textoOriginal[] = parsedText.split("\\r?\\n");
+		return textoOriginal;
 	}
 }

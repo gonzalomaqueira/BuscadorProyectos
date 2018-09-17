@@ -19,6 +19,7 @@ public interface ProyectoService {
 	void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo);
 	void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo);
 	void borrarProyecto(int id);
+	Proyecto obtenerProyectoPorId(int idProyecto);
 	
 	List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[]);
 	SeccionTexto armarSeccionAlumnos(String texto[]);
@@ -26,4 +27,5 @@ public interface ProyectoService {
 	List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto, List<Tecnologia> tecnologias);
 	List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto, List<MetodologiaTesting> metodologiasTesting);
 	List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto, List<ModeloProceso> modelosProceso);
+	
 }

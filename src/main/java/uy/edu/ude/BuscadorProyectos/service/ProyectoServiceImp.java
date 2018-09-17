@@ -74,6 +74,13 @@ public class ProyectoServiceImp implements ProyectoService {
 		this.borrar(proyectoDao.obtenerProyectoPorId(id));
 	}
 	
+	@Transactional
+	@Override
+	public Proyecto obtenerProyectoPorId(int idProyecto)
+	{
+		return proyectoDao.obtenerProyectoPorId(idProyecto);
+	}
+	
 	public List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[])
 	{
 		List<SeccionTexto> documentoPorSecciones = new ArrayList<SeccionTexto>();
@@ -298,4 +305,6 @@ public class ProyectoServiceImp implements ProyectoService {
 		}
 		return vListaRetorno;
 	}
+	
+
 }

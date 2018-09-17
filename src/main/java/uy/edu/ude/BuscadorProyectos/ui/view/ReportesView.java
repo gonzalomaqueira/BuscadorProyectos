@@ -37,9 +37,8 @@ public class ReportesView extends ReportesViewDesign implements View{
 			pdDoc = PDDocument.load(new File(fileName));
 			pdfStripper = new PDFTextStripper();
 			parsedText = pdfStripper.getText(pdDoc);
-			
 	        String textoOriginal[] = parsedText.split("\\r?\\n");
-	        ArrayList<String> titulos = new ArrayList<String>();
+	        
 	        Proyecto proyecto= new Proyecto();
 	        proyecto.setDocumentoPorSecciones(fachada.armarDocumentoPorSecciones(textoOriginal));
 	        System.out.println(parsedText);

@@ -39,7 +39,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
     @Autowired
     private Fachada fachada;
     
-    private String nombreArchivo;
+    private String nombreArchivo;//="SPN-Carpeta Principal.pdf";
     private String prefijoArchivo;
     private ProyectoVO proyectoSeleccionado;
     
@@ -55,11 +55,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	public void enter(ViewChangeEvent event)
 	{
 		form.setEnabled(true);
-		formContenido.setEnabled(false);
-		ReceptorArchivos receptor = new ReceptorArchivos(Constantes.RUTA_ARCHIVOS, prefijoArchivo);
-		updProyecto.setReceiver(receptor);
-		updProyecto.setImmediateMode(false);
-		updProyecto.setButtonCaption(null);
+		formContenido.setEnabled(false);		
 
 		cargarListaProyectos();
 		
@@ -86,10 +82,16 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 		    	DateFormat formatoFecha = new SimpleDateFormat("yyyyMMddhhmmss_");
 		    	prefijoArchivo = formatoFecha.format(fecha);
 		    	
+		    	ReceptorArchivos receptor = new ReceptorArchivos(Constantes.RUTA_ARCHIVOS, prefijoArchivo);
+				updProyecto.setReceiver(receptor);
+				updProyecto.setImmediateMode(false);
+				updProyecto.setButtonCaption(null);
+		    	
 		    	updProyecto.setEnabled(true);
 		    	btnAgregar.setCaption("Agregar");
 		    	formContenido.setEnabled(true);
 		    	btnBorrar.setVisible(false);
+		    	
 		    }
 		});	
 		
@@ -97,28 +99,37 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 		{
 			public void buttonClick(ClickEvent event)
 			{						
-		    	try 
-		    	{	
-		    		// Falta controlar que estén cargados los datos y el archivo a subir
-		    		updProyecto.submitUpload();
-		    		fachada.altaProyecto(txtNombre.getValue(), 
-		    							 Integer.parseInt(txtAnio.getValue()), 
-		    							 txtCarrera.getValue(), 
-		    							 Integer.parseInt(txtNota.getValue()), 
-		    							 Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);			    		
-		    	}
-		    	catch (Exception e)
-				{
-		    		Notification.show("Hubo un error al subir el proyecto",Notification.Type.WARNING_MESSAGE);
-		    		e.printStackTrace();
-				}
-		    	cargarListaProyectos();
-
-				grdProyectos.setEnabled(true);
-				cargarInterfazInicial();
-				limpiarFormContenido();
+	    		// Falta controlar que estén cargados los datos y el archivo a subir
+	    		updProyecto.submitUpload();
 			}
 		});
+		
+		updProyecto.addFinishedListener(evt ->
+		{
+           nombreArchivo= evt.getFilename();           
+           try 
+	    	{	
+               fachada.altaProyecto(txtNombre.getValue(), 
+  					 Integer.parseInt(txtAnio.getValue()), 
+  					 txtCarrera.getValue(), 
+  					 Integer.parseInt(txtNota.getValue()), 
+  					 Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);
+               
+               Notification.show("Archivo subido exitosamente", Notification.Type.HUMANIZED_MESSAGE);           
+	    	}
+	    	catch (Exception e)
+			{
+	    		Notification.show("Hubo un error al subir el proyecto",Notification.Type.WARNING_MESSAGE);
+	    		e.printStackTrace();
+			}
+	    	cargarListaProyectos();
+
+			grdProyectos.setEnabled(true);
+			cargarInterfazInicial();
+			limpiarFormContenido();
+           
+           updProyecto.setEnabled(false);
+        });
 		
 //		btnModificar.addClickListener(new Button.ClickListener()
 //		{
@@ -160,15 +171,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 				cargarInterfazInicial();
 				limpiarFormContenido();
 			}
-		});
-							
-		updProyecto.addFinishedListener(event1 ->
-		{
-           nombreArchivo= event1.getFilename();
-           Notification.show("Archivo subido exitosamente", Notification.Type.HUMANIZED_MESSAGE);
-           updProyecto.setEnabled(false);
-        });
-		
+		});							
 
 		btnProyecto.addClickListener(new Button.ClickListener()
 		{
