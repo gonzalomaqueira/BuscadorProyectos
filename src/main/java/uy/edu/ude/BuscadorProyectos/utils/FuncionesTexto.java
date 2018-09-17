@@ -215,4 +215,24 @@ public class FuncionesTexto
 	{
 		return (texto==null || texto.trim().equals(""));
 	}
+	
+	public static String convertirArrayAStringEspacios(ArrayList<String> listaStrings)
+	{
+		String vRetorno = "";
+		for (String linea : listaStrings)
+		{
+			vRetorno = vRetorno + linea.trim() + " ";
+		}		
+		return vRetorno;
+	}
+	
+	public static String convertirArrayAStringSaltoLinea(ArrayList<String> listaStrings)
+	{
+		String vRetorno = "";
+		for (String linea : listaStrings)
+		{
+			vRetorno = vRetorno + linea.trim() + "\n";
+		}		
+		return vRetorno;
+	}
 }

@@ -28,6 +28,7 @@ import uy.edu.ude.BuscadorProyectos.service.Fachada;
 
 import uy.edu.ude.BuscadorProyectos.utils.Constantes;
 import uy.edu.ude.BuscadorProyectos.utils.ReceptorArchivos;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
 
 
@@ -39,7 +40,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
     @Autowired
     private Fachada fachada;
     
-    private String nombreArchivo;//="SPN-Carpeta Principal.pdf";
+    private String nombreArchivo;
     private String prefijoArchivo;
     private ProyectoVO proyectoSeleccionado;
     
@@ -54,7 +55,6 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	@Override
 	public void enter(ViewChangeEvent event)
 	{
-		form.setEnabled(true);
 		formContenido.setEnabled(false);		
 
 		cargarListaProyectos();
@@ -72,7 +72,6 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 			{				
 			}
 		});
-		
 		
 		btnNuevo.addClickListener(new Button.ClickListener()
 		{

@@ -1,9 +1,12 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,7 +81,21 @@ public class ProyectoServiceImp implements ProyectoService {
 	@Override
 	public Proyecto obtenerProyectoPorId(int idProyecto)
 	{
-		return proyectoDao.obtenerProyectoPorId(idProyecto);
+		Proyecto proy = proyectoDao.obtenerProyectoPorId(idProyecto);
+		if (proy.getTecnologia() == null || proy.getTecnologia().isEmpty())
+		{
+			proy.setTecnologia(new ArrayList<Tecnologia>());
+		}
+		if (proy.getModeloProceso() == null || proy.getModeloProceso().isEmpty())
+		{
+			proy.setModeloProceso(new ArrayList<ModeloProceso>());
+		}
+		if (proy.getMetodologiaTesting() == null || proy.getMetodologiaTesting().isEmpty())
+		{
+			proy.setMetodologiaTesting(new ArrayList<MetodologiaTesting>());
+		}
+		
+		return proy;
 	}
 	
 	public List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[])
@@ -304,6 +321,36 @@ public class ProyectoServiceImp implements ProyectoService {
 			}
 		}
 		return vListaRetorno;
+	}
+	
+	@Override
+	public String[] obtenerTextoOriginalProyecto(Proyecto proyecto) {
+		
+		PDDocument pdDoc = null;
+		PDFTextStripper pdfStripper;
+		String parsedText = null;
+		String fileName = proyecto.getRutaArchivo();
+		try 
+		{
+			pdDoc = PDDocument.load(new File(fileName));
+			pdfStripper = new PDFTextStripper();
+			parsedText = pdfStripper.getText(pdDoc);
+			if (pdDoc != null)
+				pdDoc.close();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			try {
+				if (pdDoc != null)
+					pdDoc.close();
+			} catch (Exception e1) {
+				e.printStackTrace();
+			}
+		}
+		
+        String textoOriginal[] = parsedText.split("\\r?\\n");
+		return textoOriginal;
 	}
 	
 

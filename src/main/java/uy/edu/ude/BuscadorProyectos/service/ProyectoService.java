@@ -27,5 +27,6 @@ public interface ProyectoService {
 	List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto, List<Tecnologia> tecnologias);
 	List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto, List<MetodologiaTesting> metodologiasTesting);
 	List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto, List<ModeloProceso> modelosProceso);
+	String[] obtenerTextoOriginalProyecto(Proyecto proyecto);
 	
 }

@@ -24,9 +24,11 @@ import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
+import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
@@ -53,6 +55,11 @@ public class Fachada {
 	public List<ProyectoVO> obtenerProyectos()
 	{
 		return ConversorValueObject.convertirListaProyectoVO(proyectoService.obtenerProyectos());
+	}
+	
+	public ProyectoDetalleVO obtenerProyectoPorId(int idProyecto)
+	{
+		return ConversorValueObject.convertirProyectoDetalleVO(proyectoService.obtenerProyectoPorId(idProyecto));
 	}
 	
 	public void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) 
@@ -90,9 +97,20 @@ public class Fachada {
 		return proyectoService.obtenerMetodologiasTestingProyecto(proyecto, metodologiaTestingService.obtenerMetodologiasTestingCompleto());
 	}
 	
-	public Proyecto obtenerProyectoPorId(int idProyecto)
+	public void ProcesarProyecto(int idProyecto)
 	{
-		return proyectoService.obtenerProyectoPorId(idProyecto);
+		Proyecto proyecto= proyectoService.obtenerProyectoPorId(idProyecto);
+		String[] textoOriginal= proyectoService.obtenerTextoOriginalProyecto(proyecto);
+		proyecto.setDocumentoPorSecciones( proyectoService.armarDocumentoPorSecciones(textoOriginal) );
+		proyecto.setAlumnos(proyecto.devolverAlumnos());
+		proyecto.setTutor(proyecto.devolverTutor());
+		proyecto.setResumen(FuncionesTexto.convertirArrayAStringEspacios(proyecto.devolverResumen()));
+				
+		proyecto.setTecnologia(this.obtenerTecnologiasProyecto(proyecto));
+//		proyecto.setModeloProceso(this.obtenerModelosProcesoProyecto(proyecto));
+//		proyecto.setMetodologiaTesting(this.obtenerMetodologiasTestingProyecto(proyecto));
+		
+		proyectoService.modificar(proyecto);
 	}
 	
 
@@ -171,28 +189,11 @@ public class Fachada {
 		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
 	}
 
-	public String[] obtenerTextoOriginalProyecto(Proyecto proyecto) {
-		
-		PDDocument pdDoc = null;
-		PDFTextStripper pdfStripper;
-		String parsedText = null;
-		String fileName = proyecto.getRutaArchivo();
-		try 
-		{
-			pdDoc = PDDocument.load(new File(fileName));
-			pdfStripper = new PDFTextStripper();
-			parsedText = pdfStripper.getText(pdDoc);
-		} catch (InvalidPasswordException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        String textoOriginal[] = parsedText.split("\\r?\\n");
-		return textoOriginal;
-	}
+
+	
+	
+	
+	
+	
+
 }
