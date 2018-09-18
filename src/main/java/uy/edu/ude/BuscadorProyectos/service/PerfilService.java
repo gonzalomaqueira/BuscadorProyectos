@@ -6,5 +6,5 @@ import uy.edu.ude.BuscadorProyectos.entity.Perfil;
 
 public interface PerfilService
 {
-    List<Perfil> listPerfiles();
+    List<Perfil> obtenerPerfiles();
 }

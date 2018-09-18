@@ -22,17 +22,20 @@ import com.vaadin.ui.declarative.Design;
 @SuppressWarnings("serial")
 public class ProyectosUploadViewDesign extends VerticalLayout {
 	protected TextField search;
-	protected Button add;
-	protected Grid<uy.edu.ude.BuscadorProyectos.entity.Proyecto> list;
-	protected VerticalLayout form;
-	protected TextField nombre;
-	protected TextField anio;
-	protected TextField carrera;
-	protected TextField nota;
+	protected Button btnNuevo;
+	protected Grid<uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO> grdProyectos;
+	protected VerticalLayout formContenido;
+	protected TextField txtNombre;
+	protected TextField txtAnio;
+	protected TextField txtCarrera;
+	protected TextField txtNota;
 	protected Upload updProyecto;
-	protected Button update;
-	protected Button cancel;
-	protected Button delete;
+	protected Button btnVerDetalle;
+	protected Button btnProcesar;
+	protected Button btnAgregar;
+	protected Button btnModificar;
+	protected Button btnCancelar;
+	protected Button btnBorrar;
 
 	public ProyectosUploadViewDesign() {
 		Design.read(this);

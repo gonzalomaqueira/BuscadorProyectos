@@ -15,6 +15,7 @@ import uy.edu.ude.BuscadorProyectos.dao.TecnologiaDao;
 import uy.edu.ude.BuscadorProyectos.dao.UsuarioDao;
 import uy.edu.ude.BuscadorProyectos.entity.Categoria;
 import uy.edu.ude.BuscadorProyectos.entity.Perfil;
+import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
@@ -90,8 +91,13 @@ public class TecnologiaServiceImp implements TecnologiaService {
    @Transactional
    @Override
    public void eliminarTecnologia(int id) 
-   {		
-	   Tecnologia tecnologia = this.obtenerTecnologiaPorId(id);
+   {
+	   Tecnologia tecnologia = this.obtenerTecnologiaPorId(id);	   
+	   for (Proyecto proy: tecnologia.getProyectos())
+	   {
+		   proy.getTecnologia().remove(tecnologia);
+	   }
+	   tecnologia.getProyectos().removeAll(tecnologia.getProyectos());
 	   this.delete(tecnologia);
    }
    
@@ -120,12 +126,7 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
 	   sinonimo.setNombre(nombreSinonimo);
 	   sinonimo.setTecnologia(this.obtenerTecnologiaPorId(idTecnologia));
-	   this.agregarSinonimo(sinonimo);
-   }
-
-   private void agregarSinonimo(SinonimoTecnologia sinonimo) 
-   {
-		tecnologiaDao.agregarSinonimo(sinonimo);
+	   tecnologiaDao.agregarSinonimo(sinonimo);
    }
    
    @Transactional
@@ -135,27 +136,15 @@ public class TecnologiaServiceImp implements TecnologiaService {
 	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
 	   sinonimo.setId(idSinonimo);
 	   sinonimo.setNombre(nombreSinonimo);
-	   this.modificarSinonimo(sinonimo);
-   }
-
-   private void modificarSinonimo(SinonimoTecnologia sinonimo)
-   {
 	   tecnologiaDao.modificarSinonimo(sinonimo);
    }
-  
+
    @Transactional
    @Override
    public void eliminarSinonimoTecnologia(int idSinonimo)
    {
 	   SinonimoTecnologia sinonimo = new SinonimoTecnologia();
 	   sinonimo.setId(idSinonimo);
-	   this.eliminarSinonimo(sinonimo);
-   }
-
-   private void eliminarSinonimo(SinonimoTecnologia sinonimo)
-   {
 	   tecnologiaDao.eliminarSinonimo(sinonimo);
    }
-   
-
 }

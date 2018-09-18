@@ -24,12 +24,12 @@ public class MainViewDesign extends HorizontalLayout {
 	protected Label activeViewName;
 	protected Button menuButton;
 	protected CssLayout menu;
-	protected Button storefront;
-	protected Button dashboard;
-	protected Button users;
+	protected Button proyectos;
+	protected Button reportes;
+	protected Button usuarios;
 	protected Button tecnologias;
-	protected Button products;
-	protected Button logout;
+	protected Button configuracion;
+	protected Button salir;
 	protected VerticalLayout content;
 
 	public MainViewDesign() {

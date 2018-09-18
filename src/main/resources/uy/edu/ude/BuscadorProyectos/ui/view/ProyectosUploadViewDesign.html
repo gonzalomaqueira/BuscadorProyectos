@@ -13,13 +13,13 @@
     <vaadin-horizontal-layout spacing="false" width-full :middle :expand>
      <vaadin-text-field icon="fonticon://FontAwesome/f002" style-name="small inline-icon search" id="search" placeholder="Buscar" width-full _id="search"></vaadin-text-field>
     </vaadin-horizontal-layout>
-    <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="add" plain-text _id="add" :middle :right>
+    <vaadin-button icon="fonticon://FontAwesome/f067" style-name="borderless" id="btnNuevo" plain-text _id="btnNuevo" :middle :right>
       Nuevo Proyecto 
     </vaadin-button>
    </vaadin-horizontal-layout>
    <vaadin-css-layout style-name="content" size-full :expand>
     <vaadin-css-layout style-name="list" size-full>
-     <vaadin-grid id="list" size-full data-item-type="uy.edu.ude.BuscadorProyectos.entity.Proyecto" _id="list">
+     <vaadin-grid id="grdProyectos" size-full data-item-type="uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO" _id="grdProyectos">
       <table>
        <colgroup>
         <col column-id="id" sortable>
@@ -27,49 +27,62 @@
         <col column-id="anio" sortable>
         <col column-id="carrera" sortable>
         <col column-id="nota" sortable>
-        <col column-id="tutor" sortable>
+        <col column-id="estado" sortable>
        </colgroup>
        <thead>
         <tr default>
          <th plain-text column-ids="id">Id</th>
          <th plain-text column-ids="nombre">Nombre</th>
-         <th plain-text column-ids="anio">Año</th>
+         <th plain-text column-ids="anio">Anio</th>
          <th plain-text column-ids="carrera">Carrera</th>
          <th plain-text column-ids="nota">Nota</th>
-         <th plain-text column-ids="tutor">Tutor</th>
+         <th plain-text column-ids="estado">Estado</th>
         </tr>
        </thead>
        <tbody></tbody>
       </table>
      </vaadin-grid>
     </vaadin-css-layout>
-    <vaadin-vertical-layout enabled="false" style-name="inspect" spacing="false" id="form" width="513px" height-full margin="false" _id="form">
+    <vaadin-vertical-layout style-name="inspect" spacing="false" id="formContenido" width="513px" height-full margin="false" _id="formContenido">
      <vaadin-css-layout style-name="edit" size-full :expand>
       <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Nombre" style-name="small" id="nombre" width-full height="31px" _id="nombre"></vaadin-text-field>
+       <vaadin-text-field caption="Nombre" style-name="small" id="txtNombre" width-full height="31px" _id="txtNombre"></vaadin-text-field>
       </vaadin-css-layout>
       <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Año" style-name="small" id="anio" width-full _id="anio"></vaadin-text-field>
+       <vaadin-text-field caption="Año" style-name="small" id="txtAnio" width-full _id="txtAnio"></vaadin-text-field>
       </vaadin-css-layout>
       <vaadin-css-layout style-name="section half" width-full>
-       <vaadin-text-field caption="Carrera" style-name="small" id="carrera" width-full height="31px" _id="carrera"></vaadin-text-field>
+       <vaadin-text-field caption="Carrera" style-name="small" id="txtCarrera" width-full height="31px" _id="txtCarrera"></vaadin-text-field>
       </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="78px">
-       <vaadin-text-field caption="Nota" style-name="small" id="nota" width-full height="31px" _id="nota"></vaadin-text-field>
+      <vaadin-css-layout style-name="section half" width-full height="115px">
+       <vaadin-text-field caption="Nota" style-name="small" id="txtNota" width-full height="31px" _id="txtNota"></vaadin-text-field>
       </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="150px">
-       <vaadin-upload button-caption="Subir Archivo" width-full height="31px" _id="updProyecto"></vaadin-upload>
+      <vaadin-css-layout style-name="section half" width-full height="100px">
+       <vaadin-upload button-caption="Subir Archivo" width-full height="50px" _id="updProyecto"></vaadin-upload>
+      </vaadin-css-layout>
+      <vaadin-css-layout width-full height="80px">
+       <vaadin-vertical-layout spacing="false" size-full margin="false">
+        <vaadin-button style-name="small" id="btnVerDetalle" width-full height="30px" plain-text _id="btnVerDetalle" :middle :center>
+          VER DETALLE 
+        </vaadin-button>
+        <vaadin-button style-name="small primary" id="btnProcesar" width-full height="30px" plain-text _id="btnProcesar" :middle :center>
+          PROCESAR 
+        </vaadin-button>
+       </vaadin-vertical-layout>
       </vaadin-css-layout>
      </vaadin-css-layout>
      <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">
-      <vaadin-button style-name="small primary" id="update" plain-text _id="update" :middle>
-        Update 
+      <vaadin-button style-name="small primary" id="btnAgregar" plain-text _id="btnAgregar" :middle>
+        Agregar 
       </vaadin-button>
-      <vaadin-button style-name="small" id="cancel" plain-text _id="cancel" :middle :center>
-        Cancel 
+      <vaadin-button visible="false" style-name="small primary" id="btnModificar" plain-text _id="btnModificar">
+        Modificar 
       </vaadin-button>
-      <vaadin-button style-name="small danger" id="delete" plain-text _id="delete" :middle :right :expand>
-        Delete 
+      <vaadin-button style-name="small" id="btnCancelar" plain-text _id="btnCancelar" :middle :center>
+        Cancelar 
+      </vaadin-button>
+      <vaadin-button style-name="small danger" id="btnBorrar" plain-text _id="btnBorrar" :middle :right :expand>
+        Borrar 
       </vaadin-button>
      </vaadin-horizontal-layout>
     </vaadin-vertical-layout>

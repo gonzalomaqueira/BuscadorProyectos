@@ -19,25 +19,25 @@ public class UsuarioServiceImp implements UsuarioService {
 
    @Transactional(readOnly = true)
    @Override
-   public List<Usuario> listUsuarios() {
+   public List<Usuario> obtenerUsuarios() {
       return usuarioDao.listUsuarios();
    }
    
    @Transactional
    @Override
-   public void add(Usuario usuario) {
+   public void agregar(Usuario usuario) {
 	   usuarioDao.add(usuario);
    }
 
    @Transactional
    @Override
-   public void modify(Usuario usuario) {
+   public void modificar(Usuario usuario) {
 	   usuarioDao.modify(usuario);
    }
    
    @Transactional
    @Override
-   public void delete(Usuario usuario) {
+   public void borrar(Usuario usuario) {
 	   usuarioDao.delete(usuario);
    }
    
@@ -52,7 +52,7 @@ public class UsuarioServiceImp implements UsuarioService {
    public void altaUsuario(String nombreUsuario, String contrasenia, String nombre, String apellido, String email, Perfil perfil)
    {
 	   Usuario usuario = new Usuario(nombreUsuario, contrasenia, nombre, apellido, email, perfil);
-	   this.add(usuario);
+	   this.agregar(usuario);
    }
    
    @Transactional
@@ -64,7 +64,7 @@ public class UsuarioServiceImp implements UsuarioService {
 	   
 	   Usuario usuario = new Usuario(nombreUsuario, contrasenia, nombre, apellido, email, perfil);
 	   usuario.setId(id);
-	   this.modify(usuario);
+	   this.modificar(usuario);
    }
    
    
@@ -74,6 +74,6 @@ public class UsuarioServiceImp implements UsuarioService {
    {
 	   Usuario usuario = new Usuario();
 	   usuario.setId(id);
-	   this.delete(usuario);
+	   this.borrar(usuario);
    }
 }

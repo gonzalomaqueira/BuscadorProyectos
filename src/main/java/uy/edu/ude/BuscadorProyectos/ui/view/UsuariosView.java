@@ -175,7 +175,7 @@ public class UsuariosView extends UsuariosViewDesign implements View {
 		    	grdUsuarios.setEnabled(true);
 				actualizarInterfazAgregar();
 				limpiarForm();
-				grdUsuarios.setItems(fachada.listarUsuarios());				
+				grdUsuarios.setItems(fachada.obtenerUsuarios());				
 		    }
 		});	
 		
@@ -221,7 +221,7 @@ public class UsuariosView extends UsuariosViewDesign implements View {
 		if (listaPerfiles == null)
 		{
 			listaPerfiles = new ArrayList<PerfilVO>();
-			listaPerfiles.addAll(fachada.listarPerfiles());
+			listaPerfiles.addAll(fachada.obtenerPerfiles());
 			cmbPerfil.setItems(listaPerfiles);
 			cmbPerfil.setItemCaptionGenerator(PerfilVO::getDescripcion);
 		}
@@ -229,6 +229,6 @@ public class UsuariosView extends UsuariosViewDesign implements View {
 
 	private void cargarListaUsuarios() 
 	{
-		grdUsuarios.setItems(fachada.listarUsuarios());
+		grdUsuarios.setItems(fachada.obtenerUsuarios());
 	}
 }

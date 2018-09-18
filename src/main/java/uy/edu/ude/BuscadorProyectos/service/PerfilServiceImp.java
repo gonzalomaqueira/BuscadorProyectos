@@ -18,7 +18,7 @@ public class PerfilServiceImp implements PerfilService
 	
 	@Transactional(readOnly = true)
 	@Override
-	public List<Perfil> listPerfiles()
+	public List<Perfil> obtenerPerfiles()
 	{
 		return perfilDao.listPerfiles();
 	}

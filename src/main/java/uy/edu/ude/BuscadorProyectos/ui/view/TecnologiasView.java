@@ -39,12 +39,13 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 		cargarTodasTecnologias();
 		
 		/**********************************************************************/		
-		//Escucha del combo TECNOLOGIAS
+		//Escucha del combo CATEGORIA
 		cmbCategorias.addValueChangeListener(evt -> 
 		{
-		    if (evt.getSource().isEmpty()) {
-		    	
+		    if (evt.getSource().isEmpty()) 
+		    {
 		    	cargarTodasTecnologias();
+		    	categoriaSeleccionada = null;
 		    } 
 		    else 
 		    {

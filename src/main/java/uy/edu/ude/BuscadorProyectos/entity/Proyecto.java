@@ -23,6 +23,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 
 import java.sql.Blob;
@@ -52,19 +53,18 @@ public class Proyecto {
 	@Column(name = "Nota")
 	private int nota;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "IdProyecto")
-	private List<Alumno> alumnos;
+	@Column(name = "Alumnos")
+	private ArrayList<String> alumnos;
 
 	@Size(min = 1, max = 255)
 	@Column(name = "Tutor")
-	private String tutor;
+	private ArrayList<String> tutor;
 
 	@NotNull
 	@Column(name = "RutaArchivo")
 	private String rutaArchivo;
 
-	@Column(name = "Resumen")
+	@Column(name = "Resumen", columnDefinition="TEXT")
 	private String resumen;
 
 	@NotNull
@@ -76,7 +76,7 @@ public class Proyecto {
 	private Date fechaUltimaModificacion;
 
 	@Enumerated(EnumType.STRING)
-	private Enumerados.EstadoProyectoEnum estado;
+	private EstadoProyectoEnum estado;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "RelProyectoTecnologia", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "Tecnologias") })
@@ -93,14 +93,16 @@ public class Proyecto {
 	@Transient
 	private List<SeccionTexto>  DocumentoPorSecciones;
 
-	public Proyecto() {
-		this.estado = Enumerados.EstadoProyectoEnum.SIN_PROCESAR;
+	public Proyecto()
+	{
+		this.estado = EstadoProyectoEnum.SIN_PROCESAR;
 		Date vfecha = new Date();
 		this.fechaAlta = vfecha;
 		this.fechaUltimaModificacion = vfecha;
 	}
 
-	public Proyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) {
+	public Proyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo)
+	{
 		this();
 		this.nombre = nombre;
 		this.anio = anio;
@@ -109,10 +111,10 @@ public class Proyecto {
 		this.rutaArchivo = rutaArchivo;
 	}
 
-	public Proyecto(String nombre, int anio, String carrera, int nota, List<String> alumnos, String tutor,
-			String rutaArchivo, String resumen) {
+	public Proyecto(String nombre, int anio, String carrera, int nota, ArrayList<String> alumnos, ArrayList<String> tutor, String rutaArchivo, String resumen)
+	{
 		this(nombre, anio, carrera, nota, rutaArchivo);
-		// this.alumnos = alumnos;
+		this.alumnos = alumnos;
 		this.tutor = tutor;
 		this.resumen = resumen;
 	}
@@ -156,18 +158,24 @@ public class Proyecto {
 	public void setNota(int nota) {
 		this.nota = nota;
 	}
-
-	/*
-	 * public List<String> getAlumnos() { return alumnos; }
-	 * 
-	 * public void setAlumnos(List<String> alumnos) { this.alumnos = alumnos; }
-	 */
-
-	public String getTutor() {
+	
+	public ArrayList<String> getAlumnos()
+	{ 
+		return alumnos; 
+	}
+	  
+	public void setAlumnos(ArrayList<String> alumnos) 
+	{
+		this.alumnos = alumnos;
+	}
+ 
+	public ArrayList<String> getTutor()
+	{
 		return tutor;
 	}
 
-	public void setTutor(String tutor) {
+	public void setTutor(ArrayList<String> tutor)
+	{
 		this.tutor = tutor;
 	}
 
@@ -207,8 +215,10 @@ public class Proyecto {
 		return estado;
 	}
 
-	public void setEstado(Enumerados.EstadoProyectoEnum estado) {
+	public void setEstado(Enumerados.EstadoProyectoEnum estado)
+	{
 		this.estado = estado;
+		this.fechaUltimaModificacion = new Date();
 	}
 
 	public List<SeccionTexto> getDocumentoPorSecciones() {
@@ -218,6 +228,33 @@ public class Proyecto {
 	public void setDocumentoPorSecciones(List<SeccionTexto> documentoPorSecciones) {
 		DocumentoPorSecciones = documentoPorSecciones;
 	}
+	
+	public List<Tecnologia> getTecnologia() {
+		return tecnologia;
+	}
+
+	public void setTecnologia(List<Tecnologia> tecnologia) {
+		this.tecnologia = tecnologia;
+	}
+
+	public List<ModeloProceso> getModeloProceso() {
+		return modeloProceso;
+	}
+
+	public void setModeloProceso(List<ModeloProceso> modeloProceso) {
+		this.modeloProceso = modeloProceso;
+	}
+
+	public List<MetodologiaTesting> getMetodologiaTesting() {
+		return metodologiaTesting;
+	}
+
+	public void setMetodologiaTesting(List<MetodologiaTesting> metodologiaTesting) {
+		this.metodologiaTesting = metodologiaTesting;
+	}
+	
+	
+	
 	
 	public ArrayList<String> devolverResumen() 
 	{
@@ -322,9 +359,8 @@ public class Proyecto {
 		return contenido;
 	}
 	
-	public void cargarTecnologias ()
-	{
-		
-	}
+
+
+
 	
 }

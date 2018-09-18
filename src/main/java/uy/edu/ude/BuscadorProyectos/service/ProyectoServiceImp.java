@@ -1,9 +1,12 @@
 package uy.edu.ude.BuscadorProyectos.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,7 @@ import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
 import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 
 @Service
@@ -27,26 +31,103 @@ public class ProyectoServiceImp implements ProyectoService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<Proyecto> listarProyectos() {
+	public List<Proyecto> obtenerProyectos() {
 		return proyectoDao.listarProyectos();
 	}
 
 	@Transactional
 	@Override
-	public void add(Proyecto proyecto) {
+	public void agregar(Proyecto proyecto) {
 		proyectoDao.add(proyecto);
 	}
 
 	@Transactional
 	@Override
-	public void modify(Proyecto proyecto) {
+	public void modificar(Proyecto proyecto) {
 		proyectoDao.modify(proyecto);
 	}
 
 	@Transactional
 	@Override
-	public void delete(Proyecto proyecto) {
+	public void borrar(Proyecto proyecto) {
 		proyectoDao.delete(proyecto);
+	}
+	
+	
+	@Transactional
+	@Override
+	public void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) 
+	{
+	   Proyecto proyecto = new Proyecto(nombre, anio, carrera, nota, rutaArchivo);
+	   this.agregar(proyecto);
+	}
+
+	@Transactional
+	@Override
+	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) 
+	{
+		Proyecto proy= this.obtenerProyectoPorId(id);
+		proy.setNombre(nombre);
+		proy.setAnio(anio);
+		proy.setCarrera(carrera);
+		proy.setNota(nota);
+		proyectoDao.modify(proy);
+	}
+	
+	@Transactional
+	@Override
+	public void modificarCompleto(int id, String nombre, int anio, String carrera, int nota, 
+			String resumen, ArrayList<String> alumnos, ArrayList<String> tutor)
+	{
+		Proyecto proy= this.obtenerProyectoPorId(id);
+		proy.setNombre(nombre);
+		proy.setAnio(anio);
+		proy.setCarrera(carrera);
+		proy.setNota(nota);
+		proy.setResumen(resumen);
+		proy.setAlumnos(alumnos);
+		proy.setTutor(tutor);
+		proyectoDao.modify(proy);
+	}
+	
+	
+	@Transactional
+	@Override
+	public void borrarProyecto(int id) 
+	{
+		Proyecto proyecto = proyectoDao.obtenerProyectoPorId(id);
+		for (Tecnologia tec: proyecto.getTecnologia())
+		{
+			tec.getProyectos().remove(proyecto);
+		}
+		proyecto.getTecnologia().removeAll(proyecto.getTecnologia());
+		this.borrar(proyecto);
+	}
+	
+	@Transactional
+	@Override
+	public Proyecto obtenerProyectoPorId(int idProyecto)
+	{
+		Proyecto proy = proyectoDao.obtenerProyectoPorId(idProyecto);
+		if (proy.getTecnologia() == null || proy.getTecnologia().isEmpty())
+		{
+			proy.setTecnologia(new ArrayList<Tecnologia>());
+		}
+		if (proy.getModeloProceso() == null || proy.getModeloProceso().isEmpty())
+		{
+			proy.setModeloProceso(new ArrayList<ModeloProceso>());
+		}
+		if (proy.getMetodologiaTesting() == null || proy.getMetodologiaTesting().isEmpty())
+		{
+			proy.setMetodologiaTesting(new ArrayList<MetodologiaTesting>());
+		}
+		for(Tecnologia tec : proy.getTecnologia())
+		{
+			if (tec.getSinonimos() == null || tec.getSinonimos().isEmpty())
+				tec.setSinonimos(new ArrayList<SinonimoTecnologia>());
+		}
+		
+		return proy;
 	}
 	
 	public List<SeccionTexto> armarDocumentoPorSecciones(String textoOriginal[])
@@ -272,6 +353,37 @@ public class ProyectoServiceImp implements ProyectoService {
 			}
 		}
 		return vListaRetorno;
-	}	
+	}
+	
+	@Override
+	public String[] obtenerTextoOriginalProyecto(Proyecto proyecto) {
+		
+		PDDocument pdDoc = null;
+		PDFTextStripper pdfStripper;
+		String parsedText = null;
+		String fileName = proyecto.getRutaArchivo();
+		try 
+		{
+			pdDoc = PDDocument.load(new File(fileName));
+			pdfStripper = new PDFTextStripper();
+			parsedText = pdfStripper.getText(pdDoc);
+			if (pdDoc != null)
+				pdDoc.close();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			try {
+				if (pdDoc != null)
+					pdDoc.close();
+			} catch (Exception e1) {
+				e.printStackTrace();
+			}
+		}
+		
+        String textoOriginal[] = parsedText.split("\\r?\\n");
+		return textoOriginal;
+	}
+	
 
 }

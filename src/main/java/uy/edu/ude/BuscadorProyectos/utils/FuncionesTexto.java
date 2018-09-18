@@ -1,6 +1,7 @@
 package uy.edu.ude.BuscadorProyectos.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -214,5 +215,36 @@ public class FuncionesTexto
 	public static boolean esNuloOVacio(String texto)
 	{
 		return (texto==null || texto.trim().equals(""));
+	}
+	
+	public static String convertirArrayAStringEspacios(ArrayList<String> listaStrings)
+	{
+		String vRetorno = "";
+		if (listaStrings != null && !listaStrings.isEmpty())
+		{	
+			for (String linea : listaStrings)
+			{
+				vRetorno = vRetorno + linea.trim() + " ";
+			}
+		}
+		return vRetorno;
+	}
+	
+	public static String convertirArrayAStringSaltoLinea(ArrayList<String> listaStrings)
+	{
+		String vRetorno = "";
+		if (listaStrings != null && !listaStrings.isEmpty())
+		{			
+			for (String linea : listaStrings)
+			{
+				vRetorno = vRetorno + linea.trim() + "\n";
+			}
+		}
+		return vRetorno;
+	}
+	
+	public static ArrayList<String> convertirStringAArrayList(String texto)
+	{
+		return new ArrayList<String>(Arrays.asList(texto.split("\n")));
 	}
 }

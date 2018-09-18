@@ -2,6 +2,7 @@ package uy.edu.ude.BuscadorProyectos.navigation;
 
 import uy.edu.ude.BuscadorProyectos.proyectos.SubirProyectosView;
 import uy.edu.ude.BuscadorProyectos.ui.view.AccessDeniedView;
+import uy.edu.ude.BuscadorProyectos.ui.view.ProyectosUploadView;
 
 import org.springframework.stereotype.Component;
 
@@ -65,7 +66,7 @@ public class NavigationManager extends SpringNavigator {
 
 		//navigateTo(SecurityUtils.isCurrentUserInRole(Role.ADMIN) ? DashboardView.class : StorefrontView.class);
 		//navigateTo(AccessDeniedView.class);
-		navigateTo(SubirProyectosView.class);
+		navigateTo(ProyectosUploadView.class);
 	}
 
 	/**

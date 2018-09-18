@@ -24,7 +24,7 @@ public class ReceptorArchivos implements Receiver {
     {
         File file = null;
         try {
-            file = new File(rutaArchivo + prefijo + nombreArchivo  );
+            file = new File(rutaArchivo + prefijo + nombreArchivo);
             if (!file.exists()) {
                 file.createNewFile();
             }
