@@ -60,8 +60,8 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	@Override
 	public void enter(ViewChangeEvent event)
 	{
-		formContenido.setEnabled(false);
 		cargarListaProyectos();
+		cargarInterfazInicial();
 		
 		grdProyectos.addSelectionListener(evt -> 
 		{
@@ -112,12 +112,12 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
            nombreArchivo= evt.getFilename();           
            try 
 	    	{	
-               fachada.altaProyecto(txtNombre.getValue(), 
-  					 Integer.parseInt(txtAnio.getValue()), 
-  					 txtCarrera.getValue(), 
-  					 Integer.parseInt(txtNota.getValue()), 
-  					 Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);
-               
+        	   fachada.altaProyecto(txtNombre.getValue(), 
+			  					 	Integer.parseInt(txtAnio.getValue()), 
+			  					 	txtCarrera.getValue(), 
+			  					 	Integer.parseInt(txtNota.getValue()), 
+			  					 	Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);
+           
                Notification.show("Archivo subido exitosamente", Notification.Type.HUMANIZED_MESSAGE);           
 	    	}
 	    	catch (Exception e)
@@ -125,7 +125,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	    		Notification.show("Hubo un error al subir el proyecto", Notification.Type.WARNING_MESSAGE);
 	    		e.printStackTrace();
 			}
-           actualizarProyectos();
+            actualizarProyectos();
 
 			grdProyectos.setEnabled(true);
 			cargarInterfazInicial();
@@ -134,26 +134,33 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
            updProyecto.setEnabled(false);
         });
 		
-//		btnModificar.addClickListener(new Button.ClickListener()
-//		{
-//			public void buttonClick(ClickEvent event)
-//			{						
-//		    	try 
-//		    	{
-//		    		fachada.modificarProyecto(proyectoSeleccionado.getId(), txtNombre.getValue(), Integer.parseInt(txtAnio.getValue()), txtCarrera.getValue(), Integer.parseInt(txtNota.getValue()), Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);			    		
-//		    	}
-//		    	catch (Exception e)
-//				{
-//		    		Notification.show("Hubo un error al subir el proyecto",Notification.Type.WARNING_MESSAGE);
-//		    		e.printStackTrace();
-//				}
-//		    	cargarListaProyectos();
-//
-//				grdProyectos.setEnabled(true);
-//				actualizarInterfazAgregar();
-//				limpiarFormContenido();
-//			}
-//		});
+		btnModificar.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event)
+			{						
+		    	try 
+		    	{
+		    		fachada.modificarProyecto(	proyectoSeleccionado.getId(),
+							    				 txtNombre.getValue(), 
+							  					 Integer.parseInt(txtAnio.getValue()), 
+							  					 txtCarrera.getValue(), 
+							  					 Integer.parseInt(txtNota.getValue()), 
+							  					 Constantes.RUTA_ARCHIVOS + prefijoArchivo + nombreArchivo);
+		    		
+		    		Notification.show("Archivo modificado exitosamente", Notification.Type.HUMANIZED_MESSAGE); 
+		    	}
+		    	catch (Exception e)
+				{
+		    		Notification.show("Hubo un error al modificar el proyecto",Notification.Type.WARNING_MESSAGE);
+		    		e.printStackTrace();
+				}
+		    	
+
+		    	actualizarProyectos();
+				grdProyectos.setEnabled(true);
+				cargarInterfazInicial();
+			}
+		});
 		
 		btnBorrar.addClickListener(new Button.ClickListener()
 		{
@@ -169,8 +176,8 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 		    		Notification.show("Hubo un error al eliminar el proyecto",Notification.Type.WARNING_MESSAGE);
 		    		e.printStackTrace();
 				}
-		    	cargarListaProyectos();
-
+		    	
+				actualizarProyectos();
 				grdProyectos.setEnabled(true);
 				cargarInterfazInicial();
 			}
@@ -277,6 +284,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	
 	private void limpiarFormContenido()
 	{
+		updProyecto.setEnabled(false);
 		txtNombre.clear();
 		txtAnio.clear();
 		txtCarrera.clear();

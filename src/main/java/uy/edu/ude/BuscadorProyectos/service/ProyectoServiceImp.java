@@ -64,9 +64,14 @@ public class ProyectoServiceImp implements ProyectoService {
 
 	@Transactional
 	@Override
-	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) {
-		// TODO Auto-generated method stub
-		
+	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) 
+	{
+		Proyecto proy= this.obtenerProyectoPorId(id);
+		proy.setNombre(nombre);
+		proy.setAnio(anio);
+		proy.setCarrera(carrera);
+		proy.setNota(nota);
+		proyectoDao.modify(proy);
 	}
 	
 	@Transactional
@@ -90,7 +95,13 @@ public class ProyectoServiceImp implements ProyectoService {
 	@Override
 	public void borrarProyecto(int id) 
 	{
-		this.borrar(proyectoDao.obtenerProyectoPorId(id));
+		Proyecto proyecto = proyectoDao.obtenerProyectoPorId(id);
+		for (Tecnologia tec: proyecto.getTecnologia())
+		{
+			tec.getProyectos().remove(proyecto);
+		}
+		proyecto.getTecnologia().removeAll(proyecto.getTecnologia());
+		this.borrar(proyecto);
 	}
 	
 	@Transactional
