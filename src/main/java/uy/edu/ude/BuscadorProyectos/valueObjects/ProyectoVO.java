@@ -1,5 +1,8 @@
 package uy.edu.ude.BuscadorProyectos.valueObjects;
 
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados;
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
+
 public class ProyectoVO
 {
 	private int id;
@@ -12,13 +15,17 @@ public class ProyectoVO
 
 	private int nota;
 	
-	public ProyectoVO(int id, String nombre, int anio, String carrera, int nota) {
+	private EstadoProyectoEnum estado;
+	
+	public ProyectoVO(int id, String nombre, int anio, String carrera, int nota, EstadoProyectoEnum estado)
+	{
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.anio = anio;
 		this.carrera = carrera;
 		this.nota = nota;
+		this.estado = estado;
 	}
 
 	public int getId() {
@@ -60,4 +67,12 @@ public class ProyectoVO
 	public void setNota(int nota) {
 		this.nota = nota;
 	}
+
+	public Enumerados.EstadoProyectoEnum getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Enumerados.EstadoProyectoEnum estado) {
+		this.estado = estado;
+	}	
 }

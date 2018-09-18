@@ -41,13 +41,11 @@ public class MainView extends MainViewDesign implements ViewDisplay {
 
 	@PostConstruct
 	public void init() {
-		attachNavigation(storefront, ProyectosUploadView.class);
-		attachNavigation(dashboard, ProyectoView.class);
-		attachNavigation(users, UsuariosView.class);
+		attachNavigation(proyectos, ProyectosUploadView.class);
+		attachNavigation(usuarios, UsuariosView.class);
 		attachNavigation(tecnologias, TecnologiasView.class);
-		attachNavigation(products, ReportesView.class);
 
-		logout.addClickListener(e -> logout());
+		salir.addClickListener(e -> logout());
 	}
 
 	/**

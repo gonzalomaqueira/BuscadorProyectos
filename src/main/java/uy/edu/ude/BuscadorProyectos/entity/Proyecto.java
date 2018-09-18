@@ -23,6 +23,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 
 import java.sql.Blob;
@@ -75,7 +76,7 @@ public class Proyecto {
 	private Date fechaUltimaModificacion;
 
 	@Enumerated(EnumType.STRING)
-	private Enumerados.EstadoProyectoEnum estado;
+	private EstadoProyectoEnum estado;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "RelProyectoTecnologia", joinColumns = { @JoinColumn(name = "Proyectos") }, inverseJoinColumns = { @JoinColumn(name = "Tecnologias") })
@@ -92,14 +93,16 @@ public class Proyecto {
 	@Transient
 	private List<SeccionTexto>  DocumentoPorSecciones;
 
-	public Proyecto() {
-		this.estado = Enumerados.EstadoProyectoEnum.SIN_PROCESAR;
+	public Proyecto()
+	{
+		this.estado = EstadoProyectoEnum.SIN_PROCESAR;
 		Date vfecha = new Date();
 		this.fechaAlta = vfecha;
 		this.fechaUltimaModificacion = vfecha;
 	}
 
-	public Proyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) {
+	public Proyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo)
+	{
 		this();
 		this.nombre = nombre;
 		this.anio = anio;
@@ -155,18 +158,24 @@ public class Proyecto {
 	public void setNota(int nota) {
 		this.nota = nota;
 	}
-
 	
-	 public ArrayList<String> getAlumnos() { return alumnos; }
+	public ArrayList<String> getAlumnos()
+	{ 
+		return alumnos; 
+	}
 	  
-	 public void setAlumnos(ArrayList<String> alumnos) { this.alumnos = alumnos; }
-	 
-
-	public ArrayList<String> getTutor() {
+	public void setAlumnos(ArrayList<String> alumnos) 
+	{
+		this.alumnos = alumnos;
+	}
+ 
+	public ArrayList<String> getTutor()
+	{
 		return tutor;
 	}
 
-	public void setTutor(ArrayList<String> tutor) {
+	public void setTutor(ArrayList<String> tutor)
+	{
 		this.tutor = tutor;
 	}
 
@@ -206,8 +215,10 @@ public class Proyecto {
 		return estado;
 	}
 
-	public void setEstado(Enumerados.EstadoProyectoEnum estado) {
+	public void setEstado(Enumerados.EstadoProyectoEnum estado)
+	{
 		this.estado = estado;
+		this.fechaUltimaModificacion = new Date();
 	}
 
 	public List<SeccionTexto> getDocumentoPorSecciones() {
@@ -241,6 +252,8 @@ public class Proyecto {
 	public void setMetodologiaTesting(List<MetodologiaTesting> metodologiaTesting) {
 		this.metodologiaTesting = metodologiaTesting;
 	}
+	
+	
 	
 	
 	public ArrayList<String> devolverResumen() 

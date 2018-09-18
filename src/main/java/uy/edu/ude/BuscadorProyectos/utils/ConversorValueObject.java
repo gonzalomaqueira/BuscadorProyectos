@@ -50,7 +50,8 @@ public class ConversorValueObject
 							  proyecto.getNombre(),
 							  proyecto.getAnio(),
 							  proyecto.getCarrera(),
-							  proyecto.getNota());
+							  proyecto.getNota(),
+							  proyecto.getEstado());
 	}
 	
 	public static List<ProyectoVO> convertirListaProyectoVO(List<Proyecto> listaProyectos)

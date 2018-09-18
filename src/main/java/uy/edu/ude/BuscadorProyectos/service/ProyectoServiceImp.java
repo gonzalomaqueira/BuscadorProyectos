@@ -67,7 +67,23 @@ public class ProyectoServiceImp implements ProyectoService {
 	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Transactional
+	@Override
+	public void modificarCompleto(int id, String nombre, int anio, String carrera, int nota, 
+			String resumen, ArrayList<String> alumnos, ArrayList<String> tutor)
+	{
+		Proyecto proy= this.obtenerProyectoPorId(id);
+		proy.setNombre(nombre);
+		proy.setAnio(anio);
+		proy.setCarrera(carrera);
+		proy.setNota(nota);
+		proy.setResumen(resumen);
+		proy.setAlumnos(alumnos);
+		proy.setTutor(tutor);
+		proyectoDao.modify(proy);
+	}
 	
 	
 	@Transactional
@@ -93,6 +109,11 @@ public class ProyectoServiceImp implements ProyectoService {
 		if (proy.getMetodologiaTesting() == null || proy.getMetodologiaTesting().isEmpty())
 		{
 			proy.setMetodologiaTesting(new ArrayList<MetodologiaTesting>());
+		}
+		for(Tecnologia tec : proy.getTecnologia())
+		{
+			if (tec.getSinonimos() == null || tec.getSinonimos().isEmpty())
+				tec.setSinonimos(new ArrayList<SinonimoTecnologia>());
 		}
 		
 		return proy;

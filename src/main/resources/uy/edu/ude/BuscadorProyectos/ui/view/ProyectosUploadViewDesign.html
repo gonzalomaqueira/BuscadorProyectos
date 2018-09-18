@@ -27,6 +27,7 @@
         <col column-id="anio" sortable>
         <col column-id="carrera" sortable>
         <col column-id="nota" sortable>
+        <col column-id="estado" sortable>
        </colgroup>
        <thead>
         <tr default>
@@ -35,6 +36,7 @@
          <th plain-text column-ids="anio">Anio</th>
          <th plain-text column-ids="carrera">Carrera</th>
          <th plain-text column-ids="nota">Nota</th>
+         <th plain-text column-ids="estado">Estado</th>
         </tr>
        </thead>
        <tbody></tbody>
@@ -55,13 +57,18 @@
       <vaadin-css-layout style-name="section half" width-full height="115px">
        <vaadin-text-field caption="Nota" style-name="small" id="txtNota" width-full height="31px" _id="txtNota"></vaadin-text-field>
       </vaadin-css-layout>
-      <vaadin-css-layout style-name="section half" width-full height="120px">
+      <vaadin-css-layout style-name="section half" width-full height="100px">
        <vaadin-upload button-caption="Subir Archivo" width-full height="50px" _id="updProyecto"></vaadin-upload>
       </vaadin-css-layout>
-      <vaadin-css-layout width-full height="30px">
-       <vaadin-button style-name="small primary" id="btnProyecto" size-full plain-text _id="btnProyecto">
-         PROCESAR 
-       </vaadin-button>
+      <vaadin-css-layout width-full height="80px">
+       <vaadin-vertical-layout spacing="false" size-full margin="false">
+        <vaadin-button style-name="small" id="btnVerDetalle" width-full height="30px" plain-text _id="btnVerDetalle" :middle :center>
+          VER DETALLE 
+        </vaadin-button>
+        <vaadin-button style-name="small primary" id="btnProcesar" width-full height="30px" plain-text _id="btnProcesar" :middle :center>
+          PROCESAR 
+        </vaadin-button>
+       </vaadin-vertical-layout>
       </vaadin-css-layout>
      </vaadin-css-layout>
      <vaadin-horizontal-layout style-name="buttons border-top" width-full height="50px">

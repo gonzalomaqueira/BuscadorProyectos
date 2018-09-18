@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -22,14 +23,17 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.components.grid.SingleSelectionModel;
 import com.vaadin.ui.Button.ClickEvent;
 
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados;
 import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
 import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
 
 import uy.edu.ude.BuscadorProyectos.utils.Constantes;
 import uy.edu.ude.BuscadorProyectos.utils.ReceptorArchivos;
+import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO;
 
 
 @SpringView
@@ -43,6 +47,7 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
     private String nombreArchivo;
     private String prefijoArchivo;
     private ProyectoVO proyectoSeleccionado;
+    private List<ProyectoVO> listaProyectos;
     
     private final NavigationManager navigationManager;
     
@@ -55,17 +60,20 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	@Override
 	public void enter(ViewChangeEvent event)
 	{
-		formContenido.setEnabled(false);		
-
+		formContenido.setEnabled(false);
 		cargarListaProyectos();
 		
 		grdProyectos.addSelectionListener(evt -> 
 		{
 			SingleSelectionModel<ProyectoVO> singleSelect = (SingleSelectionModel<ProyectoVO>) grdProyectos.getSelectionModel();
-			singleSelect.setDeselectAllowed(false);			
+			singleSelect.setDeselectAllowed(false);
 			try
 			{
-				proyectoSeleccionado = singleSelect.getSelectedItem().get();
+				if (singleSelect.getSelectedItem() != null)
+				{
+					proyectoSeleccionado = singleSelect.getSelectedItem().get();
+					cargarDatosProyectoSeleccionado();
+				}
 				actualizarInterfazModificar();
 			}
 			catch (Exception e)
@@ -85,12 +93,8 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 				updProyecto.setReceiver(receptor);
 				updProyecto.setImmediateMode(false);
 				updProyecto.setButtonCaption(null);
-		    	
-		    	updProyecto.setEnabled(true);
-		    	btnAgregar.setCaption("Agregar");
-		    	formContenido.setEnabled(true);
-		    	btnBorrar.setVisible(false);
-		    	
+				
+		    	actualizarInterfazNuevoProyecto(); 	
 		    }
 		});	
 		
@@ -118,10 +122,10 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	    	}
 	    	catch (Exception e)
 			{
-	    		Notification.show("Hubo un error al subir el proyecto",Notification.Type.WARNING_MESSAGE);
+	    		Notification.show("Hubo un error al subir el proyecto", Notification.Type.WARNING_MESSAGE);
 	    		e.printStackTrace();
 			}
-	    	cargarListaProyectos();
+           actualizarProyectos();
 
 			grdProyectos.setEnabled(true);
 			cargarInterfazInicial();
@@ -157,7 +161,8 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 			{						
 		    	try 
 		    	{
-		    		fachada.borrarProyecto(proyectoSeleccionado.getId());			    		
+		    		fachada.borrarProyecto(proyectoSeleccionado.getId());
+		    		Notification.show("Proyecto eliminado exitosamente", Notification.Type.HUMANIZED_MESSAGE);
 		    	}
 		    	catch (Exception e)
 				{
@@ -168,23 +173,73 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 
 				grdProyectos.setEnabled(true);
 				cargarInterfazInicial();
-				limpiarFormContenido();
 			}
-		});							
+		});
+		
+		btnCancelar.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event)
+			{						
+		    	cargarInterfazInicial();
+			}
+		});		
 
-		btnProyecto.addClickListener(new Button.ClickListener()
+		btnVerDetalle.addClickListener(new Button.ClickListener()
+		{
+			public void buttonClick(ClickEvent event)
+			{			
+				navigationManager.navigateTo(ProyectoView.class , proyectoSeleccionado.getId());
+			}
+		});
+		
+		btnProcesar.addClickListener(new Button.ClickListener()
 		{
 			public void buttonClick(ClickEvent event)
 			{
-				navigationManager.navigateTo(ProyectoView.class , proyectoSeleccionado.getId());
+				try
+		    	{
+					fachada.ProcesarProyecto(proyectoSeleccionado.getId());
+		    		Notification.show("Proyecto procesado exitosamente", Notification.Type.HUMANIZED_MESSAGE);
+		    	}
+		    	catch (Exception e)
+				{
+		    		Notification.show("Hubo un error al procesar el proyecto", Notification.Type.WARNING_MESSAGE);
+		    		e.printStackTrace();
+				}
+				actualizarProyectos();
+				grdProyectos.setEnabled(true);
+				actualizarBotonesProcesamiento();
 			}
 		});		
 	}
 	
+	private void cargarDatosProyectoSeleccionado() 
+	{
+		this.txtNombre.setValue(proyectoSeleccionado.getNombre());
+		this.txtAnio.setValue(Integer.toString(proyectoSeleccionado.getAnio()));
+		this.txtCarrera.setValue(proyectoSeleccionado.getCarrera());
+		this.txtNota.setValue(Integer.toString(proyectoSeleccionado.getNota()));
+	}
+
 	private void cargarInterfazInicial() 
 	{
 		formContenido.setEnabled(false);
 		grdProyectos.setEnabled(true);
+		limpiarFormContenido();
+	}
+	
+	private void actualizarInterfazNuevoProyecto() 
+	{
+		limpiarFormContenido();
+		grdProyectos.deselectAll();
+		grdProyectos.setEnabled(false);
+		updProyecto.setEnabled(true);
+    	btnAgregar.setVisible(true);
+    	btnModificar.setVisible(false);
+    	formContenido.setEnabled(true);
+    	btnBorrar.setVisible(false);	    	
+    	btnProcesar.setVisible(false);
+    	btnVerDetalle.setVisible(false);
 	}
 	
 	private void actualizarInterfazModificar()
@@ -193,7 +248,32 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 		btnBorrar.setVisible(true);
 		btnAgregar.setVisible(false);
 		btnModificar.setVisible(true);
+    	btnProcesar.setVisible(true);
+    	btnVerDetalle.setVisible(true);
+		
+		actualizarBotonesProcesamiento();
 	}
+	
+	private void actualizarBotonesProcesamiento()
+	{
+		if (proyectoSeleccionado != null)
+		{
+			if (proyectoSeleccionado.getEstado() == Enumerados.EstadoProyectoEnum.SIN_PROCESAR)
+			{
+				btnProcesar.setCaption("PROCESAR");
+				btnVerDetalle.setEnabled(false);
+			}
+			else
+			{
+				btnProcesar.setCaption("RE-PROCESAR");
+				btnVerDetalle.setEnabled(true);
+			}
+		}
+		else
+		{
+			btnProcesar.setEnabled(false);
+		}	
+	}	
 	
 	private void limpiarFormContenido()
 	{
@@ -205,6 +285,32 @@ public class ProyectosUploadView extends ProyectosUploadViewDesign implements Vi
 	
 	private void cargarListaProyectos() 
 	{
-		grdProyectos.setItems(fachada.obtenerProyectos());
+		if (listaProyectos == null)
+		{
+			this.actualizarProyectos();
+		}
+	}
+	
+	private void actualizarProyectos()
+	{
+		listaProyectos = new ArrayList<ProyectoVO>();
+		listaProyectos.addAll(fachada.obtenerProyectos());
+		grdProyectos.setItems(listaProyectos);
+		this.actualizarProyectoSeleccionado();
+	}	
+	
+	private void actualizarProyectoSeleccionado()
+	{
+		if (this.proyectoSeleccionado != null && this.listaProyectos != null && !this.listaProyectos.isEmpty())
+		{
+			for(ProyectoVO proy: this.listaProyectos)
+			{
+				if (proy.getId() == this.proyectoSeleccionado.getId())
+				{
+					this.proyectoSeleccionado = proy;
+					break;
+				}
+			}
+		}
 	}
 }

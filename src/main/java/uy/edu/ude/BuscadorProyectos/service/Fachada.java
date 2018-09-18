@@ -23,6 +23,7 @@ import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
 import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
+import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
 import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
 import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
@@ -72,6 +73,12 @@ public class Fachada {
 		proyectoService.modificarProyecto(id, nombre, anio, carrera, nota, rutaArchivo);
 	}
 	
+	public void modificarProyectoCompleto(int id, String nombre, int anio, String carrera, int nota, String resumen, 
+			ArrayList<String> alumnos, ArrayList<String> tutor) 
+	{
+		proyectoService.modificarCompleto(id, nombre, anio, carrera, nota, resumen, alumnos, tutor);
+	}
+	
 	public void borrarProyecto(int id)
 	{
 		proyectoService.borrarProyecto(id);
@@ -107,12 +114,12 @@ public class Fachada {
 		proyecto.setResumen(FuncionesTexto.convertirArrayAStringEspacios(proyecto.devolverResumen()));
 				
 		proyecto.setTecnologia(this.obtenerTecnologiasProyecto(proyecto));
-//		proyecto.setModeloProceso(this.obtenerModelosProcesoProyecto(proyecto));
-//		proyecto.setMetodologiaTesting(this.obtenerMetodologiasTestingProyecto(proyecto));
+		proyecto.setModeloProceso(this.obtenerModelosProcesoProyecto(proyecto));
+		proyecto.setMetodologiaTesting(this.obtenerMetodologiasTestingProyecto(proyecto));
 		
+		proyecto.setEstado(EstadoProyectoEnum.PROCESADO);
 		proyectoService.modificar(proyecto);
 	}
-	
 
 	
 	/**************************************************************** Usuarios */	
@@ -188,6 +195,8 @@ public class Fachada {
 	{
 		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
 	}
+
+
 
 
 	
