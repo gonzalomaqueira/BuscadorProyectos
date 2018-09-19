@@ -57,19 +57,6 @@
       display: block;
       text-align: center;
     }
-    @if $app-background-gradient {
-      // apply gradient, if configured
-      .navigation-bar-container {
-        background-image: $app-background-gradient;
-      }
-      .navigation-bar {
-        background-color: transparent;
-      }
-      .navigation {
-        background-color: transparent;
-        border: none;
-      }
-    }
   }
   // wide screens
   .app-shell[width-range~="1001px-"] {

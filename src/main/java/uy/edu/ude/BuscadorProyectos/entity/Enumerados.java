@@ -7,4 +7,12 @@ public class Enumerados
 		PROCESADO,
 		SIN_PROCESAR
 	}
+	
+	public enum TipoElemento
+	{
+		TECNOLOGIA,
+		METODOLOGIA_TESTING,
+		MODELO_PROCESO,
+		OTRO
+	}
 }

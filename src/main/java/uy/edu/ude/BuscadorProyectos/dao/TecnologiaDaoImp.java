@@ -19,11 +19,12 @@ import uy.edu.ude.BuscadorProyectos.entity.SinonimoTecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entity.Usuario;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
+
 @Repository
 public class TecnologiaDaoImp implements TecnologiaDao {
 
 	@PersistenceContext
-	   private EntityManager em;
+	private EntityManager em;
 	
 	@Override
 	public List<Tecnologia> obtenerTecnologias() 
@@ -37,8 +38,7 @@ public class TecnologiaDaoImp implements TecnologiaDao {
 	@Override
 	public void add(Tecnologia tecnologia) 
 	{
-		   em.merge(tecnologia);
-
+		em.merge(tecnologia);
 	}
 
 	@Override

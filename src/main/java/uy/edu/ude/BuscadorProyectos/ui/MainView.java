@@ -44,6 +44,7 @@ public class MainView extends MainViewDesign implements ViewDisplay {
 		attachNavigation(proyectos, ProyectosUploadView.class);
 		attachNavigation(usuarios, UsuariosView.class);
 		attachNavigation(tecnologias, TecnologiasView.class);
+		attachNavigation(reportes, ReportesView.class); // Eliminar
 
 		salir.addClickListener(e -> logout());
 	}

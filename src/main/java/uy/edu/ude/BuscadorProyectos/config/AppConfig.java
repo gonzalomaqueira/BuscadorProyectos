@@ -12,8 +12,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScans(value = { @ComponentScan("uy.edu.ude.BuscadorProyectos.service"),
-      @ComponentScan("uy.edu.ude.BuscadorProyectos.dao"),
+@ComponentScans(value = { 
+	@ComponentScan("uy.edu.ude.BuscadorProyectos.service"),
+	@ComponentScan("uy.edu.ude.BuscadorProyectos.service.interfaces"),
+	@ComponentScan("uy.edu.ude.BuscadorProyectos.service.implementaciones"),	
+    @ComponentScan("uy.edu.ude.BuscadorProyectos.dao"),
+    @ComponentScan("uy.edu.ude.BuscadorProyectos.dao.interfaces"),
+    @ComponentScan("uy.edu.ude.BuscadorProyectos.dao.implementaciones"),
 })
 public class AppConfig {
 
