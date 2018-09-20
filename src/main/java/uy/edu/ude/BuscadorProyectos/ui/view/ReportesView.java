@@ -41,19 +41,35 @@ public class ReportesView extends ReportesViewDesign implements View{
 	public void enter(ViewChangeEvent event)
 	{
 		
-		
+//		
 //		Elemento elemento1 = new Elemento("Elemento 1", true, TipoElemento.TECNOLOGIA);
 //		Elemento elemento2 = new Elemento("Elemento 2", true, TipoElemento.METODOLOGIA_TESTING);
+//		Elemento elemento3 = new Elemento("Elemento 3", true, TipoElemento.METODOLOGIA_TESTING);
+//		Elemento elemento4 = new Elemento("Elemento 4", true, TipoElemento.METODOLOGIA_TESTING);
+//		Elemento elemento5 = new Elemento("Elemento 5", true, TipoElemento.METODOLOGIA_TESTING);
 //
 //		
 //		elemento1.getElementosOrigen().add(elemento2);
+//		elemento1.getElementosOrigen().add(elemento3);
+//		elemento1.getElementosOrigen().add(elemento4);
+//		elemento1.getElementosOrigen().add(elemento5);
+//		
+//		elemento2.getElementosOrigen().add(elemento3);
+//		elemento2.getElementosOrigen().add(elemento4);
+//		elemento2.getElementosOrigen().add(elemento5);
+//		
+//		elemento3.getElementosOrigen().add(elemento4);
+//		elemento3.getElementosOrigen().add(elemento5);
+//		
+//		elemento4.getElementosOrigen().add(elemento5);
 //
 //		elementoService.agregar(elemento1);
+//		elementoService.agregar(elemento2);
+//		elementoService.agregar(elemento3);
+//		elementoService.agregar(elemento4);
+//		elementoService.agregar(elemento5);
 		
-		@SuppressWarnings("unused")
-		Elemento elem= elementoService.obtenerElementoPorId(37);
 		
-
 		@SuppressWarnings("unused")
 		List<Elemento> ListaElementos = elementoService.obtenerElementos();	 
 		 

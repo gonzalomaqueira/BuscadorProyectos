@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 import uy.edu.ude.BuscadorProyectos.entity.Enumerados.TipoElemento;
 
 @Entity
-@Table(name = "Elemento")//, uniqueConstraints = {@UniqueConstraint(name = "nombre_Elemento", columnNames = "nombre")})
+@Table(name = "Elemento", uniqueConstraints = {@UniqueConstraint(name = "nombre_Elemento", columnNames = "nombre")})
 public class Elemento
 {	
 	@Id
@@ -33,6 +33,7 @@ public class Elemento
 	private int id;
 	
 	@NotNull
+
 	@Size(min = 1, max = 255)
 	@Column(name = "Nombre")
 	private String nombre;
