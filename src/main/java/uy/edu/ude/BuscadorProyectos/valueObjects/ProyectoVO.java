@@ -1,7 +1,7 @@
 package uy.edu.ude.BuscadorProyectos.valueObjects;
 
-import uy.edu.ude.BuscadorProyectos.entity.Enumerados;
-import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.EstadoProyectoEnum;
 
 public class ProyectoVO
 {

@@ -14,18 +14,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.dao.TecnologiaDao;
-import uy.edu.ude.BuscadorProyectos.entity.ElementoProyecto;
-import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
-import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
-import uy.edu.ude.BuscadorProyectos.entity.Perfil;
-import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
-import uy.edu.ude.BuscadorProyectos.entity.SeccionTexto;
-import uy.edu.ude.BuscadorProyectos.entity.Sinonimo;
-import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
-import uy.edu.ude.BuscadorProyectos.entity.Usuario;
-import uy.edu.ude.BuscadorProyectos.entity.Enumerados.EstadoProyectoEnum;
-import uy.edu.ude.BuscadorProyectos.utils.ConversorValueObject;
-import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
+import uy.edu.ude.BuscadorProyectos.entidades.ElementoProyecto;
+import uy.edu.ude.BuscadorProyectos.entidades.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entidades.ModeloProceso;
+import uy.edu.ude.BuscadorProyectos.entidades.Perfil;
+import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
+import uy.edu.ude.BuscadorProyectos.entidades.Sinonimo;
+import uy.edu.ude.BuscadorProyectos.entidades.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.entidades.Usuario;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.EstadoProyectoEnum;
+import uy.edu.ude.BuscadorProyectos.service.interfaces.PerfilService;
+import uy.edu.ude.BuscadorProyectos.service.interfaces.ProyectoService;
+import uy.edu.ude.BuscadorProyectos.service.interfaces.TecnologiaService;
+import uy.edu.ude.BuscadorProyectos.service.interfaces.UsuarioService;
+import uy.edu.ude.BuscadorProyectos.utiles.ConversorValueObject;
+import uy.edu.ude.BuscadorProyectos.utiles.FuncionesTexto;
+import uy.edu.ude.BuscadorProyectos.utiles.SeccionTexto;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
@@ -41,16 +45,10 @@ public class Fachada {
 	@Autowired
 	private PerfilService perfilService;
 	@Autowired
-	private CategoriaService categoriaService;
-	@Autowired
 	private ProyectoService proyectoService;
 	@Autowired
 	private TecnologiaService tecnologiaService;
-	@Autowired
-	private ModeloProcesoService modeloProcesoService;
-	@Autowired
-	private MetodologiaTestingService metodologiaTestingService;
-	
+
 	/**************************************************************** Proyectos */
 	
 	public List<ProyectoVO> obtenerProyectos()
@@ -65,43 +63,28 @@ public class Fachada {
 	
 	public void altaProyecto(String nombre, int anio, String carrera, int nota, String rutaArchivo) 
 	{
-		proyectoService.altaProyecto(nombre, anio, carrera, nota, rutaArchivo);
+		proyectoService.agregar(nombre, anio, carrera, nota, rutaArchivo);
 	}
 	
 	public void modificarProyecto(int id, String nombre, int anio, String carrera, int nota, String rutaArchivo) 
 	{
-		proyectoService.modificarProyecto(id, nombre, anio, carrera, nota, rutaArchivo);
+		proyectoService.modificar(id, nombre, anio, carrera, nota, rutaArchivo);
 	}
 	
 	public void modificarProyectoCompleto(int id, String nombre, int anio, String carrera, int nota, String resumen, 
 			ArrayList<String> alumnos, ArrayList<String> tutor) 
 	{
-		proyectoService.modificarCompleto(id, nombre, anio, carrera, nota, resumen, alumnos, tutor);
+		proyectoService.modificar(id, nombre, anio, carrera, nota, resumen, alumnos, tutor);
 	}
 	
 	public void borrarProyecto(int id)
 	{
-		proyectoService.borrarProyecto(id);
+		proyectoService.eliminar(id);
 	}
 	
 	public List<SeccionTexto> armarDocumentoPorSecciones(String[] textoOriginal)
 	{
 		return proyectoService.armarDocumentoPorSecciones(textoOriginal);
-	}
-	
-	public List<Tecnologia> obtenerTecnologiasProyecto(Proyecto proyecto)
-	{
-		return proyectoService.obtenerTecnologiasProyecto(proyecto, tecnologiaService.obtenerTecnologiasCompleto());
-	}
-	
-	public List<ModeloProceso> obtenerModelosProcesoProyecto(Proyecto proyecto)
-	{
-		return proyectoService.obtenerModelosProcesoProyecto(proyecto, modeloProcesoService.obtenerModelosProcesoCompleto());
-	}
-	
-	public List<MetodologiaTesting> obtenerMetodologiasTestingProyecto(Proyecto proyecto)
-	{
-		return proyectoService.obtenerMetodologiasTestingProyecto(proyecto, metodologiaTestingService.obtenerMetodologiasTestingCompleto());
 	}
 	
 	public void ProcesarProyecto(int idProyecto)
@@ -113,7 +96,7 @@ public class Fachada {
 		proyecto.setTutor(proyecto.devolverTutor());
 		proyecto.setResumen(FuncionesTexto.convertirArrayAStringEspacios(proyecto.devolverResumen()));
 				
-		proyecto.setTecnologia(this.obtenerTecnologiasProyecto(proyecto));
+		proyecto.setTecnologias(this.obtenerTecnologiasProyecto(proyecto));
 		proyecto.setModeloProceso(this.obtenerModelosProcesoProyecto(proyecto));
 		proyecto.setMetodologiaTesting(this.obtenerMetodologiasTestingProyecto(proyecto));
 		
@@ -133,19 +116,19 @@ public class Fachada {
 	{
 		Perfil p = new Perfil();
 		p.setId(perfil.getId());
-		usuarioService.altaUsuario(usuario, contrasenia, nombre, apellido, email, p);
+		usuarioService.agregar(usuario, contrasenia, nombre, apellido, email, p);
 	}	
 	
 	public void modificarUsuario(int id, String usuario, String contrasenia, String nombre, String apellido, String email, PerfilVO perfil) 
 	{
 		Perfil p = new Perfil(); 
 		p.setId(perfil.getId());
-		usuarioService.modificarUsuario(id, usuario, contrasenia, nombre, apellido, email, p);
+		usuarioService.modificar(id, usuario, contrasenia, nombre, apellido, email, p);
 	}
 	
 	public void eliminarUsuario(int id)
 	{
-		usuarioService.eliminarUsuario(id);
+		usuarioService.eliminar(id);
 	}
 
 	public List<PerfilVO> obtenerPerfiles()
@@ -154,11 +137,6 @@ public class Fachada {
 	}
 	
 	/**************************************************************** Tecnologías */
-	
-	public List<CategoriaVO> obtenerCategorias() {
-		
-		return ConversorValueObject.convertirListaCategoriaVO(categoriaService.obtenerCategoriasCompleto());
-	}
 	
 	@Transactional(readOnly = true)
 	public List<Tecnologia> obtenerTecnologias()
@@ -194,15 +172,7 @@ public class Fachada {
 	public void eliminarSinonimo(int idSinonimo) 
 	{
 		tecnologiaService.eliminarSinonimoTecnologia(idSinonimo);	
-	}
-
-
-
-
-	
-	
-	
-	
+	}	
 	
 
 }

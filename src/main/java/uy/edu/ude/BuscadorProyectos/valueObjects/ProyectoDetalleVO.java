@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import uy.edu.ude.BuscadorProyectos.entity.MetodologiaTesting;
-import uy.edu.ude.BuscadorProyectos.entity.ModeloProceso;
-import uy.edu.ude.BuscadorProyectos.entity.Tecnologia;
+import uy.edu.ude.BuscadorProyectos.entidades.MetodologiaTesting;
+import uy.edu.ude.BuscadorProyectos.entidades.ModeloProceso;
+import uy.edu.ude.BuscadorProyectos.entidades.Tecnologia;
 
 public class ProyectoDetalleVO
 {

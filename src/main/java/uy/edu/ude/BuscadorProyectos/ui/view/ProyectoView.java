@@ -12,10 +12,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Button.ClickEvent;
 
-import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
+import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
 import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
-import uy.edu.ude.BuscadorProyectos.utils.FuncionesTexto;
+import uy.edu.ude.BuscadorProyectos.utiles.FuncionesTexto;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 
 @SpringView

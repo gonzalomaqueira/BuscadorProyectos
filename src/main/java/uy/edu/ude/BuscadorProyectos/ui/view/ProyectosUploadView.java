@@ -23,13 +23,12 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.components.grid.SingleSelectionModel;
 import com.vaadin.ui.Button.ClickEvent;
 
-import uy.edu.ude.BuscadorProyectos.entity.Enumerados;
-import uy.edu.ude.BuscadorProyectos.entity.Proyecto;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados;
+import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
 import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
-
-import uy.edu.ude.BuscadorProyectos.utils.Constantes;
-import uy.edu.ude.BuscadorProyectos.utils.ReceptorArchivos;
+import uy.edu.ude.BuscadorProyectos.utiles.Constantes;
+import uy.edu.ude.BuscadorProyectos.utiles.ReceptorArchivos;
 import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;

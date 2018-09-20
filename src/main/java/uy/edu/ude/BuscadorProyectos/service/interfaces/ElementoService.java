@@ -1,15 +1,16 @@
 package uy.edu.ude.BuscadorProyectos.service.interfaces;
 
 import java.util.List;
-import java.util.Set;
 
-import uy.edu.ude.BuscadorProyectos.entity.Elemento;
+import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
+import uy.edu.ude.BuscadorProyectos.entidades.Sinonimo;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.TipoElemento;
 
 public interface ElementoService
 {
 	List<Elemento> obtenerElementos();
 	Elemento obtenerElementoPorId(int id);
-    void agregar(Elemento elemento);
-	void modificar(Elemento elemento);
-	void eliminar(Elemento elemento);
+	
+	void agregar(String nombre, boolean esCategoria, TipoElemento tipoElemento, List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos);
+	void modificar(String nombre, boolean esCategoria, TipoElemento tipoElemento, List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos);
 }

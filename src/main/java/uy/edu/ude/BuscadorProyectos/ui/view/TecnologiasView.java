@@ -36,7 +36,7 @@ public class TecnologiasView extends TecnologiasViewDesign implements View{
 	{
 		cargarInterfazInicial();
 		this.cargarCategorias();
-		cargarTodasTecnologias();
+		cargarTodasTecnologias(); 
 		
 		/**********************************************************************/		
 		//Escucha del combo CATEGORIA

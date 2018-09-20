@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import uy.edu.ude.BuscadorProyectos.dao.interfaces.ElementoDao;
-import uy.edu.ude.BuscadorProyectos.entity.Elemento;
+import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
 import uy.edu.ude.BuscadorProyectos.service.interfaces.ElementoService;
 
 @Service
@@ -15,10 +15,10 @@ public class ElementoServiceImp implements ElementoService
 {
 	@Autowired
 	private ElementoDao elementoDao;
-
+	
 	@Transactional(readOnly = true)
 	@Override
-	public List<Elemento> obtenerElementos() 
+	public List<Elemento> obtenerElementos()
 	{
 		return elementoDao.obtenerElementos();
 	}
@@ -29,25 +29,4 @@ public class ElementoServiceImp implements ElementoService
 	{
 		return elementoDao.obtenerElementoPorId(id);	
 	}
-
-	@Transactional
-	@Override
-	public void agregar(Elemento elemento)
-	{
-		elementoDao.agregar(elemento);
-	}
-
-	@Transactional
-	@Override
-	public void modificar(Elemento elemento)
-	{
-		elementoDao.modificar(elemento);
-	}
-
-	@Transactional
-	@Override
-	public void eliminar(Elemento elemento) 
-	{
-		elementoDao.eliminar(elemento);
-	}		
 }
