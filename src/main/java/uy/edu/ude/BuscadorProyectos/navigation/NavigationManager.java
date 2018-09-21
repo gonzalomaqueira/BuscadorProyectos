@@ -1,6 +1,4 @@
 package uy.edu.ude.BuscadorProyectos.navigation;
-
-import uy.edu.ude.BuscadorProyectos.proyectos.SubirProyectosView;
 import uy.edu.ude.BuscadorProyectos.ui.view.ReportesView;
 
 import org.springframework.stereotype.Component;

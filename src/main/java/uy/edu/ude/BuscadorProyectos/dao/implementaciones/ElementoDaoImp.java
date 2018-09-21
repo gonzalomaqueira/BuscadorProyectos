@@ -1,6 +1,8 @@
 package uy.edu.ude.BuscadorProyectos.dao.implementaciones;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import uy.edu.ude.BuscadorProyectos.dao.interfaces.ElementoDao;
 import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.TipoElemento;
 
 @Repository
 public class ElementoDaoImp implements ElementoDao

@@ -12,12 +12,10 @@ import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.navigator.ViewLeaveAction;
 import com.vaadin.spring.annotation.SpringViewDisplay;
 import com.vaadin.spring.annotation.UIScope;
-//import com.vaadin.spring.access.SecuredViewAccessControl;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 
 import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
-import uy.edu.ude.BuscadorProyectos.proyectos.SubirProyectosView;
 import uy.edu.ude.BuscadorProyectos.ui.view.ReportesView;
 
 @SpringViewDisplay

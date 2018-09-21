@@ -321,7 +321,7 @@ public class ProyectoServiceImp implements ProyectoService
 		proyecto.setAlumnos(proyecto.devolverAlumnos());
 		proyecto.setTutor(proyecto.devolverTutor());
 		proyecto.setResumen(FuncionesTexto.convertirArrayAStringEspacios(proyecto.devolverResumen()));
-		proyecto.setElementosRelacionados(this.obtenerElementosProyecto(proyecto, elementoService.obtenerElementos()));
+		//proyecto.setElementosRelacionados(this.obtenerElementosProyecto(proyecto, elementoService.obtenerElementos()));
 		proyecto.setEstado(EstadoProyectoEnum.PROCESADO);
 		this.modificarProyecto(proyecto);
 	}

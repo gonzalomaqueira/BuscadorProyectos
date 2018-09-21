@@ -1,7 +1,9 @@
 package uy.edu.ude.BuscadorProyectos.entidades;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -67,8 +69,16 @@ public class Elemento
 		this.tipoElemento = tipoElemento;
 	}
 	
+	public Elemento(int id, String nombre, boolean esCategoria, TipoElemento tipoElemento) 
+	{
+		this.id=id;
+		this.nombre = nombre;
+		this.esCategoria = esCategoria;
+		this.tipoElemento = tipoElemento;
+	}
+	
 	public Elemento(String nombre, boolean esCategoria, TipoElemento tipoElemento,
-					List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos) 
+				    List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos) 
 	{
 		this(nombre, esCategoria, tipoElemento);
 		this.elementosRelacionados = elementosRelacionados;
@@ -99,11 +109,5 @@ public class Elemento
 	public List<Proyecto> getProyectos() { return proyectos; }
 	public void setProyectos(List<Proyecto> proyectos) { this.proyectos = proyectos; }
 
-	@Override
-	public String toString() 
-	{
-		return "Elemento [id=" + id + ", nombre=" + nombre + ", esCategoria=" + esCategoria + ", tipoElemento="
-				+ tipoElemento + ", elementosOrigen=" + elementosOrigen + ", elementoRelacionados="
-				+ elementosRelacionados + "]";
-	}
+
 }

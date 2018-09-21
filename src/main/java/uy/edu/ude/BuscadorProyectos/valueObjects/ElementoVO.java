@@ -1,13 +1,14 @@
 package uy.edu.ude.BuscadorProyectos.valueObjects;
 
 import java.util.List;
+import java.util.Set;
 
 public class ElementoVO 
 {	
 	private int id;
 	private String nombre;
 	private List<SinonimoVO> sinonimos;
-	private List<ElementoVO> elementosRelacionados;
+	private List<SubElementoVO> elementosRelacionados;
 	
 	public ElementoVO()
 	{	}
@@ -26,6 +27,6 @@ public class ElementoVO
  	public List<SinonimoVO> getSinonimos() { return sinonimos; }
  	public void setSinonimos(List<SinonimoVO> sinonimos) { this.sinonimos = sinonimos; }
  	
- 	public List<ElementoVO> getElementosRelacionados() { return elementosRelacionados; }
- 	public void setElementosRelacionados(List<ElementoVO> elementosRelacionados) { this.elementosRelacionados = elementosRelacionados; }
+ 	public List<SubElementoVO> getElementosRelacionados() { return elementosRelacionados; }
+ 	public void setElementosRelacionados(List<SubElementoVO> elementosRelacionados) { this.elementosRelacionados = elementosRelacionados; }
  }

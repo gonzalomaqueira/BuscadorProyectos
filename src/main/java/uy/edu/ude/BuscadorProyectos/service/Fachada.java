@@ -107,9 +107,9 @@ public class Fachada {
 	
 	/**************************************************************** Elementos */
 	
-	public List<ElementoVO> obtenerElementos()
-	{
-		return ConversorValueObject.convertirListaElementoVO(elementoService.obtenerElementos());
-	}
+//	public List<ElementoVO> obtenerElementos()
+//	{
+//		return ConversorValueObject.convertirListaElementoVO(elementoService.obtenerElementos());
+//	}
 
 }

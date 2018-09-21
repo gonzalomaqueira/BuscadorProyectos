@@ -1,7 +1,9 @@
 package uy.edu.ude.BuscadorProyectos.utiles;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
 import uy.edu.ude.BuscadorProyectos.entidades.Perfil;
@@ -13,6 +15,7 @@ import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.SinonimoVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.SubElementoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 public class ConversorValueObject 
@@ -118,19 +121,6 @@ public class ConversorValueObject
 		return listaSinonimosVO;
 	}
 	
-	public static ElementoVO convertirElementoVO(Elemento elemento)
-	{
-		ElementoVO elementoVO = new ElementoVO();
-		elementoVO.setId(elemento.getId());
-		elementoVO.setNombre(elemento.getNombre());
-		elementoVO.setSinonimos(convertirListaSinonimosVO(elemento.getSinonimos()));
-		elementoVO.setElementosRelacionados(convertirListaElementoVO(elemento.getElementosRelacionados()));
-		
-		return elementoVO;
-	}
-	
-	// Esto claramente entra en loop!!!
-	
 	public static List<ElementoVO> convertirListaElementoVO(List<Elemento> listaElementos)
 	{
 		List<ElementoVO> listaElementosVO = new ArrayList<ElementoVO>();
@@ -139,5 +129,35 @@ public class ConversorValueObject
 			listaElementosVO.add(convertirElementoVO(elemento));
 		}		
 		return listaElementosVO;
+	}
+	
+	private static ElementoVO convertirElementoVO(Elemento elemento)
+	{
+		ElementoVO elementoVO = new ElementoVO();
+		elementoVO.setId(elemento.getId());
+		elementoVO.setNombre(elemento.getNombre());
+		elementoVO.setSinonimos(convertirListaSinonimosVO(elemento.getSinonimos()));
+		elementoVO.setElementosRelacionados(convertirListaSubElementoVO(elemento.getElementosRelacionados()));
+		
+		return elementoVO;
+	}
+	
+	private static List<SubElementoVO> convertirListaSubElementoVO (List<Elemento> listaElementos)
+	{
+		List<SubElementoVO> listaSubElementosVO = new ArrayList<SubElementoVO>();
+		for(Elemento elemento : listaElementos)
+		{
+			listaSubElementosVO.add(convertirSubElementoVO(elemento));
+		}
+		return listaSubElementosVO;
+	}
+	
+	private static SubElementoVO convertirSubElementoVO(Elemento elemento)
+	{
+		SubElementoVO SubelementoVO = new SubElementoVO();
+		SubelementoVO.setId(elemento.getId());
+		SubelementoVO.setNombre(elemento.getNombre());
+
+		return SubelementoVO;
 	}
 }
