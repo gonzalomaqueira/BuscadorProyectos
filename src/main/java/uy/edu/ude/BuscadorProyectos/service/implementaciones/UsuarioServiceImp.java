@@ -17,20 +17,6 @@ public class UsuarioServiceImp implements UsuarioService
 {
    @Autowired
    private UsuarioDao usuarioDao;
-
-   @Transactional(readOnly = true)
-   @Override
-   public List<Usuario> obtenerUsuarios()
-   {
-      return usuarioDao.obtenerUsuarios();
-   }
-   
-   @Transactional
-   @Override
-   public Usuario buscarUsuario(String usuario)
-   {
-	   return usuarioDao.buscarUsuario(usuario);
-   }
    
    @Transactional
    @Override
@@ -60,5 +46,19 @@ public class UsuarioServiceImp implements UsuarioService
 	   Usuario usuario = new Usuario();
 	   usuario.setId(id);
 	   usuarioDao.eliminar(usuario);
+   }
+   
+   @Transactional(readOnly = true)
+   @Override
+   public List<Usuario> obtenerUsuarios()
+   {
+      return usuarioDao.obtenerUsuarios();
+   }
+   
+   @Transactional
+   @Override
+   public Usuario buscarUsuario(String usuario)
+   {
+	   return usuarioDao.buscarUsuario(usuario);
    }
 }

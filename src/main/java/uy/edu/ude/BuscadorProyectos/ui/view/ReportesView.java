@@ -18,15 +18,13 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.SpringView;
 
 import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
-import uy.edu.ude.BuscadorProyectos.entidades.MetodologiaTesting;
-import uy.edu.ude.BuscadorProyectos.entidades.ModeloProceso;
 import uy.edu.ude.BuscadorProyectos.entidades.Perfil;
 import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
-import uy.edu.ude.BuscadorProyectos.entidades.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entidades.Usuario;
 import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.TipoElemento;
 import uy.edu.ude.BuscadorProyectos.service.Fachada;
 import uy.edu.ude.BuscadorProyectos.service.interfaces.ElementoService;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
 
 @SpringView
@@ -41,15 +39,16 @@ public class ReportesView extends ReportesViewDesign implements View{
 	public void enter(ViewChangeEvent event)
 	{
 		
-//		
-//		Elemento elemento1 = new Elemento("Elemento 1", true, TipoElemento.TECNOLOGIA);
-//		Elemento elemento2 = new Elemento("Elemento 2", true, TipoElemento.METODOLOGIA_TESTING);
-//		Elemento elemento3 = new Elemento("Elemento 3", true, TipoElemento.METODOLOGIA_TESTING);
-//		Elemento elemento4 = new Elemento("Elemento 4", true, TipoElemento.METODOLOGIA_TESTING);
-//		Elemento elemento5 = new Elemento("Elemento 5", true, TipoElemento.METODOLOGIA_TESTING);
-//
-//		
-//		elemento1.getElementosOrigen().add(elemento2);
+
+		Elemento elemento1 = new Elemento("Elemento 1", true, TipoElemento.TECNOLOGIA);
+		Elemento elemento2 = new Elemento("Elemento 2", true, TipoElemento.METODOLOGIA_TESTING);
+		Elemento elemento3 = new Elemento("Elemento 3", true, TipoElemento.METODOLOGIA_TESTING);
+		Elemento elemento4 = new Elemento("Elemento 4", true, TipoElemento.METODOLOGIA_TESTING);
+		Elemento elemento5 = new Elemento("Elemento 5", true, TipoElemento.METODOLOGIA_TESTING);
+
+		
+		elemento1.getElementosRelacionados().add(elemento2);
+		elemento2.getElementosRelacionados().add(elemento1);
 //		elemento1.getElementosOrigen().add(elemento3);
 //		elemento1.getElementosOrigen().add(elemento4);
 //		elemento1.getElementosOrigen().add(elemento5);
@@ -63,15 +62,18 @@ public class ReportesView extends ReportesViewDesign implements View{
 //		
 //		elemento4.getElementosOrigen().add(elemento5);
 //
-//		elementoService.agregar(elemento1);
+		elementoService.agregar(elemento1);
 //		elementoService.agregar(elemento2);
 //		elementoService.agregar(elemento3);
 //		elementoService.agregar(elemento4);
 //		elementoService.agregar(elemento5);
 		
 		
+	//	@SuppressWarnings("unused")
+		//List<Elemento> ListaElementos = elementoService.obtenerElementos();	 
+		
 		@SuppressWarnings("unused")
-		List<Elemento> ListaElementos = elementoService.obtenerElementos();	 
+		List<ElementoVO> ListaElementos = fachada.obtenerElementos();	 
 		 
 //		Elemento elem = elementoService.obtenerElementoPorId(1);
 		

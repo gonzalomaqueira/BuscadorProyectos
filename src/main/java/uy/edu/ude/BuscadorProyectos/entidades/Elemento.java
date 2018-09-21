@@ -54,7 +54,7 @@ public class Elemento
     @OneToMany(mappedBy="elemento", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Sinonimo> sinonimos;
 	 
-    @ManyToMany(cascade=CascadeType.ALL, mappedBy="elementosRelacionados") 
+    @ManyToMany(cascade=CascadeType.ALL, mappedBy="elementosRelacionados", fetch = FetchType.LAZY) 
 	private List<Proyecto> proyectos;
 	
 	public Elemento() 
@@ -65,6 +65,14 @@ public class Elemento
 		this.nombre = nombre;
 		this.esCategoria = esCategoria;
 		this.tipoElemento = tipoElemento;
+	}
+	
+	public Elemento(String nombre, boolean esCategoria, TipoElemento tipoElemento,
+					List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos) 
+	{
+		this(nombre, esCategoria, tipoElemento);
+		this.elementosRelacionados = elementosRelacionados;
+		this.sinonimos = sinonimos;
 	}
 
 	public int getId() { return id; }

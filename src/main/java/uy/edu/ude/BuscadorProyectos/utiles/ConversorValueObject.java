@@ -3,28 +3,20 @@ package uy.edu.ude.BuscadorProyectos.utiles;
 import java.util.ArrayList;
 import java.util.List;
 
-import uy.edu.ude.BuscadorProyectos.entidades.Categoria;
-import uy.edu.ude.BuscadorProyectos.entidades.MetodologiaTesting;
-import uy.edu.ude.BuscadorProyectos.entidades.ModeloProceso;
+import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
 import uy.edu.ude.BuscadorProyectos.entidades.Perfil;
 import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entidades.Sinonimo;
-import uy.edu.ude.BuscadorProyectos.entidades.Tecnologia;
 import uy.edu.ude.BuscadorProyectos.entidades.Usuario;
-import uy.edu.ude.BuscadorProyectos.valueObjects.CategoriaVO;
-import uy.edu.ude.BuscadorProyectos.valueObjects.MetodologiaTestingVO;
-import uy.edu.ude.BuscadorProyectos.valueObjects.ModeloProcesoVO;
+import uy.edu.ude.BuscadorProyectos.valueObjects.ElementoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.PerfilVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoDetalleVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.ProyectoVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.SinonimoVO;
-import uy.edu.ude.BuscadorProyectos.valueObjects.TecnologiaVO;
 import uy.edu.ude.BuscadorProyectos.valueObjects.UsuarioVO;
 
 public class ConversorValueObject 
 {
-	/****************************************************** Proyecto */
-	
 	public static ProyectoDetalleVO convertirProyectoDetalleVO(Proyecto proyecto)
 	{
 		return new ProyectoDetalleVO( proyecto.getId(), 
@@ -38,9 +30,7 @@ public class ConversorValueObject
 									  proyecto.getResumen(),
 									  proyecto.getFechaAlta(),
 									  proyecto.getFechaUltimaModificacion(),
-									  convertirListaTecnologiasVO(proyecto.getTecnologias()),
-									  convertirListaModeloProcesoVO(proyecto.getModeloProceso()),
-									  convertirListaMetodologiaTestingVO(proyecto.getMetodologiaTesting()));
+									  convertirListaElementoVO(proyecto.getElementosRelacionados()));
 		
 	}
 	
@@ -64,8 +54,6 @@ public class ConversorValueObject
 		}		
 		return listaProyectosVO;
 	}
-	
-	/****************************************************** Usuario */
 	
 	public static UsuarioVO convertirUsuarioVO(Usuario usuario)
 	{
@@ -125,9 +113,31 @@ public class ConversorValueObject
 		List<SinonimoVO> listaSinonimosVO = new ArrayList<SinonimoVO>();
 		for(Sinonimo sinonimo : listaSinonimos)
 		{
-			listaSinonimosVO.agregar(convertirSinonimoVO(sinonimo));
+			listaSinonimosVO.add(convertirSinonimoVO(sinonimo));
 		}		
 		return listaSinonimosVO;
 	}
-
+	
+	public static ElementoVO convertirElementoVO(Elemento elemento)
+	{
+		ElementoVO elementoVO = new ElementoVO();
+		elementoVO.setId(elemento.getId());
+		elementoVO.setNombre(elemento.getNombre());
+		elementoVO.setSinonimos(convertirListaSinonimosVO(elemento.getSinonimos()));
+		elementoVO.setElementosRelacionados(convertirListaElementoVO(elemento.getElementosRelacionados()));
+		
+		return elementoVO;
+	}
+	
+	// Esto claramente entra en loop!!!
+	
+	public static List<ElementoVO> convertirListaElementoVO(List<Elemento> listaElementos)
+	{
+		List<ElementoVO> listaElementosVO = new ArrayList<ElementoVO>();
+		for(Elemento elemento : listaElementos)
+		{
+			listaElementosVO.add(convertirElementoVO(elemento));
+		}		
+		return listaElementosVO;
+	}
 }

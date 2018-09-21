@@ -18,12 +18,7 @@ import com.vaadin.ui.UI;
 
 import uy.edu.ude.BuscadorProyectos.navigation.NavigationManager;
 import uy.edu.ude.BuscadorProyectos.proyectos.SubirProyectosView;
-import uy.edu.ude.BuscadorProyectos.ui.view.AccessDeniedView;
-import uy.edu.ude.BuscadorProyectos.ui.view.ProyectoView;
 import uy.edu.ude.BuscadorProyectos.ui.view.ReportesView;
-import uy.edu.ude.BuscadorProyectos.ui.view.ProyectosUploadView;
-import uy.edu.ude.BuscadorProyectos.ui.view.TecnologiasView;
-import uy.edu.ude.BuscadorProyectos.ui.view.UsuariosView;
 
 @SpringViewDisplay
 @UIScope
@@ -41,9 +36,6 @@ public class MainView extends MainViewDesign implements ViewDisplay {
 
 	@PostConstruct
 	public void init() {
-		attachNavigation(proyectos, ProyectosUploadView.class);
-		attachNavigation(usuarios, UsuariosView.class);
-		attachNavigation(tecnologias, TecnologiasView.class);
 		attachNavigation(reportes, ReportesView.class); // Eliminar
 
 		salir.addClickListener(e -> logout());

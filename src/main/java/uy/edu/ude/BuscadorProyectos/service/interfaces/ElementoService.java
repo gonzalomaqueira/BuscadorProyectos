@@ -7,10 +7,11 @@ import uy.edu.ude.BuscadorProyectos.entidades.Sinonimo;
 import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.TipoElemento;
 
 public interface ElementoService
-{
-	List<Elemento> obtenerElementos();
-	Elemento obtenerElementoPorId(int id);
-	
+{	
+	void agregar(Elemento elemento);
 	void agregar(String nombre, boolean esCategoria, TipoElemento tipoElemento, List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos);
 	void modificar(String nombre, boolean esCategoria, TipoElemento tipoElemento, List<Elemento> elementosRelacionados, List<Sinonimo> sinonimos);
+	void eliminar(int id);
+	List<Elemento> obtenerElementos();
+	Elemento obtenerElementoPorId(int id);
 }

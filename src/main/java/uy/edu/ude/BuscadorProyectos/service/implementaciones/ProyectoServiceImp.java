@@ -15,7 +15,7 @@ import uy.edu.ude.BuscadorProyectos.dao.interfaces.ProyectoDao;
 import uy.edu.ude.BuscadorProyectos.entidades.Elemento;
 import uy.edu.ude.BuscadorProyectos.entidades.Proyecto;
 import uy.edu.ude.BuscadorProyectos.entidades.Sinonimo;
-import uy.edu.ude.BuscadorProyectos.entidades.Usuario;
+import uy.edu.ude.BuscadorProyectos.entidades.Enumerados.EstadoProyectoEnum;
 import uy.edu.ude.BuscadorProyectos.service.interfaces.ElementoService;
 import uy.edu.ude.BuscadorProyectos.service.interfaces.ProyectoService;
 import uy.edu.ude.BuscadorProyectos.utiles.FuncionesTexto;
@@ -26,6 +26,9 @@ public class ProyectoServiceImp implements ProyectoService
 {
 	@Autowired
 	private ProyectoDao proyectoDao;
+	
+	@Autowired
+	private ElementoService elementoService;
 	
 	@Transactional
 	@Override
@@ -307,5 +310,25 @@ public class ProyectoServiceImp implements ProyectoService
 			seccion.setContenido(contenido);
 		}
 		return seccion;
-	}	
+	}
+	
+	@Override
+	public void procesarProyecto(int idProyecto)
+	{
+		Proyecto proyecto= this.obtenerProyectoPorId(idProyecto);
+		String[] textoOriginal= this.obtenerTextoOriginalProyecto(proyecto);
+		proyecto.setDocumentoPorSecciones(this.armarDocumentoPorSecciones(textoOriginal));
+		proyecto.setAlumnos(proyecto.devolverAlumnos());
+		proyecto.setTutor(proyecto.devolverTutor());
+		proyecto.setResumen(FuncionesTexto.convertirArrayAStringEspacios(proyecto.devolverResumen()));
+		proyecto.setElementosRelacionados(this.obtenerElementosProyecto(proyecto, elementoService.obtenerElementos()));
+		proyecto.setEstado(EstadoProyectoEnum.PROCESADO);
+		this.modificarProyecto(proyecto);
+	}
+	
+	@Transactional
+	private void modificarProyecto(Proyecto proyecto)
+	{
+		proyectoDao.modificar(proyecto);
+	}
 }

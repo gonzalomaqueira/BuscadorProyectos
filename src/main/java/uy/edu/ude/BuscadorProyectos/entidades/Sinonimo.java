@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "SinonimosElemento", uniqueConstraints = {@UniqueConstraint(name = "uq_nombre_SinonimoElemento", columnNames = "nombre")})
-public abstract class Sinonimo
+public class Sinonimo
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,9 +34,10 @@ public abstract class Sinonimo
 	public Sinonimo() 
 	{	}
 	
-	public Sinonimo(String nombre)
+	public Sinonimo(String nombre, Elemento elemento)
 	{
 		this.nombre = nombre;
+		this.elemento = elemento;
 	}
 
 	public int getId() { return id; }

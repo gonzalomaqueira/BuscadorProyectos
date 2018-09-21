@@ -22,5 +22,5 @@ public interface ProyectoService
 	SeccionTexto armarSeccionAlumnos(String texto[]);
 	SeccionTexto armarSeccionTutor(String texto[]);
 	
-	
+	void procesarProyecto(int id);
 }
